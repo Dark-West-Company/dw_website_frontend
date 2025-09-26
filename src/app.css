@@ -1,0 +1,12 @@
+@import 'tailwindcss';
+
+html {
+  overflow: hidden;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+body {
+  height: 100vh;
+  background-color: var(--color-background-900);
+  color: var(--color-background-50);
+}
