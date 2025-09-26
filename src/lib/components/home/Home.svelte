@@ -52,7 +52,7 @@
       </button>
     {:else if characterInfo}
       <button
-        class="bg-green-900 px-4 py-2 rounded text-primary-100 font-semibold hover:bg-green-800 transition-colors ml-4 border border-primary-700 shadow"
+        class="bg-primary-800 px-4 py-2 rounded text-primary-100 font-semibold hover:bg-primary-700 transition-colors ml-4 border border-primary-700 shadow"
         on:click={() => (window.location.href = '/sheets')}
       >
         View my character sheets

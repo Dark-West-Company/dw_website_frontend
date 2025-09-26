@@ -4,9 +4,9 @@ import colors from 'tailwindcss/colors';
 import { useColors } from './src/lib/models/useColors';
 const { generateBackgroundColors, generateColors } = useColors();
 
-const baseBackgroundColor = '#22180c'; // dark sepia brown
-const basePrimaryColor = '#7c2d12'; // rusty burnt orange
-const baseSecondaryColor = '#e7d7b1'; // bone/aged parchment
+const baseBackgroundColor = '#1A1A1A';
+const basePrimaryColor = '#960005';
+const baseSecondaryColor = '#E2DCD0';
 const primaryOverlayOpacity = 0.6;
 const secondaryOverlayOpacity = 0.3;
 // 981c20 = red
