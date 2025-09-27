@@ -37,48 +37,38 @@
   }
 </script>
 
-<div class="flex flex-col w-full h-full bg-background-900">
-  <div class="bg-primary-950 text-primary-100 px-6 py-3 flex items-center border-b-4 border-primary-800 shadow-lg">
+<div class="flex flex-col w-full h-full">
+  <div class="px-6 py-3 flex items-center shadow-lg">
     <div></div>
     <div class="flex-1"></div>
     <div class="text-center font-bold text-2xl tracking-widest uppercase font-serif drop-shadow">Dark West RP Group</div>
     <div class="flex-1"></div>
     {#if !loggedIn}
-      <button
-        class="bg-primary-800 px-4 py-2 rounded text-primary-100 font-semibold hover:bg-primary-700 transition-colors ml-4 border border-primary-700 shadow"
-        on:click={loginWithDiscord}
-      >
-        Login with Discord
-      </button>
+      <button class="px-4 py-2 rounded font-semibold hover:transition-colors ml-4 shadow" on:click={loginWithDiscord}> Login with Discord </button>
     {:else if characterInfo}
-      <button
-        class="bg-primary-800 px-4 py-2 rounded text-primary-100 font-semibold hover:bg-primary-700 transition-colors ml-4 border border-primary-700 shadow"
-        on:click={() => (window.location.href = '/sheets')}
-      >
-        View my character sheets
-      </button>
+      <button class="px-4 py-2 rounded font-semibold hover:transition-colors ml-4 shadow" on:click={() => (window.location.href = '/sheets')}> View my character sheets </button>
     {/if}
   </div>
   <div class="flex-1 flex flex-col items-center justify-center py-12 gap-8">
     <div class="max-w-xl text-center">
-      <h1 class="text-4xl font-extrabold mb-2 text-primary-400 font-serif tracking-widest uppercase drop-shadow-lg">Welcome to Dark West</h1>
-      <p class="text-lg text-primary-200 mb-4 font-medium italic">
+      <h1 class="text-4xl font-extrabold mb-2 font-serif tracking-widest uppercase drop-shadow-lg">Welcome to Dark West</h1>
+      <p class="text-lg mb-4 font-medium italic">
         Dark West is a RedM role-playing group set in the wild frontier. Join us for immersive stories, unique characters, and collaborative adventures.
       </p>
-      <p class="text-md text-primary-300 font-mono"> Placeholder shenanigans: character sheets, campaign logs, Discord integration, and more coming soon! </p>
+      <p class="text-md font-mono"> Placeholder shenanigans: character sheets, campaign logs, Discord integration, and more coming soon! </p>
     </div>
     <div class="flex flex-col items-center gap-4">
-      <div class="bg-primary-900 rounded-lg px-6 py-4 shadow-lg border border-primary-800 text-primary-100 w-full max-w-md text-center ring-2 ring-primary-700">
-        <span class="font-bold text-xl block mb-2 font-serif tracking-wide uppercase text-primary-400">Recent RP Events</span>
-        <div class="text-primary-300 text-base font-mono">
+      <div class="rounded-lg px-6 py-4 shadow-lg w-full max-w-md text-center">
+        <span class="font-bold text-xl block mb-2 font-serif tracking-wide uppercase">Recent RP Events</span>
+        <div class="text-base font-mono">
           Train heist in Valentine<br />
           Saloon showdown in Blackwater<br />
           New character sheets released
         </div>
       </div>
-      <div class="bg-primary-900 rounded-lg px-6 py-4 shadow-lg border border-primary-800 text-primary-100 w-full max-w-md text-center ring-2 ring-primary-700">
-        <span class="font-bold text-xl block mb-2 font-serif tracking-wide uppercase text-primary-400">Coming Soon</span>
-        <div class="text-primary-300 text-base font-mono">
+      <div class="rounded-lg px-6 py-4 shadow-lg w-full max-w-md text-center">
+        <span class="font-bold text-xl block mb-2 font-serif tracking-wide uppercase">Coming Soon</span>
+        <div class="text-base font-mono">
           Discord-linked character registration<br />
           Live campaign tracker<br />
           Customizable sheet templates
