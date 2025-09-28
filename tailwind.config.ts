@@ -4,9 +4,9 @@ import colors from 'tailwindcss/colors';
 import { useColors } from './src/lib/models/useColors';
 const { generateBackgroundColors, generateColors } = useColors();
 
-const baseBackgroundColor = '#1A1A1A';
-const basePrimaryColor = '#960005';
-const baseSecondaryColor = '#E2DCD0';
+const baseBackgroundColor = '#181818'; // matte black
+const basePrimaryColor = '#8B7500'; // dark gold
+const baseSecondaryColor = '#FFD700'; // rich gold
 const primaryOverlayOpacity = 0.6;
 const secondaryOverlayOpacity = 0.3;
 // 981c20 = red

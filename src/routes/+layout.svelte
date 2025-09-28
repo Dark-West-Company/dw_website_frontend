@@ -1,12 +1,109 @@
-<script lang="ts">
+<script>
+  import { onMount } from 'svelte';
+  import { goto } from '$app/navigation';
   import favicon from '$lib/assets/favicon.svg';
   import '../app.css';
+  import { userData } from '$lib/userStore';
+
+  let loggedIn = false;
+  let isAdmin = false;
+  let characterInfo = null;
+
+  // Check for JWT in localStorage and fetch character info
+  onMount(async () => {
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      loggedIn = true;
+      // Fetch character info from backend
+      try {
+        const backendUrl = import.meta.env.VITE_BACKEND_URL;
+        const res = await fetch(`${backendUrl}/api/user/info`, {
+          headers: { Authorization: `Bearer ${token}` },
+          credentials: 'include',
+        });
+        if (res.ok) {
+          const data = await res.json();
+          isAdmin = !!data.isAdmin;
+          characterInfo = Array.isArray(data.sheets) ? data.sheets : [];
+          userData.set({
+            isAdmin: !!data.isAdmin,
+            sheets: characterInfo,
+            user: data.user ?? null,
+            characters:
+              characterInfo?.map((sheet) => ({
+                id: sheet.character_id,
+                name: sheet.name,
+                type: sheet.character_type,
+              })) ?? [],
+          });
+        } else if (res.status === 401) {
+          loggedIn = false;
+          characterInfo = null;
+        }
+      } catch {
+        loggedIn = false;
+        characterInfo = null;
+      }
+    }
+  });
+
+  // Discord OAuth parameters
+  const clientId = import.meta.env.VITE_DISCORD_CLIENT_ID;
+  const redirectUri = import.meta.env.VITE_DISCORD_REDIRECT_URI;
+  const discordOAuthBase = 'https://discord.com/oauth2/authorize';
+  const scope = 'identify';
+  const responseType = 'code';
+
+  function loginWithDiscord() {
+    // Assemble Discord OAuth URL programmatically
+    const discordOAuthUrl = `${discordOAuthBase}?client_id=${clientId}` + `&redirect_uri=${encodeURIComponent(redirectUri)}` + `&response_type=${responseType}` + `&scope=${scope}`;
+    window.location.href = discordOAuthUrl;
+  }
 </script>
 
 <svelte:head>
   <link rel="icon" href={favicon} />
 </svelte:head>
 
-<div class="h-full w-full">
-  <slot />
+<div class="flex flex-col w-full h-full bg-background-900">
+  <div class="px-6 py-3 grid grid-cols-3 items-center shadow-lg border-b-4 border-secondary-400 bg-background-900">
+    <div>
+      {#if isAdmin}
+        <button
+          class="ml-auto w-fit px-3 py-1 rounded font-semibold hover:bg-secondary-700 hover:text-black shadow border-2 border-secondary-400 bg-secondary-400 text-black transition-colors duration-200"
+          on:click={() => (window.location.href = '/admin')}
+        >
+          Admin
+        </button>
+      {/if}
+    </div>
+
+    <button
+      type="button"
+      class="align-self-center text-center font-bold text-2xl tracking-widest uppercase font-serif text-secondary-400 hover:underline focus:outline-none"
+      style="display: block; background: none; border: none; cursor: pointer;"
+      on:click={() => goto('/')}
+    >
+      World of Dark West
+    </button>
+
+    {#if !loggedIn}
+      <button
+        class="px-4 py-2 rounded font-semibold hover:bg-secondary-700 hover:text-black shadow border-2 border-secondary-400 bg-secondary-400 text-black transition-colors duration-200"
+        on:click={loginWithDiscord}
+      >
+        Login with Discord
+      </button>
+    {:else if characterInfo}
+      <button
+        class="ml-auto w-fit px-3 py-1 rounded font-semibold hover:bg-secondary-700 hover:text-black shadow border-2 border-secondary-400 bg-secondary-400 text-black transition-colors duration-200"
+        on:click={() => (window.location.href = '/sheets')}
+      >
+        My sheets
+      </button>
+    {/if}
+  </div>
+  <div class="flex grow flex-1 overflow-auto">
+    <slot />
+  </div>
 </div>
