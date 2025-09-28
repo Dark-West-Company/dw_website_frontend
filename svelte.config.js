@@ -1,5 +1,5 @@
 // import adapter from '@sveltejs/adapter-static';
-import adapter from '@sveltejs/adapter-auto';
+import adapter from '@sveltejs/adapter-static';
 import preprocess from 'svelte-preprocess';
 import { resolve } from 'path';
 
@@ -12,10 +12,9 @@ const config = {
     // See https://kit.svelte.dev/docs/adapters for more information about adapters.
     adapter: adapter({
       fallback: '404.html',
-      port: 8000,
     }),
     paths: {
-      base: process.argv.includes('dev') ? '' : '',
+      base: process.env.GITHUB_PAGES ? '/dw_website_frontend' : '',
     },
     alias: {
       '@/*': './src/lib/*',
