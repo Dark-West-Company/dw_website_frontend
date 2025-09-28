@@ -26,6 +26,9 @@ jobs:
           yarn build
         env:
           GITHUB_PAGES: true
+          VITE_DISCORD_CLIENT_ID: ${{ secrets.VITE_DISCORD_CLIENT_ID }}
+          VITE_DISCORD_REDIRECT_URI: ${{ secrets.VITE_DISCORD_REDIRECT_URI }}
+          VITE_BACKEND_URL: ${{ secrets.VITE_BACKEND_URL }}
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
