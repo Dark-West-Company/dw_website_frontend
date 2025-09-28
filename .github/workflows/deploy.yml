@@ -6,6 +6,11 @@ on:
       - master
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -19,7 +24,7 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --frozen-lockfile
 
       - name: Build static site
         run: |
@@ -30,8 +35,14 @@ jobs:
           VITE_DISCORD_REDIRECT_URI: ${{ secrets.VITE_DISCORD_REDIRECT_URI }}
           VITE_BACKEND_URL: ${{ secrets.VITE_BACKEND_URL }}
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+          path: ./build
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
