@@ -14,7 +14,7 @@ const config = {
       fallback: '404.html',
     }),
     paths: {
-      base: process.env.GITHUB_PAGES ? '/dw_website_frontend' : '',
+      base: '/',
     },
     alias: {
       '@/*': './src/lib/*',
