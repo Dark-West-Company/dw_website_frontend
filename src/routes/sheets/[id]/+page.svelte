@@ -2,26 +2,16 @@
   import { onMount, onDestroy } from 'svelte';
   import SharedSection from '$lib/components/sheets/SharedSection.svelte';
   import { eventBus, events } from '$lib/eventBus';
+  import { apiPatch, apiGet } from '$lib/api';
 
   let sheetId = '';
   let sheet = null;
 
   async function handleSheetDataChanged() {
     if (!sheet || !sheet.data) return;
-    const backendUrl = import.meta.env.VITE_BACKEND_URL;
-    const token = localStorage.getItem('jwt');
     try {
       console.log('Updating sheet data on backend:', sheet);
-
-      const res = await fetch(`${backendUrl}/api/character/sheet/${sheetId}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        credentials: 'include',
-        body: JSON.stringify(sheet.data),
-      });
+      const res = await apiPatch(`/api/character/sheet/${sheetId}`, sheet.data);
       const result = await res.json();
       if (!result.success) {
         console.error('Failed to update character sheet:', result.error);
@@ -38,13 +28,8 @@
     }
     sheetId = id;
     if (sheetId) {
-      const backendUrl = import.meta.env.VITE_BACKEND_URL;
-      const token = localStorage.getItem('jwt');
       try {
-        const res = await fetch(`${backendUrl}/api/character/sheet/${sheetId}`, {
-          headers: { Authorization: `Bearer ${token}` },
-          credentials: 'include',
-        });
+        const res = await apiGet(`/api/character/sheet/${sheetId}`);
         if (res.ok) {
           sheet = await res.json();
           console.log('Loaded sheet:', sheet);

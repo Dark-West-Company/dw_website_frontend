@@ -10,7 +10,7 @@
    */
   import { onMount } from 'svelte';
   import { writable } from 'svelte/store';
-  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+  import { apiGet, apiPost, apiPatch } from '$lib/api';
 
   const gifts = writable([]);
   const loading = writable(true);
@@ -28,7 +28,7 @@
     loading.set(true);
     error.set('');
     try {
-      const res = await fetch(`${BACKEND_URL}/api/admin/werewolf-gifts`, { credentials: 'include' });
+      const res = await apiGet('/api/admin/werewolf-gifts');
       const data = await res.json();
       if (data.success) {
         gifts.set(data.gifts);
@@ -44,15 +44,10 @@
   async function createGift() {
     error.set('');
     try {
-      const res = await fetch(`${BACKEND_URL}/api/admin/werewolf-gifts`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify({
-          gift_name: newGift.gift_name,
-          gift_description: newGift.gift_description,
-          gift_level: newGift.gift_level,
-        }),
+      const res = await apiPost('/api/admin/werewolf-gifts', {
+        gift_name: newGift.gift_name,
+        gift_description: newGift.gift_description,
+        gift_level: newGift.gift_level,
       });
       const data = await res.json();
       if (data.success) {
@@ -70,15 +65,10 @@
   async function updateGift(gift) {
     error.set('');
     try {
-      const res = await fetch(`${BACKEND_URL}/api/admin/werewolf-gifts/${gift.id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify({
-          gift_name: gift.gift_name,
-          gift_description: gift.gift_description,
-          gift_level: gift.gift_level,
-        }),
+      const res = await apiPatch(`/api/admin/werewolf-gifts/${gift.id}`, {
+        gift_name: gift.gift_name,
+        gift_description: gift.gift_description,
+        gift_level: gift.gift_level,
       });
       const data = await res.json();
       if (data.success) {

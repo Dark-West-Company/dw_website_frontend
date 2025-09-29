@@ -6,19 +6,11 @@
   $: characters = $userData.characters ?? [];
   $: unassociatedSheets = sheets.filter((sheet) => !sheet.character_id);
 
+  import { apiPost } from '$lib/api';
+
   async function createSheet(sheetType) {
-    const backendUrl = import.meta.env.VITE_BACKEND_URL;
-    const token = localStorage.getItem('jwt');
     try {
-      const res = await fetch(`${backendUrl}/api/character/sheet`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        credentials: 'include',
-        body: JSON.stringify({ sheetType }),
-      });
+      const res = await apiPost('/api/character/sheet', { sheetType });
       if (res.ok) {
         location.reload();
       }

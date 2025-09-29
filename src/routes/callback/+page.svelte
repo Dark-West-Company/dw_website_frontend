@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { goto } from '$app/navigation';
+  import { apiPost } from '$lib/api';
 
   onMount(async () => {
     const params = new URLSearchParams(window.location.search);
@@ -9,15 +10,8 @@
       goto('/');
       return;
     }
-    const backendUrl = import.meta.env.VITE_BACKEND_URL;
-    const callbackUrl = `${backendUrl}/api/auth/discord/callback`;
-    console.log('Attempting to POST to:', callbackUrl);
     try {
-      const res = await fetch(callbackUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code }),
-      });
+      const res = await apiPost('/api/auth/discord/callback', { code });
       if (res.ok) {
         const { token } = await res.json();
         localStorage.setItem('jwt', token);

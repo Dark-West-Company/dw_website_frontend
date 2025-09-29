@@ -4,6 +4,7 @@
   import favicon from '$lib/assets/favicon.svg';
   import '../app.css';
   import { userData } from '$lib/userStore';
+  import { apiGet } from '$lib/api';
 
   let loggedIn = false;
   let isAdmin = false;
@@ -16,11 +17,7 @@
       loggedIn = true;
       // Fetch character info from backend
       try {
-        const backendUrl = import.meta.env.VITE_BACKEND_URL;
-        const res = await fetch(`${backendUrl}/api/user/info`, {
-          headers: { Authorization: `Bearer ${token}` },
-          credentials: 'include',
-        });
+        const res = await apiGet('/api/user/info');
         if (res.ok) {
           const data = await res.json();
           isAdmin = !!data.isAdmin;
