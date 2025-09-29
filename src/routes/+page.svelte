@@ -3,29 +3,12 @@
 </script>
 
 <div class="flex-1 flex flex-col items-center justify-center py-12 gap-8">
-  <div class="max-w-xl text-center">
-    <h1 class="text-4xl font-extrabold mb-2 font-serif tracking-widest uppercase text-secondary-400">Welcome to Dark West</h1>
-    <p class="text-lg mb-4 font-medium italic text-secondary-400">
-      Dark West is a RedM role-playing group set in the wild frontier. Join us for immersive stories, unique characters, and collaborative adventures.
-    </p>
-    <p class="text-md font-mono text-secondary-400"> Placeholder shenanigans: character sheets, campaign logs, Discord integration, and more coming soon! </p>
-  </div>
-  <div class="flex flex-col items-center gap-4">
-    <div class="rounded-lg px-6 py-4 shadow-lg w-full max-w-md text-center border-4 border-secondary-400 bg-background-800">
-      <span class="font-bold text-xl block mb-2 font-serif tracking-wide uppercase text-secondary-400">Recent RP Events</span>
-      <div class="text-base font-mono text-secondary-400">
-        Train heist in Valentine<br />
-        Saloon showdown in Blackwater<br />
-        New character sheets released
-      </div>
+  <div class="text-center">
+    <div class="mb-2">
+      <span class="block text-lg font-medium font-serif tracking-wide uppercase text-secondary-400">Welcome to the</span>
+      <span class="block text-5xl font-extrabold font-serif tracking-widest uppercase text-secondary-400 mt-1">World of DarkWest</span>
     </div>
-    <div class="rounded-lg px-6 py-4 shadow-lg w-full max-w-md text-center border-4 border-secondary-400 bg-background-800">
-      <span class="font-bold text-xl block mb-2 font-serif tracking-wide uppercase text-secondary-400">Coming Soon</span>
-      <div class="text-base font-mono text-secondary-400">
-        Discord-linked character registration<br />
-        Live campaign tracker<br />
-        Customizable sheet templates
-      </div>
-    </div>
+    <p class="text-xs mb-4 italic text-secondary-400"> Tell Fia to make me pretty </p>
   </div>
+  <div class="flex flex-col items-center gap-4"> </div>
 </div>

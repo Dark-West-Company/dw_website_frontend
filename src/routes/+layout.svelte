@@ -63,41 +63,26 @@
 </svelte:head>
 
 <div class="flex flex-col w-full h-full bg-background-900">
-  <div class="px-6 py-3 grid grid-cols-3 items-center shadow-lg border-b-4 border-secondary-400 bg-background-900">
+  <div class="px-6 py-3 grid grid-cols-3 items-center shadow-lg border-b-2 border-background-400 bg-background-900">
     <div>
       {#if isAdmin}
-        <button
-          class="ml-auto w-fit px-3 py-1 rounded font-semibold hover:bg-secondary-700 hover:text-black shadow border-2 border-secondary-400 bg-secondary-400 text-black transition-colors duration-200"
-          on:click={() => (window.location.href = '/admin')}
-        >
-          Admin
-        </button>
+        <button class="ml-auto w-fit px-3 py-1 rounded transition-colors duration-200" on:click={() => (window.location.href = '/admin')}> Admin </button>
       {/if}
     </div>
 
     <button
       type="button"
-      class="align-self-center text-center font-bold text-2xl tracking-widest uppercase font-serif text-secondary-400 hover:underline focus:outline-none"
+      class="align-self-center text-center font-serif tracking-widest uppercase text-secondary-400 hover:underline focus:outline-none"
       style="display: block; background: none; border: none; cursor: pointer;"
       on:click={() => goto('/')}
     >
-      World of Dark West
+      World of DarkWest
     </button>
 
     {#if !loggedIn}
-      <button
-        class="px-4 py-2 rounded font-semibold hover:bg-secondary-700 hover:text-black shadow border-2 border-secondary-400 bg-secondary-400 text-black transition-colors duration-200"
-        on:click={loginWithDiscord}
-      >
-        Login with Discord
-      </button>
+      <button class="px-4 py-2 rounded transition-colors duration-200" on:click={loginWithDiscord}> Login with Discord </button>
     {:else if characterInfo}
-      <button
-        class="ml-auto w-fit px-3 py-1 rounded font-semibold hover:bg-secondary-700 hover:text-black shadow border-2 border-secondary-400 bg-secondary-400 text-black transition-colors duration-200"
-        on:click={() => (window.location.href = '/sheets')}
-      >
-        My sheets
-      </button>
+      <button class="ml-auto w-fit px-3 py-1 rounded transition-colors duration-200" on:click={() => (window.location.href = '/sheets')}> My sheets </button>
     {/if}
   </div>
   <div class="flex grow flex-1 overflow-auto">

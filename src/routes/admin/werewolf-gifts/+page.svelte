@@ -154,7 +154,7 @@
     <div class="flex grow">
       <!-- Left: Gifts List -->
       <div class="w-64 min-w-56 border-r border-t border-background-500">
-        <input type="text" placeholder="Search gifts..." class="w-full px-2 py-1 mb-2 border border-background-500 rounded" bind:value={giftSearch} />
+        <input type="text" placeholder="Search gifts..." class="w-full px-2 py-1 mb-1 border-b border-background-500" bind:value={giftSearch} />
         <button
           class="mb-1 w-full px-3 py-2"
           on:click={() => {
@@ -167,7 +167,7 @@
         {:else}
           <ul class="flex flex-col gap-2 border-t border-background-500">
             {#each filteredGifts as gift (gift.id)}
-              <li class="flex items-center justify-between px-2 py-1 border-b border-background-500">
+              <li class="flex items-center justify-between pl-2 pr-1 py-1 border-b border-background-500">
                 <span class="font-medium">{gift.name}</span>
                 <div>
                   {#if gift.restricted}
