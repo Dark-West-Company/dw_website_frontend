@@ -138,7 +138,7 @@
   );
 </script>
 
-<div class="h-full w-full flex flex-col">
+<div class="h-full w-full flex flex-col overflow-hidden">
   <div class="flex items-center gap-2">
     <a href="/admin" class="px-4 py-2 bg-gray-200 rounded-lg text-gray-700 text-xl font-bold hover:bg-gray-300" title="Back to Admin">&larr;</a>
     <h1 class="text-2xl font-bold">Werewolf Gifts Admin</h1>
@@ -151,9 +151,9 @@
   {#if $loading}
     <div>Loading gifts...</div>
   {:else}
-    <div class="flex grow">
+    <div class="flex grow overflow-hidden">
       <!-- Left: Gifts List -->
-      <div class="w-64 min-w-56 border-r border-t border-background-500">
+      <div class="flex flex-col w-64 min-w-56 border-r border-t border-background-500">
         <input type="text" placeholder="Search gifts..." class="w-full px-2 py-1 mb-1 border-b border-background-500" bind:value={giftSearch} />
         <button
           class="mb-1 w-full px-3 py-2"
@@ -165,7 +165,7 @@
         {#if $gifts.length === 0}
           <div class="text-gray-500 mb-4 px-3">No werewolf gifts have been created yet.</div>
         {:else}
-          <ul class="flex flex-col gap-2 border-t border-background-500">
+          <ul class="flex flex-col grow gap-2 border-t border-background-500 overflow-y-auto">
             {#each filteredGifts as gift (gift.id)}
               <li class="flex items-center justify-between pl-2 pr-1 py-1 border-b border-background-500">
                 <span class="font-medium">{gift.name}</span>
@@ -188,7 +188,7 @@
       </div>
 
       <!-- Right: Main Content Area -->
-      <div class="flex-1 pl-4 rounded-lg border-l border-t border-background-500">
+      <div class="flex-1 pl-4 rounded-lg border-l border-t border-background-500 overflow-y-auto">
         {#if $creating}
           <div class="flex flex-col p-4 bg-gray-50 mt-4">
             <h2 class="font-semibold mb-2">Create Gift</h2>

@@ -11,38 +11,38 @@
   let characterInfo = null;
 
   // Check for JWT in localStorage and fetch character info
-  onMount(async () => {
+  async function fetchUserInfo() {
     const token = localStorage.getItem('jwt');
-    if (token) {
-      loggedIn = true;
-      // Fetch character info from backend
-      try {
-        const res = await apiGet('/api/user/info');
-        if (res.ok) {
-          const data = await res.json();
-          isAdmin = !!data.isAdmin;
-          characterInfo = Array.isArray(data.sheets) ? data.sheets : [];
-          userData.set({
-            isAdmin: !!data.isAdmin,
-            sheets: characterInfo,
-            user: data.user ?? null,
-            characters:
-              characterInfo?.map((sheet) => ({
-                id: sheet.character_id,
-                name: sheet.name,
-                type: sheet.character_type,
-              })) ?? [],
-          });
-        } else if (res.status === 401) {
-          loggedIn = false;
-          characterInfo = null;
-        }
-      } catch {
+    // Always attempt to fetch character info from backend, regardless of token
+    try {
+      const res = await apiGet('/api/user/info');
+      if (res.ok) {
+        const data = await res.json();
+        isAdmin = !!data.isAdmin;
+        characterInfo = Array.isArray(data.sheets) ? data.sheets : [];
+        userData.set({
+          isAdmin: !!data.isAdmin,
+          sheets: characterInfo,
+          user: data.user ?? null,
+          characters:
+            characterInfo?.map((sheet) => ({
+              id: sheet.character_id,
+              name: sheet.name,
+              type: sheet.character_type,
+            })) ?? [],
+        });
+        loggedIn = !!token;
+      } else if (res.status === 401) {
         loggedIn = false;
         characterInfo = null;
       }
+    } catch {
+      loggedIn = false;
+      characterInfo = null;
     }
-  });
+  }
+
+  onMount(fetchUserInfo);
 
   // Discord OAuth parameters
   const clientId = import.meta.env.VITE_DISCORD_CLIENT_ID;
