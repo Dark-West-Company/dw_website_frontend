@@ -23,6 +23,7 @@
     "vite": "^7.0.4"
   },
   "dependencies": {
+    "@mdi/font": "^7.4.47",
     "@sveltejs/adapter-static": "^3.0.9",
     "@tailwindcss/postcss": "^4.1.13",
     "@tailwindcss/vite": "^4.1.13",

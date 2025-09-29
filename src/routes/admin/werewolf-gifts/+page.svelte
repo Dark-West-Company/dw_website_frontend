@@ -2,15 +2,44 @@
   /**
    * @typedef {Object} Gift
    * @property {number} id
-   * @property {string} gift_name
-   * @property {string} gift_description
-   * @property {number} gift_level
+   * @property {string} name
+   * @property {string} description
+   * @property {string} short_description
+   * @property {number} rank
    * @property {string} created_at
    * @property {string} updated_at
    */
   import { onMount } from 'svelte';
   import { writable } from 'svelte/store';
   import { apiGet, apiPost, apiPatch } from '$lib/api';
+
+  const TRIBES = [
+    { label: 'Black Furies', value: 'black_furies' },
+    { label: 'Bone Onawers', value: 'bone_onawers' },
+    { label: 'Children of Gaia', value: 'children_of_gaia' },
+    { label: 'Fianna', value: 'fianna' },
+    { label: 'Iron Riders', value: 'iron_riders' },
+    { label: 'Get of Fenris', value: 'get_of_fenris' },
+    { label: 'Red Talons', value: 'red_talons' },
+    { label: 'Shadow Lords', value: 'shadow_lords' },
+    { label: 'Silent Striders', value: 'silent_striders' },
+    { label: 'Silver Fangs', value: 'silver_fangs' },
+    { label: 'Stargazers', value: 'stargazers' },
+    { label: 'Ghost Council', value: 'ghost_council' },
+    { label: 'Galestalkers', value: 'galestalkers' },
+  ];
+  const BREEDS = [
+    { label: 'Homid', value: 'homid' },
+    { label: 'Warborn', value: 'warborn' },
+    { label: 'Lupus', value: 'lupus' },
+  ];
+  const AUSPICES = [
+    { label: 'Ragabash', value: 'ragabash' },
+    { label: 'Theurge', value: 'theurge' },
+    { label: 'Philodox', value: 'philodox' },
+    { label: 'Galliard', value: 'galliard' },
+    { label: 'Ahroun', value: 'ahroun' },
+  ];
 
   const gifts = writable([]);
   const loading = writable(true);
@@ -19,9 +48,14 @@
   const creating = writable(false);
 
   let newGift = {
-    gift_name: '',
-    gift_description: '',
-    gift_level: 1,
+    name: '',
+    description: '',
+    short_description: '',
+    rank: 1,
+    tribes: [],
+    breeds: [],
+    auspices: [],
+    restricted: false,
   };
 
   async function fetchGifts() {
@@ -45,15 +79,20 @@
     error.set('');
     try {
       const res = await apiPost('/api/admin/werewolf-gifts', {
-        gift_name: newGift.gift_name,
-        gift_description: newGift.gift_description,
-        gift_level: newGift.gift_level,
+        name: newGift.name,
+        description: newGift.description,
+        short_description: newGift.short_description,
+        rank: newGift.rank,
+        tribes: newGift.tribes,
+        breeds: newGift.breeds,
+        auspices: newGift.auspices,
+        restricted: newGift.restricted,
       });
       const data = await res.json();
       if (data.success) {
         fetchGifts();
         creating.set(false);
-        newGift = { gift_name: '', gift_description: '', gift_level: 1 };
+        newGift = { name: '', description: '', short_description: '', rank: 1, tribes: [], breeds: [], auspices: [], restricted: false };
       } else {
         error.set(data.error || 'Failed to create gift');
       }
@@ -66,9 +105,14 @@
     error.set('');
     try {
       const res = await apiPatch(`/api/admin/werewolf-gifts/${gift.id}`, {
-        gift_name: gift.gift_name,
-        gift_description: gift.gift_description,
-        gift_level: gift.gift_level,
+        name: gift.name,
+        description: gift.description,
+        short_description: gift.short_description,
+        rank: gift.rank,
+        tribes: gift.tribes,
+        breeds: gift.breeds,
+        auspices: gift.auspices,
+        restricted: gift.restricted,
       });
       const data = await res.json();
       if (data.success) {
@@ -83,6 +127,15 @@
   }
 
   onMount(fetchGifts);
+
+  let giftSearch = '';
+  $: filteredGifts = $gifts.filter(
+    (g) =>
+      giftSearch.trim() === '' ||
+      g.name?.toLowerCase().includes(giftSearch.toLowerCase()) ||
+      g.short_description?.toLowerCase().includes(giftSearch.toLowerCase()) ||
+      g.description?.toLowerCase().includes(giftSearch.toLowerCase())
+  );
 </script>
 
 <div class="h-full w-full flex flex-col">
@@ -101,6 +154,7 @@
     <div class="flex grow">
       <!-- Left: Gifts List -->
       <div class="w-64 min-w-56 border-r border-t border-background-500">
+        <input type="text" placeholder="Search gifts..." class="w-full px-2 py-1 mb-2 border border-background-500 rounded" bind:value={giftSearch} />
         <button
           class="mb-1 w-full px-3 py-2"
           on:click={() => {
@@ -109,19 +163,24 @@
           }}>New Gift</button
         >
         {#if $gifts.length === 0}
-          <div class="text-gray-500 mb-4">No werewolf gifts have been created yet.</div>
+          <div class="text-gray-500 mb-4 px-3">No werewolf gifts have been created yet.</div>
         {:else}
           <ul class="flex flex-col gap-2 border-t border-background-500">
-            {#each $gifts as gift (gift.id)}
+            {#each filteredGifts as gift (gift.id)}
               <li class="flex items-center justify-between px-2 py-1 border-b border-background-500">
-                <span class="font-medium">{gift.gift_name}</span>
-                <button
-                  class="text-xs py-1 px-2"
-                  on:click={() => {
-                    editingGift.set({ ...gift });
-                    creating.set(false);
-                  }}>Edit</button
-                >
+                <span class="font-medium">{gift.name}</span>
+                <div>
+                  {#if gift.restricted}
+                    <i class="mdi mdi-lock w-4 h-4 text-gray-600 mr-1 inline"></i>
+                  {/if}
+                  <button
+                    class="text-xs py-1 px-2"
+                    on:click={() => {
+                      editingGift.set({ ...gift });
+                      creating.set(false);
+                    }}>Edit</button
+                  >
+                </div>
               </li>
             {/each}
           </ul>
@@ -131,50 +190,152 @@
       <!-- Right: Main Content Area -->
       <div class="flex-1 pl-4 rounded-lg border-l border-t border-background-500">
         {#if $creating}
-          <div class="p-4 bg-gray-50 max-w-lg mt-4">
+          <div class="flex flex-col p-4 bg-gray-50 mt-4">
             <h2 class="font-semibold mb-2">Create Gift</h2>
-            <div class="flex gap-6">
+
+            <div class="flex gap-6 mb-2">
               <label>
                 Name:
-                <input class="border border-background-500 px-2 w-full mb-2" bind:value={newGift.gift_name} />
+                <input class="border border-background-500 px-2" bind:value={newGift.name} />
               </label>
+
               <label>
-                Level:
-                <input type="number" min="1" max="5" class="border border-background-500 px-3 py-2 w-16 mb-2" bind:value={newGift.gift_level} />
+                Rank:
+                <input type="number" min="1" max="5" class="border border-background-500 px-3" bind:value={newGift.rank} />
+              </label>
+
+              <label class="flex items-center gap-2">
+                <input type="checkbox" bind:checked={newGift.restricted} />
+                Restricted
+              </label>
+            </div>
+
+            <div class="flex gap-2 mb-2">
+              <label>
+                Tribes:
+                <div class="flex flex-col">
+                  {#each TRIBES as tribe (tribe.value)}
+                    <label class="mr-2">
+                      <input type="checkbox" value={tribe.value} bind:group={newGift.tribes} />
+                      {tribe.label}
+                    </label>
+                  {/each}
+                </div>
+              </label>
+
+              <label>
+                Breeds:
+                <div class="flex flex-col">
+                  {#each BREEDS as breed (breed.value)}
+                    <label class="mr-2">
+                      <input type="checkbox" value={breed.value} bind:group={newGift.breeds} />
+                      {breed.label}
+                    </label>
+                  {/each}
+                </div>
+              </label>
+
+              <label>
+                Auspices:
+                <div class="flex flex-col">
+                  {#each AUSPICES as auspice (auspice.value)}
+                    <label class="mr-2">
+                      <input type="checkbox" value={auspice.value} bind:group={newGift.auspices} />
+                      {auspice.label}
+                    </label>
+                  {/each}
+                </div>
               </label>
             </div>
 
             <label>
-              Description:
-              <textarea class="border border-background-500 px-3 py-2 w-full mb-2" bind:value={newGift.gift_description}></textarea>
+              Short Description:
+              <textarea class="border border-background-500 px-2 mb-2 w-full" bind:value={newGift.short_description}></textarea>
             </label>
 
-            <button class="px-3 py-1 bg-blue-700 text-white rounded" on:click={createGift}>Save</button>
-            <button class="ml-2 px-3 py-1 bg-gray-400 text-white rounded" on:click={() => creating.set(false)}>Cancel</button>
+            <label>
+              Full Description:
+              <textarea class="border border-background-500 px-3 py-2 w-full mb-2 h-32" bind:value={newGift.description}></textarea>
+            </label>
+
+            <div class="flex gap-2">
+              <button class="px-3 py-1 bg-blue-700 text-white rounded" on:click={createGift}>Save</button>
+              <button class="ml-2 px-3 py-1 bg-gray-400 text-white rounded" on:click={() => creating.set(false)}>Cancel</button>
+            </div>
           </div>
         {:else if $editingGift}
-          <div class="p-4 bg-gray-50 max-w-lg">
+          <div class="flex flex-col p-4 bg-gray-50 mt-4">
             <h2 class="font-semibold mb-2">Edit Gift</h2>
 
-            <div class="flex gap-6 mb-4">
+            <div class="flex gap-6 mb-2">
               <label>
                 Name:
-                <input class="border border-background-500 px-3 py-2" bind:value={$editingGift.gift_name} />
+                <input class="border border-background-500 px-2" bind:value={$editingGift.name} />
               </label>
 
               <label>
-                Level:
-                <input type="number" min="1" max="5" class="border border-background-500 px-3 py-2 w-16" bind:value={$editingGift.gift_level} />
+                Rank:
+                <input type="number" min="1" max="5" class="border border-background-500 px-3" bind:value={$editingGift.rank} />
+              </label>
+
+              <label class="flex items-center gap-2">
+                <input type="checkbox" bind:checked={$editingGift.restricted} />
+                Restricted
+              </label>
+            </div>
+
+            <div class="flex gap-2 mb-2">
+              <label>
+                Tribes:
+                <div class="flex flex-col">
+                  {#each TRIBES as tribe (tribe.value)}
+                    <label class="mr-2">
+                      <input type="checkbox" value={tribe.value} bind:group={$editingGift.tribes} />
+                      {tribe.label}
+                    </label>
+                  {/each}
+                </div>
+              </label>
+
+              <label>
+                Breeds:
+                <div class="flex flex-col">
+                  {#each BREEDS as breed (breed.value)}
+                    <label class="mr-2">
+                      <input type="checkbox" value={breed.value} bind:group={$editingGift.breeds} />
+                      {breed.label}
+                    </label>
+                  {/each}
+                </div>
+              </label>
+
+              <label>
+                Auspices:
+                <div class="flex flex-col">
+                  {#each AUSPICES as auspice (auspice.value)}
+                    <label class="mr-2">
+                      <input type="checkbox" value={auspice.value} bind:group={$editingGift.auspices} />
+                      {auspice.label}
+                    </label>
+                  {/each}
+                </div>
               </label>
             </div>
 
             <label>
-              Description:
-              <textarea class="border border-background-500 px-3 py-2 w-full h-64 mb-2" bind:value={$editingGift.gift_description}></textarea>
+              Short Description:
+              <textarea class="border border-background-500 px-2 mb-2 w-full" bind:value={$editingGift.short_description}></textarea>
             </label>
 
-            <button class="px-3 py-1 bg-blue-700 text-white rounded" on:click={() => updateGift($editingGift)}>Save</button>
-            <button class="ml-2 px-3 py-1 bg-gray-400 text-white rounded" on:click={() => editingGift.set(null)}>Cancel</button>
+            <label>
+              Full Description:
+              <textarea class="border border-background-500 px-3 py-2 w-full mb-2 h-32" bind:value={$editingGift.description}></textarea>
+            </label>
+
+            <div class="flex gap-2">
+              <button class="px-3 py-1 bg-blue-700 text-white rounded" on:click={() => updateGift($editingGift)}>Save</button>
+              <button class="ml-2 px-3 py-1 bg-gray-400 text-white rounded" on:click={() => editingGift.set(null)}>Cancel</button>
+            </div>
           </div>
         {:else}
           <div class="text-gray-500 mt-4">Select a gift to edit or create a new one.</div>
