@@ -1,6 +1,7 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
   import SharedSection from '$lib/components/sheets/SharedSection.svelte';
+  import HumanSection from '$lib/HumanSection.svelte';
   import { eventBus, events } from '$lib/eventBus';
   import { apiPatch, apiGet } from '$lib/api';
 
@@ -52,13 +53,19 @@
   });
 </script>
 
-{#if sheet}
-  <div class="flex flex-col w-full h-full">
-    <SharedSection sheet={sheet.data} />
-    <!-- Other sections will be rendered here based on subtype -->
-  </div>
-{:else}
-  <div class="flex items-center justify-center w-full h-full">
-    <p>Character sheet not found.</p>
-  </div>
-{/if}
+<div class="grid grid-cols-[auto_300px] w-full h-full">
+  {#if sheet}
+    <div class="flex flex-col w-full h-full overflow-y-auto pb-5 px-5">
+      <SharedSection sheet={sheet.data} />
+      <!-- Other sections will be rendered here based on character type -->
+      {#if sheet.data.character_type === 'human'}
+        <HumanSection sheetData={sheet.data} />
+      {/if}
+    </div>
+  {:else}
+    <div class="flex items-center justify-center w-full h-full">
+      <p>Character sheet not found.</p>
+    </div>
+  {/if}
+  <div class="bg-gray-100 p-4 border-l"> Rolls sidebar </div>
+</div>

@@ -21,20 +21,38 @@
   }
 </script>
 
-<div class="flex gap-1 items-center w-full">
-  <label class="font-medium mb-1" for="dot-text-field">{label}</label>
-  <input id="dot-text-field" class="border-b px-2 py-1 mb-1 w-full" type="text" bind:value on:input={handleInput} />
-  <div class="flex gap-1">
-    {#each dots as i (i)}
-      <button
-        type="button"
-        class="w-4 h-4 rounded-full border flex items-center justify-center cursor-pointer"
-        style="background: {i < level ? '#444' : '#eee'}"
-        on:click={() => setLevel(i + 1)}
-        title={`Set level to ${i + 1}`}
-        aria-label={`Set level to ${i + 1}`}
-      >
-      </button>
-    {/each}
+<div class="flex flex-col gap-1 w-full">
+  <div class="flex items-center justify-between">
+    <div class="font-medium mb-1">{label}</div>
+    <div class="flex gap-1 mb-1">
+      {#each dots as i (i)}
+        <button
+          type="button"
+          class="w-4 h-4 rounded-full border flex items-center justify-center cursor-pointer"
+          style="background: {i <= level ? '#444' : '#eee'}"
+          on:click={() => setLevel(i)}
+          title={`Set level to ${i}`}
+          aria-label={`Set level to ${i}`}
+        >
+        </button>
+      {/each}
+    </div>
   </div>
+  {#if level >= 4}
+    <div class="flex items-center relative gap-2 text-xs">
+      <svg
+        class="absolute mr-2 ml-1"
+        width="12"
+        height="16"
+        viewBox="0 0 12 16"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        style="vertical-align: middle; transform: scaleX(-1); top: -5px;"
+      >
+        <path d="M11 1 V13 H2" stroke="#888" stroke-width="2" fill="none" />
+      </svg>
+      <label class="font-medium mb-1 ml-5" for="dot-text-field">Specialty:</label>
+      <input id="dot-text-field" type="text" class="border-b px-2 w-full" bind:value on:input={handleInput} placeholder="Enter text" />
+    </div>
+  {/if}
 </div>
