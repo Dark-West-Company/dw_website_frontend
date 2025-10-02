@@ -1,306 +1,58 @@
-<script lang="ts">
-  import { createEventDispatcher } from 'svelte';
-  import type { VampireData } from '../constants';
-  import { CLANS } from '../constants';
-  import DotControl from './DotControl.svelte';
+<script>
+  import DotDisplay from './components/sheets/DotDisplay.svelte';
+  import DotTextField from './components/sheets/DotTextField.svelte';
+  import DropdownSelect from './components/sheets/DropdownSelect.svelte';
+  import DynamicListSection from './components/sheets/DynamicListSection.svelte';
+  import HeaderIntegerField from './components/sheets/HeaderIntegerField.svelte';
+  export let sheetData;
 
-  export let vampireData: VampireData;
-
-  const dispatch = createEventDispatcher();
-
-  function updateData() {
-    dispatch('update');
-  }
-
-  function updateDiscipline(disciplineName: string, value: number) {
-    if (value === 0) {
-      delete vampireData.disciplines[disciplineName];
-    } else {
-      vampireData.disciplines[disciplineName] = value;
-    }
-    updateData();
-  }
-
-  function addDiscipline() {
-    const disciplineName = prompt('Enter discipline name:');
-    if (disciplineName && disciplineName.trim()) {
-      vampireData.disciplines[disciplineName.trim()] = 1;
-      updateData();
-    }
-  }
-
-  function removeDiscipline(disciplineName: string) {
-    delete vampireData.disciplines[disciplineName];
-    updateData();
-  }
+  const pathOptions = [
+    { label: 'Humanity', value: 'humanity' },
+    { label: 'Path of Blood', value: 'blood' },
+    { label: 'Path of the Bones', value: 'bones' },
+    { label: 'Path of Caine', value: 'caine' },
+  ];
 </script>
 
-<div class="space-y-8">
-  <div class="text-center">
-    <h2 class="text-3xl font-bold text-wod-red mb-2">Vampire</h2>
-    <p class="text-wod-light-gray">The Damned and their cursed existence</p>
+<div class="flex flex-col items-center w-full">
+  <h2 class="text-2xl font-bold mb-4">Advantages</h2>
+  <div class="grid grid-cols-3 gap-4 w-full">
+    <div>
+      <DynamicListSection header="Disciplines" bind:entries={sheetData.disciplines} />
+    </div>
+
+    <div>
+      <DynamicListSection header="Backgrounds" bind:entries={sheetData.backgrounds} />
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <DotTextField disableSpecialty label="Conscience/Conviction" sheet={sheetData} field="virtue_conscience" bind:level={sheetData.virtue_conscience} />
+      <DotTextField disableSpecialty label="Self-Control/Instinct" sheet={sheetData} field="virtue_self_control" bind:level={sheetData.virtue_self_control} />
+      <DotTextField disableSpecialty label="Courage" sheet={sheetData} field="virtue_courage" bind:level={sheetData.virtue_courage} />
+    </div>
   </div>
+  <div class="border-t border-gray-300 my-4"></div>
+  <div class="grid grid-cols-3 gap-4 w-full">
+    <div class="flex flex-col items-center gap-2">
+      <div class="font-bold">Humanity/Path</div>
+      <DropdownSelect options={pathOptions} sheet={sheetData} field="humanity_path_name" bind:value={sheetData.humanity_path_name} />
+      <DotDisplay sheet={sheetData} field="humanity_path_rating" bind:value={sheetData.humanity_path_rating} />
+    </div>
 
-  <!-- Basic Info -->
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-    <div class="bg-wod-gray rounded-lg p-6 space-y-4">
-      <h3 class="text-xl font-semibold text-wod-red">Basic Information</h3>
-      
-      <div>
-        <label for="clan" class="block text-sm font-medium mb-1">Clan</label>
-        <select
-          id="clan"
-          bind:value={vampireData.clan}
-          on:change={updateData}
-          class="w-full bg-wod-dark border border-wod-light-gray rounded px-3 py-2 text-white"
-        >
-          {#each CLANS as clan}
-            <option value={clan}>{clan}</option>
-          {/each}
-        </select>
+    <div class="flex flex-col items-center gap-4">
+      <div class="flex flex-col items-center gap-2">
+        <div class="font-bold">Willpower</div>
+        <DotDisplay readonly={true} sheet={sheetData} field="willpower_permanent" bind:value={sheetData.willpower_permanent} />
+        <DotDisplay shape="box" sheet={sheetData} field="willpower_current" bind:value={sheetData.willpower_current} />
       </div>
-
-      <div>
-        <label for="generation" class="block text-sm font-medium mb-1">Generation</label>
-        <input
-          id="generation"
-          type="number"
-          bind:value={vampireData.generation}
-          on:input={updateData}
-          min="3" max="15"
-          class="w-full bg-wod-dark border border-wod-light-gray rounded px-3 py-2 text-white"
-        />
-      </div>
-
-      <div>
-        <label for="sire" class="block text-sm font-medium mb-1">Sire</label>
-        <input
-          id="sire"
-          type="text"
-          bind:value={vampireData.sire}
-          on:input={updateData}
-          class="w-full bg-wod-dark border border-wod-light-gray rounded px-3 py-2 text-white"
-        />
-      </div>
-
-      <div>
-        <label for="nature" class="block text-sm font-medium mb-1">Nature</label>
-        <input
-          id="nature"
-          type="text"
-          bind:value={vampireData.nature}
-          on:input={updateData}
-          class="w-full bg-wod-dark border border-wod-light-gray rounded px-3 py-2 text-white"
-        />
-      </div>
-
-      <div>
-        <label for="demeanor" class="block text-sm font-medium mb-1">Demeanor</label>
-        <input
-          id="demeanor"
-          type="text"
-          bind:value={vampireData.demeanor}
-          on:input={updateData}
-          class="w-full bg-wod-dark border border-wod-light-gray rounded px-3 py-2 text-white"
-        />
-      </div>
-
-      <div>
-        <label for="concept" class="block text-sm font-medium mb-1">Concept</label>
-        <input
-          id="concept"
-          type="text"
-          bind:value={vampireData.concept}
-          on:input={updateData}
-          class="w-full bg-wod-dark border border-wod-light-gray rounded px-3 py-2 text-white"
-        />
+      <div class="flex flex-col items-center gap-2 max-w-52">
+        <div class="font-bold mb-2">Blood Pool</div>
+        <DotDisplay count="20" shape="box" sheet={sheetData} field="blood_pool_current" bind:value={sheetData.blood_pool_current} />
       </div>
     </div>
 
-    <!-- Stats -->
-    <div class="bg-wod-gray rounded-lg p-6 space-y-6">
-      <h3 class="text-xl font-semibold text-wod-red">Vital Statistics</h3>
-      
-      <!-- Blood Pool -->
-      <div>
-        <div class="flex items-center justify-between mb-2">
-          <label for="blood-pool" class="text-sm font-medium">Blood Pool</label>
-          <span class="text-wod-light-gray">{vampireData.bloodPool} / {vampireData.maxBloodPool}</span>
-        </div>
-        <div class="flex items-center space-x-4">
-          <div class="flex-1">
-            <input
-              id="blood-pool"
-              type="range"
-              bind:value={vampireData.bloodPool}
-              on:input={updateData}
-              min="0"
-              max={vampireData.maxBloodPool}
-              class="w-full"
-            />
-          </div>
-          <div class="flex items-center space-x-2">
-            <label for="maxBloodPool" class="text-xs">Max:</label>
-            <input
-              id="maxBloodPool"
-              type="number"
-              bind:value={vampireData.maxBloodPool}
-              on:input={updateData}
-              min="1" max="50"
-              class="w-16 bg-wod-dark border border-wod-light-gray rounded px-2 py-1 text-white text-sm"
-            />
-          </div>
-        </div>
-      </div>
-
-      <!-- Humanity -->
-      <div>
-        <div class="flex items-center justify-between mb-2">
-          <label for="humanity" class="text-sm font-medium">Humanity</label>
-          <span class="text-wod-light-gray">{vampireData.humanity}</span>
-        </div>
-        <DotControl
-          value={vampireData.humanity}
-          maxValue={10}
-          minValue={0}
-          ariaLabel="Humanity"
-          id="humanity"
-          on:change={(event) => { vampireData.humanity = event.detail; updateData(); }}
-        />
-      </div>
-
-      <!-- Willpower -->
-      <div>
-        <div class="flex items-center justify-between mb-2">
-          <label for="willpower" class="text-sm font-medium">Willpower</label>
-          <span class="text-wod-light-gray">{vampireData.willpower} / {vampireData.maxWillpower}</span>
-        </div>
-        <div class="space-y-2">
-          <div class="flex items-center space-x-2">
-            <label for="willpower-current" class="text-xs">Current:</label>
-            <DotControl
-              value={vampireData.willpower}
-              maxValue={vampireData.maxWillpower}
-              minValue={0}
-              size="small"
-              ariaLabel="Current Willpower"
-              id="willpower-current"
-              on:change={(event) => { vampireData.willpower = event.detail; updateData(); }}
-            />
-          </div>
-          <div class="flex items-center space-x-2">
-            <label for="willpower-max" class="text-xs">Max:</label>
-            <DotControl
-              value={vampireData.maxWillpower}
-              maxValue={10}
-              minValue={1}
-              size="small"
-              ariaLabel="Max Willpower"
-              id="willpower-max"
-              on:change={(event) => { vampireData.maxWillpower = event.detail; updateData(); }}
-            />
-          </div>
-        </div>
-      </div>
-
-      <!-- Experience -->
-      <div>
-        <label for="experience" class="block text-sm font-medium mb-1">Experience Points</label>
-        <input
-          id="experience"
-          type="number"
-          bind:value={vampireData.experience}
-          on:input={updateData}
-          min="0"
-          class="w-full bg-wod-dark border border-wod-light-gray rounded px-3 py-2 text-white"
-        />
-      </div>
-    </div>
-  </div>
-
-  <!-- Disciplines -->
-  <div class="bg-wod-gray rounded-lg p-6">
-    <div class="flex items-center justify-between mb-6">
-      <h3 class="text-xl font-semibold text-wod-red">Disciplines</h3>
-      <button 
-        on:click={addDiscipline}
-        class="bg-wod-red hover:bg-red-700 px-3 py-1 rounded text-sm transition-colors"
-      >
-        Add Discipline
-      </button>
-    </div>
-
-    {#if Object.keys(vampireData.disciplines).length === 0}
-      <p class="text-wod-light-gray text-center py-4">No disciplines learned yet.</p>
-    {:else}
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {#each Object.entries(vampireData.disciplines) as [disciplineName, level]}
-          <div class="bg-wod-dark rounded p-4">
-            <div class="flex items-center justify-between mb-2">
-              <h4 class="font-medium">{disciplineName}</h4>
-              <button 
-                on:click={() => removeDiscipline(disciplineName)}
-                class="text-red-400 hover:text-red-300 text-sm"
-                title="Remove discipline"
-              >
-                ✕
-              </button>
-            </div>
-            <DotControl
-              value={level}
-              maxValue={5}
-              minValue={0}
-              ariaLabel={`Discipline level for ${disciplineName}`}
-              id={`discipline-${disciplineName}`}
-              on:change={(event) => updateDiscipline(disciplineName, event.detail)}
-            />
-          </div>
-        {/each}
-      </div>
-    {/if}
-  </div>
-
-  <!-- Clan Information -->
-  <div class="bg-wod-gray rounded-lg p-6">
-    <h3 class="text-xl font-semibold text-wod-red mb-4">Clan Information</h3>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <div>
-        <label for="clan-disciplines" class="block text-sm font-medium mb-2">Clan Disciplines</label>
-        <div class="space-y-2">
-          {#each vampireData.clanDisciplines as discipline, index}
-            <div class="flex items-center space-x-2">
-              <input
-                id={`clan-discipline-${index}`}
-                type="text"
-                bind:value={vampireData.clanDisciplines[index]}
-                on:input={updateData}
-                class="flex-1 bg-wod-dark border border-wod-light-gray rounded px-3 py-2 text-white"
-              />
-              <button 
-                on:click={() => { vampireData.clanDisciplines.splice(index, 1); updateData(); }}
-                class="text-red-400 hover:text-red-300"
-              >
-                ✕
-              </button>
-            </div>
-          {/each}
-          <button 
-            on:click={() => { vampireData.clanDisciplines.push(''); updateData(); }}
-            class="bg-wod-light-gray hover:bg-gray-500 px-3 py-1 rounded text-sm transition-colors"
-          >
-            Add Discipline
-          </button>
-        </div>
-      </div>
-      <div>
-        <label for="clan-weakness" class="block text-sm font-medium mb-2">Clan Weakness</label>
-        <textarea 
-          bind:value={vampireData.clanWeakness} 
-          on:input={updateData}
-          rows="4"
-          class="w-full bg-wod-dark border border-wod-light-gray rounded px-3 py-2 text-white resize-vertical"
-        ></textarea>
-      </div>
+    <div>
+      <HeaderIntegerField header="Experience" bind:value={sheetData.experience} />
     </div>
   </div>
 </div>

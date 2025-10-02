@@ -18,7 +18,7 @@
   }
 </script>
 
-<div class="flex items-center w-full">
+<div class="flex items-center gap-2 w-full">
   <label for={id} class="mr-2 w-20 text-right">{label}</label>
-  <input {id} class="border rounded px-3 py-2 grow" type="number" bind:value {placeholder} on:input={handleInput} />
+  <input {id} class="border-b px-3 py-1" type="number" bind:value {placeholder} on:input={handleInput} />
 </div>

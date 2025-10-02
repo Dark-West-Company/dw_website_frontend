@@ -7,24 +7,45 @@
 </script>
 
 <div class="flex flex-col items-center w-full">
-  <h1 class="text-4xl font-bold mt-4 mb-8 text-center capitalize">{sheet.character_type}</h1>
+  <div class="grid grid-cols-3 items-center w-full">
+    <button class="flex items-center w-fit h-fit gap-1 !bg-transparent hover:!text-primary-200" on:click={() => history.back()}>
+      <i class="mdi mdi-arrow-left" aria-hidden="true"></i>
+      <span>Back</span>
+    </button>
 
-  <div class="grid grid-cols-3 grid-rows-3 gap-2 w-full">
-    <TextField id="name" label="Name" bind:value={sheet.name} />
-    {#if sheet.character_type === 'vampire' || sheet.character_type === 'mage'}
-      <TextField id="nature" label="Nature" bind:value={sheet.nature} />
-    {/if}
-    <IntegerField id="age" label="Age" bind:value={sheet.age} />
+    <div class="text-2xl font-bold mt-4 mb-4 text-center capitalize">{sheet.character_type} Character Sheet</div>
+  </div>
 
-    <TextField id="player" label="Player" bind:value={sheet.player} />
-    {#if sheet.character_type === 'vampire' || sheet.character_type === 'mage'}
-      <TextField id="demeanor" label="Demeanor" bind:value={sheet.demeanor} />
-    {/if}
-    <TextField id="gender" label="Gender" bind:value={sheet.gender} />
+  <div class="grid grid-cols-3 gap-2 w-full">
+    <div class="flex flex-col gap-1">
+      <TextField id="name" label="Name" bind:value={sheet.name} />
+      <TextField id="player" label="Player" bind:value={sheet.player} />
+      <TextField id="chronicle" label="Chronicle" bind:value={sheet.chronicle} />
+    </div>
 
-    <TextField id="chronicle" label="Chronicle" bind:value={sheet.chronicle} />
-    <TextField id="concept" label="Concept" bind:value={sheet.concept} />
-    <!-- <TextField id="residence" label="Residence" bind:value={sheet.residence} /> -->
+    <div class="flex flex-col gap-1">
+      {#if sheet.character_type === 'vampire' || sheet.character_type === 'mage'}
+        <TextField id="nature" label="Nature" bind:value={sheet.nature} />
+      {/if}
+      {#if sheet.character_type === 'vampire' || sheet.character_type === 'mage'}
+        <TextField id="demeanor" label="Demeanor" bind:value={sheet.demeanor} />
+      {/if}
+      <TextField id="concept" label="Concept" bind:value={sheet.concept} />
+    </div>
+
+    <div class="flex flex-col gap-1">
+      {#if sheet.character_type === 'human'}
+        <IntegerField id="age" label="Age" bind:value={sheet.age} />
+        <TextField id="gender" label="Gender" bind:value={sheet.gender} />
+      {/if}
+
+      {#if sheet.character_type === 'vampire'}
+        <TextField id="clan" label="Clan" bind:value={sheet.clan} />
+        <IntegerField id="generation" label="Generation" bind:value={sheet.generation} />
+        <TextField id="sire" label="Sire" bind:value={sheet.sire} />
+      {/if}
+      <!-- <TextField id="residence" label="Residence" bind:value={sheet.residence} /> -->
+    </div>
   </div>
 
   <div class="w-full border-t pt-3 mt-3">

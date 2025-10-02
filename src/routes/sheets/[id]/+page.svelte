@@ -2,6 +2,7 @@
   import { onMount, onDestroy } from 'svelte';
   import SharedSection from '$lib/components/sheets/SharedSection.svelte';
   import HumanSection from '$lib/HumanSection.svelte';
+  import VampireSection from '$lib/VampireSection.svelte';
   import { eventBus, events } from '$lib/eventBus';
   import { apiPatch, apiGet } from '$lib/api';
 
@@ -60,6 +61,10 @@
       <!-- Other sections will be rendered here based on character type -->
       {#if sheet.data.character_type === 'human'}
         <HumanSection sheetData={sheet.data} />
+      {/if}
+
+      {#if sheet.data.character_type === 'vampire'}
+        <VampireSection sheetData={sheet.data} />
       {/if}
     </div>
   {:else}
