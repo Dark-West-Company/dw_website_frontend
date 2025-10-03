@@ -1,20 +1,15 @@
 <script>
   import { eventBus, events } from '$lib/eventBus';
-  import debounce from 'lodash/debounce';
   export let id = '';
   export let label = '';
   export let value = null;
   export let placeholder = 'not set';
 
-  const emitChange = debounce((val) => {
-    eventBus.emit(events.SHEET_DATA_CHANGED, val);
-  }, 500);
-
   function handleInput(e) {
     let intVal = parseInt(e.target.value, 10);
     if (isNaN(intVal)) intVal = '';
     value = intVal;
-    emitChange(value);
+    eventBus.emit(events.SHEET_DATA_CHANGED, intVal);
   }
 </script>
 

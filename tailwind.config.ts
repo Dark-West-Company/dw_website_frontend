@@ -1,7 +1,7 @@
 import fontFamily from 'tailwindcss/defaultTheme';
 import colors from 'tailwindcss/colors';
 
-import { useColors } from './src/lib/models/useColors';
+import { useColors } from './src/lib/useColors';
 const { generateBackgroundColors, generateColors } = useColors();
 
 const baseBackgroundColor = '#181818'; // matte black

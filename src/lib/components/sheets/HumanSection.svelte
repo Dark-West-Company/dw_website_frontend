@@ -1,6 +1,6 @@
 <script>
-  import DynamicListSection from './components/sheets/DynamicListSection.svelte';
-  import HeaderIntegerField from './components/sheets/HeaderIntegerField.svelte';
+  import DynamicListSection from './DynamicListSection.svelte';
+  import HeaderIntegerField from './HeaderIntegerField.svelte';
   export let sheetData;
 </script>
 

@@ -7,6 +7,7 @@
 
   import { apiPost } from '$lib/api';
   import { goto } from '$app/navigation';
+  import { resolve } from '$app/paths';
 
   async function createSheet(sheetType) {
     try {
@@ -31,7 +32,7 @@
 
 <div class="flex flex-col items-center w-full h-full p-3">
   <div class="grid grid-cols-3 items-center w-full mb-3">
-    <button class="flex items-center w-fit h-fit gap-1 !bg-transparent hover:!text-primary-200" on:click={() => goto('/')}>
+    <button class="flex items-center w-fit h-fit gap-1 !bg-transparent hover:!text-primary-200" on:click={() => goto(resolve('/'))}>
       <i class="mdi mdi-arrow-left" aria-hidden="true"></i>
       <span>Back</span>
     </button>

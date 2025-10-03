@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import type { MageData } from '../constants';
-  import { TRADITIONS, ESSENCES } from '../constants';
+  import type { MageData } from '../../../constants';
+  import { TRADITIONS, ESSENCES } from '../../../constants';
   import DotControl from './DotControl.svelte';
 
   export let mageData: MageData;
@@ -38,10 +38,7 @@
     updateData();
   }
 
-  const sphereNames = [
-    'correspondence', 'entropy', 'forces', 'life', 'matter',
-    'mind', 'prime', 'spirit', 'time'
-  ] as const;
+  const sphereNames = ['correspondence', 'entropy', 'forces', 'life', 'matter', 'mind', 'prime', 'spirit', 'time'] as const;
 
   const sphereLabels: Record<string, string> = {
     correspondence: 'Correspondence',
@@ -52,7 +49,7 @@
     mind: 'Mind',
     prime: 'Prime',
     spirit: 'Spirit',
-    time: 'Time'
+    time: 'Time',
   };
 </script>
 
@@ -66,15 +63,10 @@
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
     <div class="bg-wod-gray rounded-lg p-6 space-y-4">
       <h3 class="text-xl font-semibold text-wod-red">Basic Information</h3>
-      
+
       <div>
         <label for="tradition" class="block text-sm font-medium mb-1">Tradition</label>
-        <select
-          id="tradition"
-          bind:value={mageData.tradition}
-          on:change={updateData}
-          class="w-full bg-wod-dark border border-wod-light-gray rounded px-3 py-2 text-white"
-        >
+        <select id="tradition" bind:value={mageData.tradition} on:change={updateData} class="w-full bg-wod-dark border border-wod-light-gray rounded px-3 py-2 text-white">
           {#each TRADITIONS as tradition}
             <option value={tradition}>{tradition}</option>
           {/each}
@@ -83,12 +75,7 @@
 
       <div>
         <label for="essence" class="block text-sm font-medium mb-1">Essence</label>
-        <select
-          id="essence"
-          bind:value={mageData.essence}
-          on:change={updateData}
-          class="w-full bg-wod-dark border border-wod-light-gray rounded px-3 py-2 text-white"
-        >
+        <select id="essence" bind:value={mageData.essence} on:change={updateData} class="w-full bg-wod-dark border border-wod-light-gray rounded px-3 py-2 text-white">
           {#each ESSENCES as essence}
             <option value={essence}>{essence}</option>
           {/each}
@@ -97,13 +84,7 @@
 
       <div>
         <label for="nature" class="block text-sm font-medium mb-1">Nature</label>
-        <input
-          id="nature"
-          type="text"
-          bind:value={mageData.nature}
-          on:input={updateData}
-          class="w-full bg-wod-dark border border-wod-light-gray rounded px-3 py-2 text-white"
-        />
+        <input id="nature" type="text" bind:value={mageData.nature} on:input={updateData} class="w-full bg-wod-dark border border-wod-light-gray rounded px-3 py-2 text-white" />
       </div>
 
       <div>
@@ -119,13 +100,7 @@
 
       <div>
         <label for="concept" class="block text-sm font-medium mb-1">Concept</label>
-        <input
-          id="concept"
-          type="text"
-          bind:value={mageData.concept}
-          on:input={updateData}
-          class="w-full bg-wod-dark border border-wod-light-gray rounded px-3 py-2 text-white"
-        />
+        <input id="concept" type="text" bind:value={mageData.concept} on:input={updateData} class="w-full bg-wod-dark border border-wod-light-gray rounded px-3 py-2 text-white" />
       </div>
 
       <div>
@@ -143,7 +118,7 @@
     <!-- Stats -->
     <div class="bg-wod-gray rounded-lg p-6 space-y-6">
       <h3 class="text-xl font-semibold text-wod-red">Vital Statistics</h3>
-      
+
       <!-- Arete -->
       <div>
         <div class="flex items-center justify-between mb-2">
@@ -156,7 +131,10 @@
           minValue={1}
           ariaLabel="Arete"
           id="arete"
-          on:change={(event) => { mageData.arete = event.detail; updateData(); }}
+          on:change={(event) => {
+            mageData.arete = event.detail;
+            updateData();
+          }}
         />
       </div>
 
@@ -176,7 +154,10 @@
               size="small"
               ariaLabel="Current Willpower"
               id="willpower-current"
-              on:change={(event) => { mageData.willpower = event.detail; updateData(); }}
+              on:change={(event) => {
+                mageData.willpower = event.detail;
+                updateData();
+              }}
             />
           </div>
           <div class="flex items-center space-x-2">
@@ -188,7 +169,10 @@
               size="small"
               ariaLabel="Max Willpower"
               id="willpower-max"
-              on:change={(event) => { mageData.maxWillpower = event.detail; updateData(); }}
+              on:change={(event) => {
+                mageData.maxWillpower = event.detail;
+                updateData();
+              }}
             />
           </div>
         </div>
@@ -202,22 +186,16 @@
         </div>
         <div class="flex items-center space-x-4">
           <div class="flex-1">
-            <input 
-              type="range" 
-              bind:value={mageData.quintessence} 
-              on:input={updateData}
-              min="0" 
-              max={mageData.maxQuintessence}
-              class="w-full"
-            />
+            <input type="range" bind:value={mageData.quintessence} on:input={updateData} min="0" max={mageData.maxQuintessence} class="w-full" />
           </div>
           <div class="flex items-center space-x-2">
             <label for="maxQuintessence" class="text-xs">Max:</label>
-            <input 
-              type="number" 
-              bind:value={mageData.maxQuintessence} 
+            <input
+              type="number"
+              bind:value={mageData.maxQuintessence}
               on:input={updateData}
-              min="1" max="50"
+              min="1"
+              max="50"
               class="w-16 bg-wod-dark border border-wod-light-gray rounded px-2 py-1 text-white text-sm"
             />
           </div>
@@ -230,15 +208,7 @@
           <label for="paradox" class="text-sm font-medium">Paradox</label>
           <span class="text-wod-light-gray">{mageData.paradox}</span>
         </div>
-        <input
-          id="paradox"
-          type="range"
-          bind:value={mageData.paradox}
-          on:input={updateData}
-          min="0"
-          max="20"
-          class="w-full"
-        />
+        <input id="paradox" type="range" bind:value={mageData.paradox} on:input={updateData} min="0" max="20" class="w-full" />
       </div>
 
       <!-- Experience -->
@@ -270,7 +240,10 @@
               minValue={0}
               ariaLabel={`Sphere level for ${sphereLabels[sphere]}`}
               id={`sphere-${sphere}`}
-              on:change={(event) => { mageData.spheres[sphere] = event.detail; updateData(); }}
+              on:change={(event) => {
+                mageData.spheres[sphere] = event.detail;
+                updateData();
+              }}
             />
           </div>
         </div>
@@ -282,12 +255,7 @@
   <div class="bg-wod-gray rounded-lg p-6">
     <div class="flex items-center justify-between mb-6">
       <h3 class="text-xl font-semibold text-wod-red">Focus Items</h3>
-      <button 
-        on:click={addFocus}
-        class="bg-wod-red hover:bg-red-700 px-3 py-1 rounded text-sm transition-colors"
-      >
-        Add Focus
-      </button>
+      <button on:click={addFocus} class="bg-wod-red hover:bg-red-700 px-3 py-1 rounded text-sm transition-colors"> Add Focus </button>
     </div>
 
     {#if mageData.focus.length === 0}
@@ -296,19 +264,8 @@
       <div class="space-y-2">
         {#each mageData.focus as focusItem, index}
           <div class="flex items-center space-x-2 bg-wod-dark rounded p-3">
-            <input 
-              type="text" 
-              bind:value={mageData.focus[index]} 
-              on:input={updateData}
-              class="flex-1 bg-transparent border-none text-white focus:outline-none"
-            />
-            <button 
-              on:click={() => removeFocus(index)}
-              class="text-red-400 hover:text-red-300"
-              title="Remove focus item"
-            >
-              ✕
-            </button>
+            <input type="text" bind:value={mageData.focus[index]} on:input={updateData} class="flex-1 bg-transparent border-none text-white focus:outline-none" />
+            <button on:click={() => removeFocus(index)} class="text-red-400 hover:text-red-300" title="Remove focus item"> ✕ </button>
           </div>
         {/each}
       </div>
@@ -319,12 +276,7 @@
   <div class="bg-wod-gray rounded-lg p-6">
     <div class="flex items-center justify-between mb-6">
       <h3 class="text-xl font-semibold text-wod-red">Seekings</h3>
-      <button 
-        on:click={addSeeking}
-        class="bg-wod-red hover:bg-red-700 px-3 py-1 rounded text-sm transition-colors"
-      >
-        Add Seeking
-      </button>
+      <button on:click={addSeeking} class="bg-wod-red hover:bg-red-700 px-3 py-1 rounded text-sm transition-colors"> Add Seeking </button>
     </div>
 
     {#if mageData.seekings.length === 0}
@@ -334,19 +286,9 @@
         {#each mageData.seekings as seeking, index}
           <div class="bg-wod-dark rounded p-4">
             <div class="flex items-start justify-between">
-              <textarea 
-                bind:value={mageData.seekings[index]} 
-                on:input={updateData}
-                rows="2"
-                class="flex-1 bg-transparent border-none text-white resize-vertical focus:outline-none"
+              <textarea bind:value={mageData.seekings[index]} on:input={updateData} rows="2" class="flex-1 bg-transparent border-none text-white resize-vertical focus:outline-none"
               ></textarea>
-              <button 
-                on:click={() => removeSeeking(index)}
-                class="text-red-400 hover:text-red-300 ml-2"
-                title="Remove seeking"
-              >
-                ✕
-              </button>
+              <button on:click={() => removeSeeking(index)} class="text-red-400 hover:text-red-300 ml-2" title="Remove seeking"> ✕ </button>
             </div>
           </div>
         {/each}

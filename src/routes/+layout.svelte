@@ -7,6 +7,7 @@
   import { userData } from '$lib/userStore';
   import { apiGet } from '$lib/api';
   import { eventBus, events } from '@/eventBus';
+  import { resolve } from '$app/paths';
 
   let loggedIn = false;
   let isAdmin = false;
@@ -77,7 +78,7 @@
       type="button"
       class="align-self-center text-center font-serif tracking-widest uppercase text-secondary-400 hover:underline focus:outline-none"
       style="display: block; background: none; border: none; cursor: pointer;"
-      on:click={() => goto('/')}
+      on:click={() => goto(resolve('/'))}
     >
       World of DarkWest
     </button>

@@ -7,15 +7,6 @@
 </script>
 
 <div class="flex flex-col items-center w-full">
-  <div class="grid grid-cols-3 items-center w-full">
-    <button class="flex items-center w-fit h-fit gap-1 !bg-transparent hover:!text-primary-200" on:click={() => history.back()}>
-      <i class="mdi mdi-arrow-left" aria-hidden="true"></i>
-      <span>Back</span>
-    </button>
-
-    <div class="text-2xl font-bold mt-4 mb-4 text-center capitalize">{sheet.character_type} Character Sheet</div>
-  </div>
-
   <div class="grid grid-cols-3 gap-2 w-full">
     <div class="flex flex-col gap-1">
       <TextField id="name" label="Name" bind:value={sheet.name} />

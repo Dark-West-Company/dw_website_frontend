@@ -1,9 +1,9 @@
 <script>
-  import DotDisplay from './components/sheets/DotDisplay.svelte';
-  import DotTextField from './components/sheets/DotTextField.svelte';
-  import DropdownSelect from './components/sheets/DropdownSelect.svelte';
-  import DynamicListSection from './components/sheets/DynamicListSection.svelte';
-  import HeaderIntegerField from './components/sheets/HeaderIntegerField.svelte';
+  import DotDisplay from './DotDisplay.svelte';
+  import DotTextField from './DotTextField.svelte';
+  import DropdownSelect from './DropdownSelect.svelte';
+  import DynamicListSection from './DynamicListSection.svelte';
+  import HeaderIntegerField from './HeaderIntegerField.svelte';
   export let sheetData;
 
   const pathOptions = [

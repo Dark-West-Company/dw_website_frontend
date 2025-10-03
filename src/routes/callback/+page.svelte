@@ -2,12 +2,13 @@
   import { onMount } from 'svelte';
   import { goto } from '$app/navigation';
   import { apiPost } from '$lib/api';
+  import { resolve } from '$app/paths';
 
   onMount(async () => {
     const params = new URLSearchParams(window.location.search);
     const code = params.get('code');
     if (!code) {
-      goto('/');
+      goto(resolve('/'));
       return;
     }
     try {
