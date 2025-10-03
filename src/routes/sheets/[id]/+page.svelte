@@ -4,6 +4,7 @@
   import HumanSection from '@/components/sheets/HumanSection.svelte';
   import VampireSection from '@/components/sheets/VampireSection.svelte';
   import WerewolfSection from '@/components/sheets/WerewolfSection.svelte';
+  import MageSection from '@/components/sheets/MageSection.svelte';
   import { eventBus, events } from '$lib/eventBus';
   import { apiPatch, apiGet } from '$lib/api';
 
@@ -107,6 +108,10 @@
 
       {#if sheet.data.character_type === 'werewolf'}
         <WerewolfSection sheetData={sheet.data} />
+      {/if}
+
+      {#if sheet.data.character_type === 'mage'}
+        <MageSection sheetData={sheet.data} />
       {/if}
     </div>
   {:else}

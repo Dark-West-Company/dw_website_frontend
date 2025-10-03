@@ -18,10 +18,12 @@
       {#if sheet.character_type === 'vampire' || sheet.character_type === 'mage'}
         <TextField id="nature" label="Nature" bind:value={sheet.nature} />
       {/if}
+
       {#if sheet.character_type === 'vampire' || sheet.character_type === 'mage'}
         <TextField id="demeanor" label="Demeanor" bind:value={sheet.demeanor} />
       {/if}
-      {#if sheet.character_type !== 'werewolf'}
+
+      {#if sheet.character_type === 'human' || sheet.character_type === 'vampire'}
         <TextField id="concept" label="Concept" bind:value={sheet.concept} />
       {/if}
 
@@ -29,6 +31,10 @@
         <TextField id="breed" label="Breed" bind:value={sheet.breed} />
         <TextField id="auspice" label="Auspice" bind:value={sheet.auspice} />
         <TextField id="tribe" label="Tribe" bind:value={sheet.tribe} />
+      {/if}
+
+      {#if sheet.character_type === 'mage'}
+        <TextField id="Essence" label="Essence" bind:value={sheet.essence} />
       {/if}
     </div>
 
@@ -48,6 +54,14 @@
       {#if sheet.character_type === 'werewolf'}
         <TextField id="pack_name" label="Pack Name" bind:value={sheet.pack_name} />
         <TextField id="pack_totem" label="Pack Totem" bind:value={sheet.pack_totem} />
+      {/if}
+
+      {#if sheet.character_type === 'mage'}
+        <TextField id="affiliation" label="Affiliation" bind:value={sheet.affiliation} />
+        <TextField id="sect" label="Sect" bind:value={sheet.sect} />
+      {/if}
+
+      {#if sheet.character_type === 'werewolf' || sheet.character_type === 'mage'}
         <TextField id="concept" label="Concept" bind:value={sheet.concept} />
       {/if}
     </div>
