@@ -6,7 +6,6 @@ function getAuthHeader() {
 
 export async function apiGet(endpoint: string, options: RequestInit = {}) {
   const url = `${import.meta.env.VITE_BACKEND_URL}${endpoint}`;
-  console.log('apiGet URL:', url);
   try {
     const response = await fetch(url, {
       ...options,

@@ -29,7 +29,6 @@
 <div class="flex flex-col gap-1 w-full">
   <div class="flex items-center justify-between">
     <div class="font-medium mb-1">{label}</div>
-    {type}
     <div class="flex gap-1 mb-1">
       {#each dots as i (i)}
         {#if type === 'none' || i <= level}

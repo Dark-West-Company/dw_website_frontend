@@ -30,7 +30,15 @@
       {#if sheet.character_type === 'vampire' || sheet.character_type === 'mage'}
         <TextField id="demeanor" label="Demeanor" bind:value={sheet.demeanor} />
       {/if}
-      <TextField id="concept" label="Concept" bind:value={sheet.concept} />
+      {#if sheet.character_type !== 'werewolf'}
+        <TextField id="concept" label="Concept" bind:value={sheet.concept} />
+      {/if}
+
+      {#if sheet.character_type === 'werewolf'}
+        <TextField id="breed" label="Breed" bind:value={sheet.breed} />
+        <TextField id="auspice" label="Auspice" bind:value={sheet.auspice} />
+        <TextField id="tribe" label="Tribe" bind:value={sheet.tribe} />
+      {/if}
     </div>
 
     <div class="flex flex-col gap-1">
@@ -45,6 +53,12 @@
         <TextField id="sire" label="Sire" bind:value={sheet.sire} />
       {/if}
       <!-- <TextField id="residence" label="Residence" bind:value={sheet.residence} /> -->
+
+      {#if sheet.character_type === 'werewolf'}
+        <TextField id="pack_name" label="Pack Name" bind:value={sheet.pack_name} />
+        <TextField id="pack_totem" label="Pack Totem" bind:value={sheet.pack_totem} />
+        <TextField id="concept" label="Concept" bind:value={sheet.concept} />
+      {/if}
     </div>
   </div>
 

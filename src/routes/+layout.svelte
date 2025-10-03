@@ -1,44 +1,45 @@
 <script>
+  import '../app.css';
+
   import { onMount } from 'svelte';
   import { goto } from '$app/navigation';
   import favicon from '$lib/assets/favicon.svg';
-  import '../app.css';
   import { userData } from '$lib/userStore';
   import { apiGet } from '$lib/api';
+  import { eventBus, events } from '@/eventBus';
 
   let loggedIn = false;
   let isAdmin = false;
-  let characterInfo = null;
 
   // Check for JWT in localStorage and fetch character info
   async function fetchUserInfo() {
+    userData.update((u) => ({ ...u, isLoading: true }));
     const token = localStorage.getItem('jwt');
-    // Always attempt to fetch character info from backend, regardless of token
+
     try {
       const res = await apiGet('/api/user/info');
       if (res.ok) {
         const data = await res.json();
         isAdmin = !!data.isAdmin;
-        characterInfo = Array.isArray(data.sheets) ? data.sheets : [];
         userData.set({
           isAdmin: !!data.isAdmin,
-          sheets: characterInfo,
+          sheets: data.sheets ?? [],
           user: data.user ?? null,
-          characters:
-            characterInfo?.map((sheet) => ({
-              id: sheet.character_id,
-              name: sheet.name,
-              type: sheet.character_type,
-            })) ?? [],
+          characters: data.characters ?? [],
+          isLoading: false,
         });
+
         loggedIn = !!token;
+        console.log('[DEBUG] userData updated:', data);
       } else if (res.status === 401) {
         loggedIn = false;
-        characterInfo = null;
+        userData.update((u) => ({ ...u, isLoading: false }));
+        console.log('[DEBUG] fetchUserInfo: Unauthorized');
       }
-    } catch {
+    } catch (e) {
       loggedIn = false;
-      characterInfo = null;
+      userData.update((u) => ({ ...u, isLoading: false }));
+      console.error('[DEBUG] fetchUserInfo error:', e);
     }
   }
 
@@ -56,6 +57,8 @@
     const discordOAuthUrl = `${discordOAuthBase}?client_id=${clientId}` + `&redirect_uri=${encodeURIComponent(redirectUri)}` + `&response_type=${responseType}` + `&scope=${scope}`;
     window.location.href = discordOAuthUrl;
   }
+
+  eventBus.on(events.RELOAD_USER_DATA, fetchUserInfo);
 </script>
 
 <svelte:head>
@@ -79,9 +82,11 @@
       World of DarkWest
     </button>
 
-    {#if !loggedIn}
+    {#if $userData.isLoading}
+      <div class="ml-auto w-fit px-3 py-1 rounded bg-background-700 text-secondary-400 animate-pulse">Loading...</div>
+    {:else if !loggedIn}
       <button class="px-4 py-2 rounded transition-colors duration-200" on:click={loginWithDiscord}> Login with Discord </button>
-    {:else if characterInfo}
+    {:else}
       <button class="ml-auto w-fit px-3 py-1 rounded transition-colors duration-200" on:click={() => (window.location.href = '/sheets')}> My sheets </button>
     {/if}
   </div>

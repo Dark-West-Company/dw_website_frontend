@@ -3,6 +3,7 @@
   import SharedSection from '$lib/components/sheets/SharedSection.svelte';
   import HumanSection from '$lib/HumanSection.svelte';
   import VampireSection from '$lib/VampireSection.svelte';
+  import WerewolfSection from '$lib/WerewolfSection.svelte';
   import { eventBus, events } from '$lib/eventBus';
   import { apiPatch, apiGet } from '$lib/api';
 
@@ -65,6 +66,10 @@
 
       {#if sheet.data.character_type === 'vampire'}
         <VampireSection sheetData={sheet.data} />
+      {/if}
+
+      {#if sheet.data.character_type === 'werewolf'}
+        <WerewolfSection sheetData={sheet.data} />
       {/if}
     </div>
   {:else}

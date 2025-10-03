@@ -24,11 +24,12 @@
       }
     } catch (e) {
       // Optionally handle error
+      console.error('Error during Discord callback:', e);
     }
-    goto('/');
+    window.location.replace('/');
   });
 </script>
 
-<div class="flex flex-col items-center justify-center h-screen">
+<div class="flex items-center justify-center w-full h-full">
   <div class="text-secondary-400 text-xl font-bold">Logging you in via Discord...</div>
 </div>

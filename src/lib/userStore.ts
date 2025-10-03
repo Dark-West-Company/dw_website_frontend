@@ -5,4 +5,5 @@ export const userData = writable({
   sheets: [],
   characters: [],
   user: null,
+  isLoading: true,
 });

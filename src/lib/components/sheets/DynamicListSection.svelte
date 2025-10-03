@@ -3,8 +3,12 @@
 
   export let header = 'Dynamic List';
   export let entries = [];
-  if (entries === null || entries === undefined || !Array.isArray(entries)) {
-    entries = [];
+  if (entries === null || entries === undefined || !Array.isArray(entries) || entries.length === 0) {
+    entries = [
+      { text: '', level: 0 },
+      { text: '', level: 0 },
+      { text: '', level: 0 },
+    ];
   }
 
   function addEntry() {
