@@ -32,26 +32,26 @@
 
 <div class="flex flex-col items-center w-full h-full p-3">
   <div class="grid grid-cols-3 items-center w-full mb-3">
-    <button class="flex items-center w-fit h-fit gap-1 !bg-transparent hover:!text-primary-200" on:click={() => goto(resolve('/'))}>
+    <button class="flex items-center w-fit h-fit gap-1 !bg-transparent hover:!text-light-blue-0" on:click={() => goto(resolve('/'))}>
       <i class="mdi mdi-arrow-left" aria-hidden="true"></i>
       <span>Back</span>
     </button>
 
-    <div class="text-2xl font-bold text-center capitalize">Your Character Sheets</div>
+    <div class="text-2xl font-rampart-spurs text-center capitalize">Your Character Sheets</div>
   </div>
 
   <div class="grid grid-cols-[300px_auto] gap-3 w-full grow">
-    <div class="flex flex-col gap-3 border-r border-background-500">
-      <div class="font-semibold border-b border-background-500 py-1 mr-3">Your Sheets</div>
+    <div class="flex flex-col gap-3 border-r border-cream-0/20">
+      <div class="font-rampart-spurs border-b border-cream-0/20 py-1 mr-3">Your Sheets</div>
 
       <div class="flex flex-col grow gap-2 overflow-y-auto pr-3">
         {#each sheets as sheet (sheet.id)}
           <div class="flex items-center">
             <div class="flex flex-col">
-              <span class="font-semibold text-sm capitalize">
+              <span class="font-rampart-spurs text-sm">
                 {sheet.name || `Unnamed ${sheet.character_type} Sheet`}
               </span>
-              <span class="text-xs text-background-300 italic">{sheet.character_type} sheet</span>
+              <span class="text-xs text-background-300 font-speedwriter">{sheet.character_type} sheet</span>
             </div>
 
             {#if isAssociated(sheet)}
@@ -60,25 +60,25 @@
               <i class="mdi mdi-link-off ml-auto" aria-hidden="true"></i>
             {/if}
 
-            <button class="ml-2 px-2 py-1" on:click={() => viewSheet(sheet.id)}> View </button>
+            <button class="ml-2 px-2 py-1 hover:!bg-dark-blue-0" on:click={() => viewSheet(sheet.id)}> View </button>
           </div>
         {/each}
       </div>
 
-      <div class="flex flex-col gap-2 pt-2 border-t border-background-500 mr-3">
-        <div>Create New Sheet</div>
+      <div class="flex flex-col gap-2 pt-2 border-t border-cream-0/20 mr-3">
+        <div class="text-center font-rampart-spurs">Create New Sheet</div>
 
-        <div class="flex gap-1">
-          <button class="px-2 py-1" on:click={() => createSheet('vampire')}>Vampire</button>
-          <button class="px-2 py-1" on:click={() => createSheet('werewolf')}>Werewolf</button>
-          <button class="px-2 py-1" on:click={() => createSheet('mage')}>Mage</button>
-          <button class="px-2 py-1" on:click={() => createSheet('human')}>Human</button>
+        <div class="flex justify-between">
+          <button class="text-sm px-1 py-1 rounded hover:!bg-dark-blue-0" on:click={() => createSheet('vampire')}>Vampire</button>
+          <button class="text-sm px-1 py-1 rounded hover:!bg-dark-blue-0" on:click={() => createSheet('werewolf')}>Werewolf</button>
+          <button class="text-sm px-1 py-1 rounded hover:!bg-dark-blue-0" on:click={() => createSheet('mage')}>Mage</button>
+          <button class="text-sm px-1 py-1 rounded hover:!bg-dark-blue-0" on:click={() => createSheet('human')}>Human</button>
         </div>
       </div>
     </div>
 
     <div class="flex flex-col gap-3">
-      <div class="font-semibold border-b border-background-500 py-1">Your In-Game Characters</div>
+      <div class="font-rampart-spurs border-b border-cream-0/20 py-1">Your In-Game Characters</div>
 
       {#if characters.length === 0}
         <div>You have no in-game characters created yet.</div>
@@ -88,7 +88,7 @@
             <div class="flex items-center w-64 h-64 bg-background-700">
               {JSON.stringify(char)}
               <div class="flex flex-col">
-                <span class="font-semibold text-lg">{char.name}</span>
+                <span class="font-rampart-spurs text-lg">{char.name}</span>
                 <span class="text-sm text-background-300 italic">{char.type} character</span>
               </div>
               {#if sheets.find((s) => s.character_id === char.id)}

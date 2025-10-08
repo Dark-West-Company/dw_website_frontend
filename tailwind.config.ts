@@ -4,10 +4,23 @@ import colors from 'tailwindcss/colors';
 import { useColors } from './src/lib/useColors';
 const { generateBackgroundColors, generateColors } = useColors();
 
-const baseBackgroundColor = '#181818'; // matte black
-const basePrimaryColor = '#8B7500'; // dark gold
-const baseSecondaryColor = '#FFD700'; // rich gold
-const primaryOverlayOpacity = 0.6;
+const baseBackgroundColor = '#0A1819'; // very dark cyan
+const basePrimaryColor = '#CAE7ED'; // sky blue
+const baseSecondaryColor = '#384028'; // dark green
+
+const creamColor = '#EDECE5'; // light cream
+
+const greenBackgroundColor = '#191F1B'; // very dark green
+const greenDarkColor = '#364025'; // dark green
+const greenMediumColor = '#516130'; // medium green
+const greenLightColor = '#8B8F30'; // light green
+
+const blueBackgroundColor = '#123150'; // very dark blue
+const blueDarkColor = '#385874'; // dark blue
+const blueMediumColor = '#7c94AF'; // medium blue
+const blueLightColor = '#C2E8EE'; // light blue
+
+const primaryOverlayOpacity = 0.8;
 const secondaryOverlayOpacity = 0.3;
 // 981c20 = red
 /** @type {import('tailwindcss').Config} */
@@ -27,6 +40,18 @@ const config = {
       primary: generateColors(baseBackgroundColor, basePrimaryColor, primaryOverlayOpacity),
       secondary: generateColors(baseBackgroundColor, baseSecondaryColor, secondaryOverlayOpacity),
       background: generateBackgroundColors(baseBackgroundColor),
+
+      cream: generateColors(baseBackgroundColor, creamColor, secondaryOverlayOpacity),
+
+      'background-green': generateBackgroundColors(greenBackgroundColor),
+      'dark-green': generateColors(greenBackgroundColor, greenDarkColor, primaryOverlayOpacity),
+      'medium-green': generateColors(greenBackgroundColor, greenMediumColor, primaryOverlayOpacity),
+      'light-green': generateColors(greenBackgroundColor, greenLightColor, primaryOverlayOpacity),
+      'background-blue': generateBackgroundColors(blueBackgroundColor),
+      'dark-blue': generateColors(blueBackgroundColor, blueDarkColor, primaryOverlayOpacity),
+      'medium-blue': generateColors(blueBackgroundColor, blueMediumColor, primaryOverlayOpacity),
+      'light-blue': generateColors(blueBackgroundColor, blueLightColor, primaryOverlayOpacity),
+
       zinc: colors.zinc,
       white: colors.white,
       black: colors.black,
@@ -56,6 +81,46 @@ const config = {
           foreground: generateColors(baseBackgroundColor, baseSecondaryColor, secondaryOverlayOpacity),
           ...generateColors(baseBackgroundColor, baseSecondaryColor, secondaryOverlayOpacity),
         },
+
+        cream: {
+          DEFAULT: generateColors(baseBackgroundColor, creamColor, secondaryOverlayOpacity)[500],
+          foreground: generateColors(baseBackgroundColor, creamColor, secondaryOverlayOpacity),
+          ...generateColors(baseBackgroundColor, creamColor, secondaryOverlayOpacity),
+        },
+
+        greenBackground: generateBackgroundColors(greenBackgroundColor),
+        'dark-green': {
+          DEFAULT: generateColors(greenBackgroundColor, greenDarkColor, primaryOverlayOpacity)[500],
+          foreground: generateColors(greenBackgroundColor, greenDarkColor, primaryOverlayOpacity),
+          ...generateColors(greenBackgroundColor, greenDarkColor, primaryOverlayOpacity),
+        },
+        'medium-green': {
+          DEFAULT: generateColors(greenBackgroundColor, greenMediumColor, primaryOverlayOpacity)[500],
+          foreground: generateColors(greenBackgroundColor, greenMediumColor, primaryOverlayOpacity),
+          ...generateColors(greenBackgroundColor, greenMediumColor, primaryOverlayOpacity),
+        },
+        'light-green': {
+          DEFAULT: generateColors(greenBackgroundColor, greenLightColor, primaryOverlayOpacity)[500],
+          foreground: generateColors(greenBackgroundColor, greenLightColor, primaryOverlayOpacity),
+          ...generateColors(greenBackgroundColor, greenLightColor, primaryOverlayOpacity),
+        },
+        'background-blue': generateBackgroundColors(blueBackgroundColor),
+        'dark-blue': {
+          DEFAULT: generateColors(blueBackgroundColor, blueDarkColor, primaryOverlayOpacity)[500],
+          foreground: generateColors(blueBackgroundColor, blueDarkColor, primaryOverlayOpacity),
+          ...generateColors(blueBackgroundColor, blueDarkColor, primaryOverlayOpacity),
+        },
+        'medium-blue': {
+          DEFAULT: generateColors(blueBackgroundColor, blueMediumColor, primaryOverlayOpacity)[500],
+          foreground: generateColors(blueBackgroundColor, blueMediumColor, primaryOverlayOpacity),
+          ...generateColors(blueBackgroundColor, blueMediumColor, primaryOverlayOpacity),
+        },
+        'light-blue': {
+          DEFAULT: generateColors(blueBackgroundColor, blueLightColor, primaryOverlayOpacity)[500],
+          foreground: generateColors(blueBackgroundColor, blueLightColor, primaryOverlayOpacity),
+          ...generateColors(blueBackgroundColor, blueLightColor, primaryOverlayOpacity),
+        },
+
         destructive: {
           DEFAULT: 'hsl(var(--destructive) / <alpha-value>)',
           foreground: 'hsl(var(--destructive-foreground) / <alpha-value>)',

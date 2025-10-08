@@ -12,6 +12,6 @@
 </script>
 
 <div class="flex items-center gap-2 w-full">
-  <label for={id} class="mr-2 w-20 text-right">{label}</label>
-  <input {id} class="border-b px-3 py-1" type="text" bind:value {placeholder} on:input={handleInput} />
+  <label for={id} class="text-right text-sm text-cream-300 whitespace-nowrap">{label}</label>
+  <input {id} type="text" bind:value {placeholder} on:input={handleInput} />
 </div>

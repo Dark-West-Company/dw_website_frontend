@@ -8,6 +8,8 @@
   import { apiGet } from '$lib/api';
   import { eventBus, events } from '@/eventBus';
   import { resolve } from '$app/paths';
+  import logo from '$lib/assets/dw_logo_green.png';
+  import dwLogoSimple from '$lib/assets/dw_logo_simple.png';
 
   let loggedIn = false;
   let isAdmin = false;
@@ -66,32 +68,55 @@
   <link rel="icon" href={favicon} />
 </svelte:head>
 
-<div class="flex flex-col w-full h-full bg-background-900">
-  <div class="px-6 py-3 grid grid-cols-3 items-center shadow-lg border-b-2 border-background-400 bg-background-900">
-    <div>
-      {#if isAdmin}
-        <button class="ml-auto w-fit px-3 py-1 rounded transition-colors duration-200" on:click={() => (window.location.href = '/admin')}> Admin </button>
-      {/if}
+<div class="flex flex-col w-full h-full bg-background-0">
+  <div class="flex flex-col items-center relative w-full font-rampart-spurs bg-black z-50">
+    <div class="grid grid-cols-3 items-center w-full gap-3">
+      <div class="flex items-center justify-end gap-4">
+        <!-- <img src={logo} alt="Logo" class="h-18 w-auto cursor-pointer" on:click={() => goto(resolve('/'))} /> -->
+
+        <button class="w-fit text-xl px-3 button-hover-drop-shadow" on:click={() => (window.location.href = '/about')}> About </button>
+        <button class="w-fit text-xl px-3 button-hover-drop-shadow" on:click={() => (window.location.href = '/lore')}> Lore </button>
+      </div>
+
+      <div class="flex items-center justify-center z-10">
+        <button type="button" class="flex items-center w-fit !bg-transparent !border-none" on:click={() => goto(resolve('/'))}>
+          <img src={dwLogoSimple} alt="DarkWest Logo" class="w-84 h-auto logo-drop-shadow pt-3 pb-2" />
+        </button>
+      </div>
+
+      <div class="flex items-center justify-start gap-4">
+        <button class="w-fit text-xl px-3 button-hover-drop-shadow" on:click={() => (window.location.href = 'https://discord.com')}> Discord </button>
+        {#if $userData.isLoading}
+          <div class="w-fit px-3 py-1">Loading...</div>
+        {:else if !loggedIn}
+          <button class="w-fit px-3 py-1 button-hover-drop-shadow" on:click={loginWithDiscord}> Login </button>
+        {:else}
+          <button class="w-fit text-xl px-3 py-1 button-hover-drop-shadow" on:click={() => (window.location.href = '/sheets')}> Sheets </button>
+        {/if}
+      </div>
     </div>
 
-    <button
-      type="button"
-      class="align-self-center text-center font-serif tracking-widest uppercase text-secondary-400 hover:underline focus:outline-none"
-      style="display: block; background: none; border: none; cursor: pointer;"
-      on:click={() => goto(resolve('/'))}
-    >
-      World of DarkWest
-    </button>
+    <div class="h-6 w-full absolute left-0 right-0 -bottom-3 bg-gradient-to-t from-transparent via-black to-black"></div>
 
-    {#if $userData.isLoading}
-      <div class="ml-auto w-fit px-3 py-1 rounded bg-background-700 text-secondary-400 animate-pulse">Loading...</div>
-    {:else if !loggedIn}
-      <button class="px-4 py-2 rounded transition-colors duration-200" on:click={loginWithDiscord}> Login with Discord </button>
-    {:else}
-      <button class="ml-auto w-fit px-3 py-1 rounded transition-colors duration-200" on:click={() => (window.location.href = '/sheets')}> My sheets </button>
-    {/if}
+    <!-- <div class="flex items-center gap-4">
+      {#if isAdmin}
+        <button class="ml-auto w-fit text-xl px-3 rounded border-2 border-black" on:click={() => (window.location.href = '/admin')}> Admin </button>
+      {/if}
+    </div> -->
   </div>
+
   <div class="flex grow flex-1 overflow-auto">
     <slot />
   </div>
 </div>
+
+<style>
+  .logo-drop-shadow {
+    filter: drop-shadow(0 0px 6px var(--color-light-blue-0)) drop-shadow(0 0px 6px var(--color-light-blue-0));
+  }
+
+  .button-hover-drop-shadow:hover {
+    transition: filter 0.3s ease;
+    filter: drop-shadow(0 0px 11px var(--color-dark-blue-0)) drop-shadow(0 0px 11px var(--color-medium-blue-0));
+  }
+</style>

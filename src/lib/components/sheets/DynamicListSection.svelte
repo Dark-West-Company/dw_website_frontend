@@ -34,22 +34,20 @@
   }
 </script>
 
-<div class="flex items-center flex-col">
-  <div class="flex items-center relative justify-center mb-2 w-full">
-    <h3 class="font-bold">{header}</h3>
-    <button class="absolute right-0 ml-2 px-2 py-1 bg-blue-500 text-white rounded" on:click={addEntry}>+ Add</button>
+<div class="flex flex-col relative border rounded-xl border-cream-0/20 pb-2 pt-4 px-3">
+  <div class="absolute left-0 right-0 -top-3 flex justify-center">
+    <div class="w-fit text-center bg-background-0 font-rampart-spurs tracking-wider px-1">{header}</div>
   </div>
 
   <div class="w-full space-y-2">
     {#each entries as entry, idx (idx)}
       <div class="flex items-center gap-2 w-full">
-        <input type="text" class="border-b px-2 py-1 flex-1" bind:value={entry.text} on:input={(e) => updateText(idx, e.target.value)} placeholder="Entry text" />
+        <input type="text" bind:value={entry.text} on:input={(e) => updateText(idx, e.target.value)} placeholder="Entry text" />
         <div class="flex gap-1">
           {#each [1, 2, 3, 4, 5] as i (i)}
             <button
               type="button"
-              class="w-4 h-4 rounded-full border flex items-center justify-center cursor-pointer"
-              style="background: {i < entry.level ? '#444' : '#eee'}"
+              class="w-3 h-3 rounded-full flex items-center justify-center cursor-pointer hover:!bg-light-blue-0 {i <= entry.level ? '!bg-light-green-0' : '!bg-background-500'}"
               on:click={() => updateLevel(idx, i + 1)}
               title={`Set level to ${i + 1}`}
               aria-label={`Set level to ${i + 1}`}
@@ -57,8 +55,14 @@
             </button>
           {/each}
         </div>
-        <button class="px-2 py-1 bg-red-500 text-white rounded" on:click={() => removeEntry(idx)} disabled={entries.length <= 1} title="Remove entry">−</button>
+        <button
+          class="flex align-center justify-center w-6 h-4 !bg-red-900 hover:!bg-red-700 rounded-full text-xs"
+          on:click={() => removeEntry(idx)}
+          disabled={entries.length <= 1}
+          title="Remove entry">-</button
+        >
       </div>
     {/each}
   </div>
+  <button class="mt-2 px-2 pt-1 rounded text-xs hover:!bg-dark-blue-0" on:click={addEntry}>+ Add Entry</button>
 </div>

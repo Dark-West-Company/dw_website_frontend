@@ -1,3 +1,16 @@
+// XP progression type constants
+export const XP_TYPE_ATTRIBUTE = 'attribute';
+export const XP_TYPE_ABILITY = 'ability';
+export const XP_TYPE_WILLPOWER = 'willpower';
+export const XP_TYPE_BACKGROUND = 'background';
+export const XP_TYPE_VAMPIRE_DISCIPLINE = 'vampire_discipline';
+export const XP_TYPE_VAMPIRE_VIRTUE = 'vampire_virtue';
+export const XP_TYPE_VAMPIRE_PATH = 'vampire_path';
+export const XP_TYPE_WEREWOLF_GIFT = 'werewolf_gift';
+export const XP_TYPE_WEREWOLF_RAGE = 'werewolf_rage';
+export const XP_TYPE_WEREWOLF_GNOSIS = 'werewolf_gnosis';
+export const XP_TYPE_MAGE_SPHERE = 'mage_sphere';
+export const XP_TYPE_MAGE_ARETE = 'mage_arete';
 // Character Types
 export type CharacterType = 'vampire' | 'werewolf' | 'mage' | 'human';
 

@@ -14,8 +14,8 @@
   }
 </script>
 
-<select class="w-full px-2 py-1 border-b bg-background-900 focus:outline-none" bind:value on:change={handleChange}>
+<select class="w-fit py-1 border-b border-light-blue-0 px-1 focus:outline-none" bind:value on:change={handleChange}>
   {#each options as opt (opt.value)}
-    <option value={opt.value} class="bg-background-900 text-primary-100">{opt.label}</option>
+    <option value={opt.value} class="text-sm bg-background-900 text-cream-0">{opt.label}</option>
   {/each}
 </select>
