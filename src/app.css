@@ -64,7 +64,9 @@ button:disabled {
   overflow: hidden !important;
 }
 
-
+.paragraph-text {
+  @apply mt-4 leading-relaxed font-sans;
+}
 
 
 

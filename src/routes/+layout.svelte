@@ -10,6 +10,7 @@
   import { resolve } from '$app/paths';
   import logo from '$lib/assets/dw_logo_green.png';
   import dwLogoSimple from '$lib/assets/dw_logo_simple.png';
+  import winterBackground from '$lib/assets/Winter.png';
 
   let loggedIn = false;
   let isAdmin = false;
@@ -69,8 +70,12 @@
 </svelte:head>
 
 <div class="flex flex-col w-full h-full bg-background-0">
-  <div class="flex flex-col items-center relative w-full font-rampart-spurs bg-black z-50">
-    <div class="grid grid-cols-3 items-center w-full gap-3">
+  <div
+    class="flex flex-col items-center relative w-full font-rampart-spurs z-50"
+    style="background-image: url({winterBackground}); background-size: cover; background-position: center;"
+  >
+    <div class="absolute inset-0 backdrop-blur-[2px] bg-black/60"></div>
+    <div class="grid grid-cols-3 items-center w-full gap-3 z-10">
       <div class="flex items-center justify-end gap-4">
         <!-- <img src={logo} alt="Logo" class="h-18 w-auto cursor-pointer" on:click={() => goto(resolve('/'))} /> -->
 
@@ -96,7 +101,7 @@
       </div>
     </div>
 
-    <div class="h-6 w-full absolute left-0 right-0 -bottom-3 bg-gradient-to-t from-transparent via-black to-black"></div>
+    <div class="h-6 w-full absolute left-0 right-0 -bottom-3 bg-gradient-to-b from-transparent via-background-0 to-transparent"></div>
 
     <!-- <div class="flex items-center gap-4">
       {#if isAdmin}

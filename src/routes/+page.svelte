@@ -73,19 +73,22 @@
     </div>
   </div>
 
-  <div class="flex w-full relative justify-between bg-black pb-2 px-2">
-    <div class="h-6 w-full absolute left-0 right-0 -top-6 bg-gradient-to-b from-transparent via-black to-black"></div>
+  <div class="flex w-full relative justify-between pb-2 pt-4 px-2">
+    <img src={winterBackground} alt="Winter Background" class="absolute inset-0 w-full h-full object-cover -scale-x-100" />
+    <div class="absolute inset-0 backdrop-blur-[2px] bg-black/80"></div>
 
-    <div>
+    <div class="h-6 w-full absolute left-0 right-0 -top-3 bg-gradient-to-b from-transparent via-background-0 to-transparent"></div>
+
+    <div class="z-50">
       <img src={darkFilagree} alt="Cream Filagree" class="w-22 h-auto filagree-drop-shadow" />
     </div>
 
-    <div class="flex flex-col gap-2 items-center justify-center h-full">
+    <div class="flex flex-col gap-2 items-center justify-center h-full z-50">
       <div>Contact</div>
       <div class="text-xs">social logos</div>
     </div>
 
-    <div>
+    <div class="z-50">
       <img src={darkFilagree} alt="Cream Filagree" class="w-22 h-auto -scale-x-100 filagree-drop-shadow" />
     </div>
   </div>
