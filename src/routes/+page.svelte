@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
   // import background from '$lib/assets/forest_bg.png';
   // import winterBackground from '$lib/assets/Winter.png';
   // import dwLogo from '$lib/assets/dw_logo.png';
@@ -8,18 +8,64 @@
   // import blackInkBackground from '$lib/assets/black_ink_background.png';
   // import pageTornEdgeBlack from '$lib/assets/page_torn_edge_black.png';
   import BlinkingEye from '@/components/BlinkingEye.svelte';
+
+  // Reusable function to generate eye parameters
+  function generateEyeParams(count) {
+    // count should be even for pairs
+    const pairs = [];
+    for (let i = 0; i < count / 2; i++) {
+      // Base position for the pair
+      const baseLeft = Math.floor(Math.random() * 80) + 10;
+      const baseTop = Math.floor(Math.random() * 70) + 15;
+
+      // Offset for each eye in the pair
+      const offset = (Math.random() * 6 + 10) * (Math.random() < 0.5 ? 1 : -1);
+
+      // Randomly decide if this pair blinks
+      const shouldBlink = Math.random() < 0.1;
+      let blinkParams = {};
+      if (shouldBlink) {
+        blinkParams = {
+          shouldBlink: true,
+          animationDelay: `${Math.random() * 8}s`,
+          animationDuration: `${8 + Math.random() * 6}s`,
+        };
+      } else {
+        blinkParams = {
+          shouldBlink: false,
+        };
+      }
+
+      // Left eye
+      pairs.push({
+        left: `${baseLeft - offset}%`,
+        top: `${baseTop - offset * 2}%`,
+        ...blinkParams,
+      });
+      // Right eye
+      pairs.push({
+        left: `${baseLeft + offset}%`,
+        top: `${baseTop + offset * 2}%`,
+        ...blinkParams,
+      });
+    }
+    return pairs;
+  }
+
+  const eyeParamsArea1 = generateEyeParams(10);
+  const eyeParamsArea2 = generateEyeParams(10);
 </script>
 
 <!-- Main Content -->
 <div class="flex flex-col w-full h-full transition-opacity duration-500">
   <div class="h-full flex flex-col relative grow items-center justify-center">
-    <div class="relative w-full grow">
-      {#each Array(8) as _, i (i)}
-        <BlinkingEye class="!absolute" style="left: {Math.floor(Math.random() * 90) + 5}%; top: {Math.floor(Math.random() * 80) + 10}%;" />
+    <div class="relative w-full grow z-10">
+      {#each eyeParamsArea1 as params, i (i)}
+        <BlinkingEye class="!absolute" style="left: {params.left}; top: {params.top};" {...params} />
       {/each}
     </div>
 
-    <div class="flex flex-col items-center h-1/2 justify-center w-full text-center font-speedwriter text-2xl bg-primary gap-10 relative z-10 my-24">
+    <div class="flex flex-col items-center h-1/2 justify-center w-full text-center font-speedwriter text-2xl bg-primary gap-10 relative z-20 my-24">
       <div class="torn-edge-top"></div>
       <div class="z-10">What are you doing?</div>
       <div class="z-10">You shouldn't be here</div>
@@ -27,9 +73,9 @@
       <div class="torn-edge-bottom"></div>
     </div>
 
-    <div class="relative w-full grow">
-      {#each Array(8) as _, i (i)}
-        <BlinkingEye class="!absolute" style="left: {Math.floor(Math.random() * 90) + 5}%; top: {Math.floor(Math.random() * 80) + 10}%;" />
+    <div class="relative w-full grow z-10">
+      {#each eyeParamsArea2 as params, i (i)}
+        <BlinkingEye class="!absolute" style="left: {params.left}; top: {params.top};" {...params} />
       {/each}
     </div>
   </div>

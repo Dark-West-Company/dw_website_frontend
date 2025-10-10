@@ -1,12 +1,16 @@
 <script>
   import { onMount } from 'svelte';
 
+  export let shouldBlink = undefined;
+  export let animationDelay = undefined;
+  export let animationDuration = undefined;
+
   let size = 5;
   let innerGlow = 2;
   let outerGlow = 4;
-  let shouldBlink = false;
-  let animationDelay = '0s';
-  let animationDuration = '8s';
+  let _shouldBlink = false;
+  let _animationDelay = '0s';
+  let _animationDuration = '8s';
 
   onMount(() => {
     // Randomize dot size (5-8px)
@@ -16,22 +20,33 @@
     innerGlow = 2 + Math.random() * 3; // 2-5px
     outerGlow = 4 + Math.random() * 6; // 4-10px
 
-    // 90% chance to blink (for testing)
-    shouldBlink = Math.random() < 0.1;
-
-    if (shouldBlink) {
-      animationDelay = `${Math.random() * 8}s`;
-      animationDuration = `${8 + Math.random() * 6}s`; // 8-14s
+    // If shouldBlink is explicitly false, never blink
+    if (shouldBlink === false) {
+      _shouldBlink = false;
+      _animationDelay = '0s';
+      _animationDuration = '8s';
+    }
+    // If all blink props are provided, use them
+    else if (shouldBlink !== undefined && animationDelay !== undefined && animationDuration !== undefined) {
+      _shouldBlink = shouldBlink;
+      _animationDelay = animationDelay;
+      _animationDuration = animationDuration;
+    } else {
+      _shouldBlink = Math.random() < 0.1;
+      if (_shouldBlink) {
+        _animationDelay = `${Math.random() * 8}s`;
+        _animationDuration = `${8 + Math.random() * 6}s`; // 8-14s
+      }
     }
   });
 </script>
 
 <div class="presence {$$props.class || ''}" style={$$props.style || ''}>
-  <div class="presence-wrapper {shouldBlink ? 'blink' : ''}" style={shouldBlink ? `animation-delay: ${animationDelay}; animation-duration: ${animationDuration};` : ''}>
+  <div class="presence-wrapper {_shouldBlink ? 'blink' : ''}" style={_shouldBlink ? `animation-delay: ${_animationDelay}; animation-duration: ${_animationDuration};` : ''}>
     <div
       class="presence-glow"
       style="
-        width: {size}px; 
+        width: {size}px;
         height: {size}px;
         filter: drop-shadow(0 0 {innerGlow}px rgba(212, 167, 102, 0.8)) drop-shadow(0 0 {outerGlow}px rgba(212, 167, 102, 0.4));
       "
