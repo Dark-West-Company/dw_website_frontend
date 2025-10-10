@@ -36,7 +36,7 @@
 
 <div class="flex flex-col relative border rounded-xl border-black pb-2 pt-4 px-3">
   <div class="absolute left-0 right-0 -top-3 flex justify-center">
-    <div class="w-fit text-center bg-background-0 font-rampart-spurs tracking-wider px-1">{header}</div>
+    <div class="w-fit text-center bg-background-0 text-tprimary rounded font-rampart-spurs tracking-wider px-2">{header}</div>
   </div>
 
   <div class="w-full space-y-2">
@@ -64,5 +64,5 @@
       </div>
     {/each}
   </div>
-  <button class="mt-2 px-2 pt-1 rounded text-xs hover:!bg-dark-blue-0" on:click={addEntry}>+ Add Entry</button>
+  <button class="mt-2 px-2 pt-1 rounded text-xs hover:!bg-background-0 hover:!text-info" on:click={addEntry}>+ Add Entry</button>
 </div>

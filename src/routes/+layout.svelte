@@ -3,20 +3,22 @@
 
   import { onMount } from 'svelte';
   import { goto } from '$app/navigation';
-  import favicon from '$lib/assets/favicon.svg';
+  // import favicon from '$lib/assets/favicon.svg';
+  // import dwIcon from '$lib/assets/dw_icon.png';
   import { userData } from '$lib/userStore';
   import { apiGet } from '$lib/api';
   import { eventBus, events } from '@/eventBus';
   import { resolve } from '$app/paths';
-  import logo from '$lib/assets/dw_logo_green.png';
+  // import logo from '$lib/assets/dw_logo_green.png';
   import dwLogoSimple from '$lib/assets/dw_logo_simple.png';
-  import winterBackground from '$lib/assets/Winter.png';
+  // import winterBackground from '$lib/assets/Winter.png';
   import blackInkBackground from '$lib/assets/black_ink_background.png';
   import { page } from '$app/stores';
   import dwLogo from '$lib/assets/dw_logo.png';
+  import dwLogoWhite from '$lib/assets/dw_logo_white.png';
 
   let loggedIn = false;
-  let isAdmin = false;
+  // let isAdmin = false;
 
   // Overlay logic
   let entered = false;
@@ -44,7 +46,6 @@
       const res = await apiGet('/api/user/info');
       if (res.ok) {
         const data = await res.json();
-        isAdmin = !!data.isAdmin;
         userData.set({
           isAdmin: !!data.isAdmin,
           sheets: data.sheets ?? [],
@@ -86,7 +87,7 @@
 </script>
 
 <svelte:head>
-  <link rel="icon" href={favicon} />
+  <link rel="icon" href={dwLogoWhite} />
 </svelte:head>
 
 <div class="flex flex-col w-full h-full relative">
@@ -129,9 +130,9 @@
       <div class="flex items-center justify-start gap-4">
         <a class="w-fit text-xl px-3 button-hover-drop-shadow text-tprimary" href="https://discord.gg/mQ4KXpJH83" target="_blank"> Discord </a>
         {#if $userData.isLoading}
-          <div class="w-fit px-3 py-1">Loading...</div>
+          <div class="w-fit text-xl px-3 py-1 text-tprimary">Loading...</div>
         {:else if !loggedIn}
-          <button class="w-fit px-3 py-1 button-hover-drop-shadow" on:click={loginWithDiscord}> Login </button>
+          <button class="w-fit text-xl px-3 py-1 button-hover-drop-shadow" on:click={loginWithDiscord}> Login </button>
         {:else}
           <button class="w-fit text-xl px-3 py-1 button-hover-drop-shadow" on:click={() => goto(resolve('/sheets'))}> Sheets </button>
         {/if}

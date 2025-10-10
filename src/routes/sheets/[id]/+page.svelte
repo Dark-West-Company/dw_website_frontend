@@ -7,6 +7,8 @@
   import MageSection from '@/components/sheets/MageSection.svelte';
   import { eventBus, events } from '$lib/eventBus';
   import { apiPatch, apiGet } from '$lib/api';
+  import { goto } from '$app/navigation';
+  import { resolve } from '$app/paths';
 
   let sheetId = '';
   let sheet = null;
@@ -82,16 +84,16 @@
     </div>
   {:else if sheet}
     <div class="flex flex-col w-full h-full overflow-y-auto pb-5 bg-primary-0/80">
-      <div class="grid grid-cols-3 items-center w-full px-5">
-        <button class="flex items-center w-fit h-fit gap-1 !bg-transparent hover:!text-tprimary-0" on:click={() => history.back()}>
+      <div class="grid grid-cols-[1fr_auto_1fr] items-center w-full px-5">
+        <button class="flex items-center w-fit h-fit gap-1 !bg-transparent hover:!text-info" on:click={() => goto(resolve('/sheets'))}>
           <i class="mdi mdi-arrow-left" aria-hidden="true"></i>
           <span>Back</span>
         </button>
 
-        <div class="text-2xl mt-4 mb-4 text-center font-rampart-spurs-stamp whitespace-nowrap tracking-wider">{sheet.data.character_type} Character Sheet</div>
+        <div class="text-2xl mt-4 mb-4 text-center font-rampart-spurs-stamp whitespace-nowrap tracking-wider text-tprimary">{sheet.data.character_type} Character Sheet</div>
 
         <div class="flex gap-2 ml-auto">
-          <button class="px-2 py-1 rounded !bg-success-0 hover:!bg-tprimary-0" disabled={!isDirty} on:click={onSaveSheet}> Save </button>
+          <button class="px-2 py-1 rounded !bg-success-0 hover:!bg-success-50" disabled={!isDirty} on:click={onSaveSheet}> Save </button>
           <button class="px-2 py-1 rounded !bg-red-900 hover:!bg-red-700" disabled={!isDirty} on:click={onDiscardChanges}> Discard </button>
         </div>
       </div>

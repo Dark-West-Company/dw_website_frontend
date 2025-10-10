@@ -1,8 +1,8 @@
 <script>
   import DotTextField from './DotTextField.svelte';
   import { XP_TYPE_ABILITY } from '../../../constants';
-  import sunSpurLeftWhite from '$lib/assets/sun_spur_left_white.png';
-  import sunSpurRightWhite from '$lib/assets/sun_spur_right_white.png';
+  import sunSpurLeftBlack from '$lib/assets/sun_spur_left_black.png';
+  import sunSpurRightBlack from '$lib/assets/sun_spur_right_black.png';
 
   export let sheet;
   const subtype = sheet.character_type ?? 'vampire';
@@ -10,9 +10,9 @@
 
 <div class="w-full">
   <div class="flex justify-center items-center w-full relative mb-1 gap-3">
-    <img src={sunSpurLeftWhite} alt="Sun Spur Left" class="h-12" />
+    <img src={sunSpurLeftBlack} alt="Sun Spur Left" class="h-12 spurs-drop-shadow" />
     <h2 class="text-2xl text-tprimary-0 font-rampart-spurs-stamp tracking-wider">Abilities</h2>
-    <img src={sunSpurRightWhite} alt="Sun Spur Right" class="h-12" />
+    <img src={sunSpurRightBlack} alt="Sun Spur Right" class="h-12 spurs-drop-shadow" />
   </div>
 
   <div class="grid grid-cols-3 gap-x-6 w-full">

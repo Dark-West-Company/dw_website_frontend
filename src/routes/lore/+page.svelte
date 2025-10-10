@@ -178,8 +178,4 @@
   .bg-gradient-to-r {
     background: linear-gradient(to right, var(--color-background-0), var(--color-info-0), var(--color-background-0));
   }
-
-  .spurs-drop-shadow {
-    filter: drop-shadow(0 0px 6px var(--color-tprimary-0)) drop-shadow(0 0px 6px var(--color-tprimary-0));
-  }
 </style>

@@ -4,8 +4,8 @@
   import DropdownSelect from './DropdownSelect.svelte';
   import DynamicListSection from './DynamicListSection.svelte';
   import IntegerField from './IntegerField.svelte';
-  import sunSpurLeftWhite from '$lib/assets/sun_spur_left_white.png';
-  import sunSpurRightWhite from '$lib/assets/sun_spur_right_white.png';
+  import sunSpurLeftBlack from '$lib/assets/sun_spur_left_black.png';
+  import sunSpurRightBlack from '$lib/assets/sun_spur_right_black.png';
   import { XP_TYPE_VAMPIRE_DISCIPLINE, XP_TYPE_BACKGROUND, XP_TYPE_VAMPIRE_VIRTUE, XP_TYPE_VAMPIRE_PATH, XP_TYPE_WILLPOWER } from '../../../constants';
 
   export let sheetData;
@@ -20,9 +20,9 @@
 
 <div class="flex flex-col items-center w-full">
   <div class="flex justify-center items-center w-full relative mb-1 gap-3">
-    <img src={sunSpurLeftWhite} alt="Sun Spur Left" class="h-12" />
+    <img src={sunSpurLeftBlack} alt="Sun Spur Left" class="h-12 spurs-drop-shadow" />
     <h2 class="text-2xl text-tprimary-0 font-rampart-spurs-stamp tracking-wider">Advantages</h2>
-    <img src={sunSpurRightWhite} alt="Sun Spur Right" class="h-12" />
+    <img src={sunSpurRightBlack} alt="Sun Spur Right" class="h-12 spurs-drop-shadow" />
   </div>
 
   <div class="grid grid-cols-3 gap-4 w-full mt-4">
@@ -58,7 +58,7 @@
   <div class="grid grid-cols-3 gap-4 w-full mt-8">
     <div class="h-fit flex flex-col items-center gap-2 relative border rounded-xl border-black pb-3 pt-4 px-3">
       <div class="absolute left-0 right-0 -top-3 flex justify-center">
-        <div class="w-fit text-center bg-background-0 font-rampart-spurs tracking-wider px-1">Humanity / Path</div>
+        <div class="w-fit text-center bg-background-0 font-rampart-spurs tracking-wider rounded text-tprimary px-2">Humanity / Path</div>
       </div>
 
       <DropdownSelect options={pathOptions} sheet={sheetData} field="humanity_path_name" bind:value={sheetData.humanity_path_name} />
@@ -68,7 +68,7 @@
     <div class="flex flex-col items-center gap-4">
       <div class="flex flex-col items-center gap-2 relative border rounded-xl border-black pb-3 pt-4 px-3">
         <div class="absolute left-0 right-0 -top-3 flex justify-center">
-          <div class="w-fit text-center bg-background-0 font-rampart-spurs tracking-wider px-1">Willpower</div>
+          <div class="w-fit text-center bg-background-0 font-rampart-spurs tracking-wider rounded text-tprimary px-2">Willpower</div>
         </div>
 
         <DotDisplay readonly={true} sheet={sheetData} field="willpower_permanent" bind:value={sheetData.willpower_permanent} />
@@ -77,7 +77,7 @@
 
       <div class="flex flex-col items-center gap-2 max-w-56 w-56 relative border rounded-xl border-black pb-3 pt-4 px-3">
         <div class="absolute left-0 right-0 -top-3 flex justify-center">
-          <div class="w-fit text-center bg-background-0 font-rampart-spurs tracking-wider px-1">Blood Pool</div>
+          <div class="w-fit text-center bg-background-0 font-rampart-spurs tracking-wider rounded text-tprimary px-2">Blood Pool</div>
         </div>
         <DotDisplay count="20" shape="box" sheet={sheetData} field="blood_pool_current" bind:value={sheetData.blood_pool_current} />
       </div>
@@ -85,7 +85,7 @@
 
     <div class="h-fit flex flex-col items-center gap-2 relative border rounded-xl border-black pb-3 pt-4 px-3">
       <div class="absolute left-0 right-0 -top-3 flex justify-center">
-        <div class="w-fit text-center bg-background-0 font-rampart-spurs tracking-wider px-1">Experience</div>
+        <div class="w-fit text-center bg-background-0 font-rampart-spurs tracking-wider rounded text-tprimary px-2">Experience</div>
       </div>
 
       <IntegerField header="Experience" bind:value={sheetData.experience} disabled={sheetData.mode !== 'creative'} />

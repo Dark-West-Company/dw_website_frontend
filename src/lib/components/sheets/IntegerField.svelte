@@ -16,7 +16,7 @@
 
 <div class="flex items-center gap-2 w-full">
   {#if label}
-    <label for={id} class="text-right text-sm text-tprimary-300">{label}</label>
+    <label for={id} class="text-right text-sm text-tsecondary">{label}</label>
   {/if}
   <input {id} type="number" bind:value {placeholder} on:input={handleInput} {disabled} />
 </div>
