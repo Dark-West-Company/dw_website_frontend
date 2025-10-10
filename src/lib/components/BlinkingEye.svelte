@@ -17,7 +17,7 @@
     outerGlow = 4 + Math.random() * 6; // 4-10px
 
     // 90% chance to blink (for testing)
-    shouldBlink = Math.random() < 0.2;
+    shouldBlink = Math.random() < 0.1;
 
     if (shouldBlink) {
       animationDelay = `${Math.random() * 8}s`;
