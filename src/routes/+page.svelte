@@ -67,10 +67,11 @@
 
     <div class="flex flex-col items-center h-1/2 justify-center w-full text-center font-speedwriter text-2xl bg-primary gap-10 relative z-20 my-24">
       <div class="torn-edge-top"></div>
-      <div class="z-10">What are you doing?</div>
-      <div class="z-10">You shouldn't be here</div>
-      <div class="z-10">Not yet...</div>
+      <div>What are you doing?</div>
+      <div>You shouldn't be here</div>
+      <div>Not yet...</div>
       <div class="torn-edge-bottom"></div>
+      <div class="paper-texture"></div>
     </div>
 
     <div class="relative w-full grow z-10">
@@ -148,6 +149,18 @@
 
     filter: invert(8%) sepia(6%) saturate(2495%) hue-rotate(349deg) brightness(92%) contrast(81%);
     transform: rotate(180deg);
+    z-index: 10;
+  }
+
+  .paper-texture {
+    position: absolute;
+    top: -100px;
+    right: 0;
+    bottom: -100px;
+    left: 0;
+    background-image: url(/src/lib/assets/paper_texture.png);
+    background-size: cover;
+    background-position: center;
     z-index: 10;
   }
 </style>

@@ -15,7 +15,8 @@ const errorColor = '#7a4438'; // dried blood red
 const successColor = '#5a6847'; // sickly muted green
 const infoColor = '#4a6662'; // muted teal
 
-const textPrimaryColor = '#c9b35f'; // muted gold
+// const textPrimaryColor = '#c9b35f'; // muted gold, original glowy yellow color
+const textPrimaryColor = '#9bb5c4'; // muted light gold
 const textSecondaryColor = '#b2a490'; // muted light cream
 
 // const creamColor = '#EDECE5'; // light cream

@@ -48,7 +48,7 @@
       style="
         width: {size}px;
         height: {size}px;
-        filter: drop-shadow(0 0 {innerGlow}px rgba(212, 167, 102, 0.8)) drop-shadow(0 0 {outerGlow}px rgba(212, 167, 102, 0.4));
+        filter: drop-shadow(0 0 {innerGlow}px var(--color-tprimary-0)) drop-shadow(0 0 {outerGlow}px var(--color-tprimary-0));
       "
     ></div>
   </div>
@@ -70,7 +70,7 @@
   }
 
   .presence-glow {
-    background-color: #000000;
+    background-color: var(--color-tprimary-900);
     border-radius: 50%;
     position: absolute;
     top: 50%;
