@@ -1,6 +1,7 @@
 <script lang="ts">
-  import sunSpurLeftWhite from '$lib/assets/sun_spur_left_white.png';
-  import sunSpurRightWhite from '$lib/assets/sun_spur_right_white.png';
+  import sunSpurLeftBlack from '$lib/assets/sun_spur_left_black.png';
+  import sunSpurRightBlack from '$lib/assets/sun_spur_right_black.png';
+  import Separator from '@/components/Separator.svelte';
 
   // No loreSections array needed; all content is inline below.
   const sidebarLinks = [
@@ -12,14 +13,13 @@
   ];
 </script>
 
-<div class="flex w-full h-full bg-background-0">
+<div class="flex w-full h-full">
   <!-- Sidebar -->
-  <nav
-    class="sticky top-0 h-full w-36 min-w-28 bg-gradient-to-bl from-background-0 via-background-0 to-black border-r border-cream-0/20 flex flex-col items-start px-4 py-4 gap-2 z-10"
-  >
-    <div class="text-2xl font-rampart-spurs-stamp tracking-widest">Lore</div>
-    <div class="w-full border-b border-cream-0/20 mb-2"></div>
-
+  <nav class="sticky top-0 h-full w-36 min-w-28 bg-gradient-to-bl bg-background-0/80 flex flex-col items-start px-4 py-4 gap-3 z-10">
+    <div class="text-2xl font-rampart-spurs-stamp tracking-widest h-6 text-tprimary">Lore</div>
+    <div class="w-full px-2">
+      <Separator white />
+    </div>
     {#each sidebarLinks as link (link.id)}
       <a class="text-sm font-rampart-spurs-stamp tracking-wide hover:underline focus:underline transition-colors duration-150" href={'#' + link.id}>
         {link.title}
@@ -28,12 +28,12 @@
   </nav>
 
   <!-- Main Content -->
-  <main class="flex-1 overflow-y-auto px-8 py-3 flex flex-col gap-0 items-start font-rampart-sans">
-    <section id="world_lore" class="w-full text-cream-0/70 py-3">
+  <main class="h-full overflow-y-auto px-8 py-3 flex flex-col gap-0 items-start font-rampart-sans bg-primary/80">
+    <section id="world_lore" class="w-full py-3">
       <div class="flex justify-center items-center w-full relative mb-1 gap-3 mt-6">
-        <img src={sunSpurLeftWhite} alt="Sun Spur Left" class="h-12" />
-        <div class="text-3xl font-rampart-spurs-stamp text-center text-cream-0">World Lore</div>
-        <img src={sunSpurRightWhite} alt="Sun Spur Right" class="h-12" />
+        <img src={sunSpurLeftBlack} alt="Sun Spur Left" class="h-12 spurs-drop-shadow" />
+        <div class="text-3xl font-rampart-spurs-stamp text-center text-tprimary-0">World Lore</div>
+        <img src={sunSpurRightBlack} alt="Sun Spur Right" class="h-12 spurs-drop-shadow" />
       </div>
       <p class="paragraph-text">
         During the 17th century, Kindred began making their way to the New World and violence would mark their path. The Sabbat, in particular, found their power and strength as
@@ -66,18 +66,18 @@
       </p>
     </section>
 
-    <div class="w-full border-b border-cream-0/20 mt-3"></div>
+    <Separator />
 
     <div class="flex justify-center items-center w-full relative gap-3 mt-5">
-      <img src={sunSpurLeftWhite} alt="Sun Spur Left" class="h-12" />
-      <div class="text-3xl font-rampart-spurs-stamp text-center text-cream-0">In the County</div>
-      <img src={sunSpurRightWhite} alt="Sun Spur Right" class="h-12" />
+      <img src={sunSpurLeftBlack} alt="Sun Spur Left" class="h-12 spurs-drop-shadow" />
+      <div class="text-3xl font-rampart-spurs-stamp text-center text-tprimary-0">In the County</div>
+      <img src={sunSpurRightBlack} alt="Sun Spur Right" class="h-12 spurs-drop-shadow" />
     </div>
 
-    <section id="kindred" class="w-full text-cream-0/70 py-3">
+    <section id="kindred" class="w-full py-3">
       <div class="flex items-center w-full relative gap-3">
-        <h2 class="text-2xl text-cream-0 font-rampart-spurs-stamp tracking-wider">Kindred</h2>
-        <img src={sunSpurRightWhite} alt="Sun Spur Right" class="h-12" />
+        <h2 class="text-2xl text-tprimary-0 font-rampart-spurs-stamp tracking-wider">Kindred</h2>
+        <img src={sunSpurRightBlack} alt="Sun Spur Right" class="h-12 spurs-drop-shadow" />
       </div>
       <p class="paragraph-text">
         In America, the Camarilla had experienced large pushback due to the Sabbat, but as the Sabbat were occupied with their civil war, the Camarilla found the opportunity to
@@ -91,10 +91,10 @@
       </p>
     </section>
 
-    <section id="garou" class="w-full text-cream-0/70 py-3">
+    <section id="garou" class="w-full py-3">
       <div class="flex items-center w-full relative gap-3">
-        <h2 class="text-2xl text-cream-0 font-rampart-spurs-stamp tracking-wider">Garou</h2>
-        <img src={sunSpurRightWhite} alt="Sun Spur Right" class="h-12" />
+        <h2 class="text-2xl text-tprimary-0 font-rampart-spurs-stamp tracking-wider">Garou</h2>
+        <img src={sunSpurRightBlack} alt="Sun Spur Right" class="h-12 spurs-drop-shadow" />
       </div>
       <p class="paragraph-text">
         Violence, rage and bloodshed ravaged the county as the Second War of Rage was in full force. The Garou would go on to murder local Fera, as well as any opposition to the
@@ -109,10 +109,10 @@
       </p>
     </section>
 
-    <section id="mages" class="w-full text-cream-0/70 py-3">
+    <section id="mages" class="w-full py-3">
       <div class="flex items-center w-full relative gap-3">
-        <h2 class="text-2xl text-cream-0 font-rampart-spurs-stamp tracking-wider">Mages</h2>
-        <img src={sunSpurRightWhite} alt="Sun Spur Right" class="h-12" />
+        <h2 class="text-2xl text-tprimary-0 font-rampart-spurs-stamp tracking-wider">Mages</h2>
+        <img src={sunSpurRightBlack} alt="Sun Spur Right" class="h-12 spurs-drop-shadow" />
       </div>
       <p class="paragraph-text">
         The Doissetep, a stronghold and one of the greatest chantries in Tradition history, was a testament to Magi knowledge, skill, and experience. The Mages of the county would
@@ -128,13 +128,13 @@
       </p>
     </section>
 
-    <div class="w-full border-b border-cream-0/20 mt-3"></div>
+    <Separator />
 
-    <section id="haze" class="w-full text-cream-0/70 py-3">
+    <section id="haze" class="w-full py-3">
       <div class="flex justify-center items-center w-full relative mb-1 gap-3 mt-3">
-        <img src={sunSpurLeftWhite} alt="Sun Spur Left" class="h-12" />
-        <div class="text-3xl font-rampart-spurs-stamp text-center text-cream-0">The Haze</div>
-        <img src={sunSpurRightWhite} alt="Sun Spur Right" class="h-12" />
+        <img src={sunSpurLeftBlack} alt="Sun Spur Left" class="h-12 spurs-drop-shadow" />
+        <div class="text-3xl font-rampart-spurs-stamp text-center text-tprimary-0">The Haze</div>
+        <img src={sunSpurRightBlack} alt="Sun Spur Right" class="h-12 spurs-drop-shadow" />
       </div>
       <p class="paragraph-text">
         The Haze, the Eternal Fog, the Restless Storm… Whatever you may call it, is a force and fusion of the Wyrm (Shenti of Entropy), the Weaver (Shenti of Stasis), and the Wyld
@@ -176,6 +176,10 @@
     background: linear-gradient(225deg, var(--color-background-0), black 80%);
   }
   .bg-gradient-to-r {
-    background: linear-gradient(to right, var(--color-background-0), var(--color-dark-green-0), var(--color-background-0));
+    background: linear-gradient(to right, var(--color-background-0), var(--color-info-0), var(--color-background-0));
+  }
+
+  .spurs-drop-shadow {
+    filter: drop-shadow(0 0px 6px var(--color-tprimary-0)) drop-shadow(0 0px 6px var(--color-tprimary-0));
   }
 </style>

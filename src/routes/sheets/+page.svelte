@@ -30,9 +30,9 @@
   }
 </script>
 
-<div class="flex flex-col items-center w-full h-full p-3">
+<div class="flex flex-col items-center w-full h-full p-3 bg-background-0/80 border-t-2 border-black">
   <div class="grid grid-cols-3 items-center w-full mb-3">
-    <button class="flex items-center w-fit h-fit gap-1 !bg-transparent hover:!text-light-blue-0" on:click={() => goto(resolve('/'))}>
+    <button class="flex items-center w-fit h-fit gap-1 !bg-transparent hover:!text-tprimary-0" on:click={() => goto(resolve('/'))}>
       <i class="mdi mdi-arrow-left" aria-hidden="true"></i>
       <span>Back</span>
     </button>
@@ -41,8 +41,8 @@
   </div>
 
   <div class="grid grid-cols-[300px_auto] gap-3 w-full grow">
-    <div class="flex flex-col gap-3 border-r border-cream-0/20">
-      <div class="font-rampart-spurs border-b border-cream-0/20 py-1 mr-3">Your Sheets</div>
+    <div class="flex flex-col gap-3 border-r border-black">
+      <div class="font-rampart-spurs border-b border-black py-1 mr-3">Your Sheets</div>
 
       <div class="flex flex-col grow gap-2 overflow-y-auto pr-3">
         {#each sheets as sheet (sheet.id)}
@@ -65,7 +65,7 @@
         {/each}
       </div>
 
-      <div class="flex flex-col gap-2 pt-2 border-t border-cream-0/20 mr-3">
+      <div class="flex flex-col gap-2 pt-2 border-t border-black mr-3">
         <div class="text-center font-rampart-spurs">Create New Sheet</div>
 
         <div class="flex justify-between">
@@ -78,7 +78,7 @@
     </div>
 
     <div class="flex flex-col gap-3">
-      <div class="font-rampart-spurs border-b border-cream-0/20 py-1">Your In-Game Characters</div>
+      <div class="font-rampart-spurs border-b border-black py-1">Your In-Game Characters</div>
 
       {#if characters.length === 0}
         <div>You have no in-game characters created yet.</div>

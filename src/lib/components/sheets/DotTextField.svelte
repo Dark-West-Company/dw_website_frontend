@@ -28,14 +28,14 @@
 
 <div class="flex flex-col gap-1 w-full">
   <div class="flex items-center justify-between">
-    <div class="text-sm font-rampart-regular text-cream-300">{@html label}</div>
+    <div class="text-sm font-rampart-regular text-tprimary-300">{@html label}</div>
     <div class="flex flex-grow border-b mx-3 border-cream-0/10"></div>
     <div class="flex gap-1 mb-1">
       {#each dots as i (i)}
         {#if type === 'none' || i <= level}
           <button
             type="button"
-            class="w-3 h-3 rounded-full flex items-center justify-center cursor-pointer hover:!bg-light-blue-0 {i <= level ? '!bg-light-green-0' : '!bg-background-500'}"
+            class="w-3 h-3 rounded-full flex items-center justify-center cursor-pointer hover:!bg-tprimary-0 {i <= level ? '!bg-tprimary-0' : '!bg-background-500'}"
             on:click={() => setLevel(i)}
             aria-label={`Set level to ${i}`}
           >
@@ -44,7 +44,7 @@
           <HoverPopup text={`${getUpgradeXpCost(type, level, i)}xp to upgrade to level ${i}`}>
             <button
               type="button"
-              class="w-3 h-3 rounded-full flex items-center justify-center cursor-pointer hover:!bg-light-blue-0 {i <= level ? '!bg-light-green-0' : '!bg-background-500'}"
+              class="w-3 h-3 rounded-full flex items-center justify-center cursor-pointer hover:!bg-tprimary-0 {i <= level ? '!bg-tprimary-0' : '!bg-background-500'}"
               on:click={() => setLevel(i)}
               aria-label={`Set level to ${i}`}
             >
@@ -67,8 +67,8 @@
       >
         <path d="M11 1 V13 H2" stroke="#888" stroke-width="2" fill="none" />
       </svg>
-      <label class="mb-1 ml-5 text-xs font-speedwriter text-cream-400" for="dot-text-field">Specialty:</label>
-      <input id="dot-text-field" type="text" class="border-b border-light-blue-0 px-1 w-full" bind:value={specialty} on:input={handleInput} placeholder="Enter text" />
+      <label class="mb-1 ml-5 text-xs font-speedwriter text-tprimary-400" for="dot-text-field">Specialty:</label>
+      <input id="dot-text-field" type="text" class="border-b border-tprimary-0 px-1 w-full" bind:value={specialty} on:input={handleInput} placeholder="Enter text" />
     </div>
   {/if}
 </div>

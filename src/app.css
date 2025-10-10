@@ -11,7 +11,7 @@ html {
 body {
   height: 100vh;
   background-color: var(--color-background-0);
-  color: var(--color-cream-0);
+  color: var(--color-tsecondary-50);
 }
 
 /* Global button styles */
@@ -20,19 +20,14 @@ button {
   /* border-radius: 1em; */
   border: none;
   background: transparent;
-  color: var(--color-cream-0);
+  color: var(--color-tprimary-0);
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
   outline: none;
 }
 
-button:hover {
-  /* background: var(--color-secondary-700); */
-  /* color: var(--color-cream-0); */
-}
-
 input {
-  @apply border-b border-light-blue-0/50 px-1 text-sm w-full outline-none;
+  @apply border-b border-tprimary-0/50 px-1 text-sm w-full outline-none;
 }
 
 button:disabled {
@@ -53,7 +48,7 @@ button:disabled {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-dark-green-0, var(--color-background-900));
+  background: var(--color-info-0, var(--color-background-900));
 }
 
 ::-webkit-scrollbar-track {
@@ -65,10 +60,8 @@ button:disabled {
 }
 
 .paragraph-text {
-  @apply mt-4 leading-relaxed font-sans;
+  @apply mt-4  font-sans text-lg;
 }
-
-
 
 .font-rampart-spurs {
   font-family: 'Rampart Spurs', sans-serif;

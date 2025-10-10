@@ -37,7 +37,7 @@
           type="button"
           class="w-4 h-4 border flex items-center justify-center transition {readonly ? 'cursor-default' : 'cursor-pointer'} {shape === 'circle' ? 'rounded-full' : 'rounded'} {i <=
           value
-            ? '!bg-light-green-0'
+            ? '!bg-tprimary-0'
             : '!bg-background-500'}"
           aria-label={`Set value to ${i}`}
           title={`Set value to ${i}`}
@@ -52,7 +52,7 @@
         type="button"
         class="w-4 h-4 border flex items-center justify-center transition {readonly ? 'cursor-default' : 'cursor-pointer'} {shape === 'circle' ? 'rounded-full' : 'rounded'} {i <=
         value
-          ? '!bg-light-green-0'
+          ? '!bg-tprimary-0'
           : '!bg-background-500'}"
         aria-label={`Set value to ${i}`}
         title={`Set value to ${i}`}

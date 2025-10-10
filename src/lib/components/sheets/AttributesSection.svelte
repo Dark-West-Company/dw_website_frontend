@@ -10,7 +10,7 @@
 <div class="w-full">
   <div class="flex justify-center items-center w-full relative mb-4 gap-3">
     <img src={sunSpurLeftWhite} alt="Sun Spur Left" class="h-12" />
-    <h2 class="text-2xl text-cream-0 font-rampart-spurs-stamp tracking-wider">Attributes</h2>
+    <h2 class="text-2xl text-tprimary-0 font-rampart-spurs-stamp tracking-wider">Attributes</h2>
     <img src={sunSpurRightWhite} alt="Sun Spur Right" class="h-12" />
   </div>
 

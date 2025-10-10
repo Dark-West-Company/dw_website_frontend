@@ -34,7 +34,7 @@
   }
 </script>
 
-<div class="flex flex-col relative border rounded-xl border-cream-0/20 pb-2 pt-4 px-3">
+<div class="flex flex-col relative border rounded-xl border-black pb-2 pt-4 px-3">
   <div class="absolute left-0 right-0 -top-3 flex justify-center">
     <div class="w-fit text-center bg-background-0 font-rampart-spurs tracking-wider px-1">{header}</div>
   </div>
@@ -47,7 +47,7 @@
           {#each [1, 2, 3, 4, 5] as i (i)}
             <button
               type="button"
-              class="w-3 h-3 rounded-full flex items-center justify-center cursor-pointer hover:!bg-light-blue-0 {i <= entry.level ? '!bg-light-green-0' : '!bg-background-500'}"
+              class="w-3 h-3 rounded-full flex items-center justify-center cursor-pointer hover:!bg-tprimary-0 {i <= entry.level ? '!bg-tprimary-0' : '!bg-background-500'}"
               on:click={() => updateLevel(idx, i + 1)}
               title={`Set level to ${i + 1}`}
               aria-label={`Set level to ${i + 1}`}

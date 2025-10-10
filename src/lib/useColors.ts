@@ -19,9 +19,9 @@ export const useColors = () => {
     return colors;
   };
 
-  const generateColors = (baseColor, overlayColor, opacity) => {
+  const generateColors = (baseColor, overlayColor, opacity): Record<string, string> => {
     // The idea here is that we generate a valid set of colors based on the provided base color, overlay color, and opacity
-    let colors = {};
+    let colors: Record<string, string> = {};
     let backgroundColors = generateBackgroundColors(baseColor);
     let colorSteps = Object.keys(backgroundColors);
 

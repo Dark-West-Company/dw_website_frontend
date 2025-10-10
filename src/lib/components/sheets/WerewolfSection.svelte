@@ -22,7 +22,7 @@
 <div class="flex flex-col items-center w-full">
   <div class="flex justify-center items-center w-full relative mb-1 gap-3">
     <img src={sunSpurLeftWhite} alt="Sun Spur Left" class="h-12" />
-    <h2 class="text-2xl text-cream-0 font-rampart-spurs-stamp tracking-wider">Advantages</h2>
+    <h2 class="text-2xl text-tprimary-0 font-rampart-spurs-stamp tracking-wider">Advantages</h2>
     <img src={sunSpurRightWhite} alt="Sun Spur Right" class="h-12" />
   </div>
 
@@ -44,7 +44,7 @@
 
   <div class="grid grid-cols-3 gap-4 w-full mt-8">
     <div class="flex flex-col items-center gap-6">
-      <div class="flex flex-col items-center relative gap-4 border rounded-xl border-cream-0/20 px-3 pb-3 pt-4">
+      <div class="flex flex-col items-center relative gap-4 border rounded-xl border-black px-3 pb-3 pt-4">
         <div class="absolute left-0 right-0 -top-3 flex justify-center">
           <div class="w-fit text-center bg-background-0 font-rampart-spurs tracking-wider text-xl px-1">Renown</div>
         </div>
@@ -68,7 +68,7 @@
         </div>
       </div>
 
-      <div class="flex flex-col items-center gap-2 relative border rounded-xl border-cream-0/20 px-3 pb-3 pt-2">
+      <div class="flex flex-col items-center gap-2 relative border rounded-xl border-black px-3 pb-3 pt-2">
         <div class="absolute left-0 right-0 -top-3 flex justify-center">
           <div class="w-fit text-center bg-background-0 font-rampart-spurs tracking-wider px-1">Rank</div>
         </div>
@@ -77,7 +77,7 @@
     </div>
 
     <div class="flex flex-col items-center gap-8">
-      <div class="flex flex-col items-center gap-2 relative border rounded-xl border-cream-0/20 pb-3 pt-4 px-3">
+      <div class="flex flex-col items-center gap-2 relative border rounded-xl border-black pb-3 pt-4 px-3">
         <div class="absolute left-0 right-0 -top-3 flex justify-center">
           <div class="w-fit text-center bg-background-0 font-rampart-spurs tracking-wider px-1">Rage</div>
         </div>
@@ -86,7 +86,7 @@
         <DotDisplay shape="box" type={XP_TYPE_WEREWOLF_RAGE} sheet={sheetData} field="rage_current" bind:value={sheetData.rage_current} />
       </div>
 
-      <div class="flex flex-col items-center gap-2 relative border rounded-xl border-cream-0/20 pb-3 pt-4 px-3">
+      <div class="flex flex-col items-center gap-2 relative border rounded-xl border-black pb-3 pt-4 px-3">
         <div class="absolute left-0 right-0 -top-3 flex justify-center">
           <div class="w-fit text-center bg-background-0 font-rampart-spurs tracking-wider px-1">Gnosis</div>
         </div>
@@ -95,7 +95,7 @@
         <DotDisplay shape="box" type={XP_TYPE_WEREWOLF_GNOSIS} sheet={sheetData} field="gnosis_current" bind:value={sheetData.gnosis_current} />
       </div>
 
-      <div class="flex flex-col items-center gap-2 relative border rounded-xl border-cream-0/20 pb-3 pt-4 px-3">
+      <div class="flex flex-col items-center gap-2 relative border rounded-xl border-black pb-3 pt-4 px-3">
         <div class="absolute left-0 right-0 -top-3 flex justify-center">
           <div class="w-fit text-center bg-background-0 font-rampart-spurs tracking-wider px-1">Willpower</div>
         </div>
@@ -105,12 +105,12 @@
       </div>
     </div>
 
-    <div class="h-fit flex flex-col items-center gap-2 relative border rounded-xl border-cream-0/20 pb-3 pt-4 px-3">
+    <div class="h-fit flex flex-col items-center gap-2 relative border rounded-xl border-black pb-3 pt-4 px-3">
       <div class="absolute left-0 right-0 -top-3 flex justify-center">
         <div class="w-fit text-center bg-background-0 font-rampart-spurs tracking-wider px-1">Experience</div>
       </div>
 
-      <IntegerField header="Experience" bind:value={sheetData.experience} />
+      <IntegerField header="Experience" bind:value={sheetData.experience} disabled={sheetData.mode !== 'creative'} />
     </div>
   </div>
 </div>

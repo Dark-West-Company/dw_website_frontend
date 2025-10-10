@@ -11,7 +11,7 @@
 <div class="flex flex-col items-center w-full">
   <div class="flex justify-center items-center w-full relative mb-1 gap-3">
     <img src={sunSpurLeftWhite} alt="Sun Spur Left" class="h-12" />
-    <h2 class="text-2xl text-cream-0 font-rampart-spurs-stamp tracking-wider">Advantages</h2>
+    <h2 class="text-2xl text-tprimary-0 font-rampart-spurs-stamp tracking-wider">Advantages</h2>
     <img src={sunSpurRightWhite} alt="Sun Spur Right" class="h-12" />
   </div>
 
@@ -24,12 +24,12 @@
       <DynamicListSection header="Backgrounds" bind:entries={sheetData.backgrounds} type={XP_TYPE_BACKGROUND} />
     </div>
 
-    <div class="h-fit flex flex-col items-center gap-2 relative border rounded-xl border-cream-0/20 pb-3 pt-4 px-3">
+    <div class="h-fit flex flex-col items-center gap-2 relative border rounded-xl border-black pb-3 pt-4 px-3">
       <div class="absolute left-0 right-0 -top-3 flex justify-center">
         <div class="w-fit text-center bg-background-0 font-rampart-spurs tracking-wider px-1">Experience</div>
       </div>
 
-      <IntegerField header="Experience" bind:value={sheetData.experience} />
+      <IntegerField header="Experience" bind:value={sheetData.experience} disabled={sheetData.mode !== 'creative'} />
     </div>
   </div>
 </div>

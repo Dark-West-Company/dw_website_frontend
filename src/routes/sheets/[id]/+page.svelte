@@ -75,15 +75,15 @@
   });
 </script>
 
-<div class="grid grid-cols-[auto_300px] w-full h-full">
+<div class="grid grid-cols-[auto_300px] w-full h-full border-t-2 border-black">
   {#if isLoading}
     <div class="flex items-center justify-center w-full h-full">
       <p>Loading character sheet...</p>
     </div>
   {:else if sheet}
-    <div class="flex flex-col w-full h-full overflow-y-auto pb-5">
+    <div class="flex flex-col w-full h-full overflow-y-auto pb-5 bg-primary-0/80">
       <div class="grid grid-cols-3 items-center w-full px-5">
-        <button class="flex items-center w-fit h-fit gap-1 !bg-transparent hover:!text-light-blue-0" on:click={() => history.back()}>
+        <button class="flex items-center w-fit h-fit gap-1 !bg-transparent hover:!text-tprimary-0" on:click={() => history.back()}>
           <i class="mdi mdi-arrow-left" aria-hidden="true"></i>
           <span>Back</span>
         </button>
@@ -91,7 +91,7 @@
         <div class="text-2xl mt-4 mb-4 text-center font-rampart-spurs-stamp whitespace-nowrap tracking-wider">{sheet.data.character_type} Character Sheet</div>
 
         <div class="flex gap-2 ml-auto">
-          <button class="px-2 py-1 rounded !bg-medium-green-0 hover:!bg-light-green-0" disabled={!isDirty} on:click={onSaveSheet}> Save </button>
+          <button class="px-2 py-1 rounded !bg-success-0 hover:!bg-tprimary-0" disabled={!isDirty} on:click={onSaveSheet}> Save </button>
           <button class="px-2 py-1 rounded !bg-red-900 hover:!bg-red-700" disabled={!isDirty} on:click={onDiscardChanges}> Discard </button>
         </div>
       </div>
@@ -122,5 +122,5 @@
     </div>
   {/if}
 
-  <div class="bg-gradient-to-br from-black/15 to-background-0 border-l border-cream-0/20 p-4"> Rolls sidebar </div>
+  <div class="bg-background-0/80 border-l-2 border-black p-4"> Rolls sidebar </div>
 </div>

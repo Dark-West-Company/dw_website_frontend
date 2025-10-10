@@ -7,9 +7,9 @@
 </script>
 
 <div class="flex flex-col relative items-center w-full">
-  <div class="absolute left-0 right-0 h-2 -top-2 bg-gradient-to-b from-transparent to-dark-green-0/20 z-10"></div>
+  <div class="absolute left-0 right-0 h-2 -top-2 bg-gradient-to-b from-transparent to-background-0/50 z-10"></div>
 
-  <div class="grid grid-cols-3 gap-2 w-full bg-dark-green-0/20 bg-opacity-60 py-3 px-5">
+  <div class="grid grid-cols-3 gap-2 w-full bg-background-0/50 py-3 px-5">
     <div class="flex flex-col gap-2">
       <TextField id="name" label="Name" bind:value={sheet.name} />
       <TextField id="player" label="Player" bind:value={sheet.player} />
@@ -70,13 +70,13 @@
   </div>
 
   <div class="w-full relative py-4 px-5">
-    <div class="absolute left-0 right-0 h-2 top-0 bg-gradient-to-t from-transparent to-dark-green-0/20 z-10"></div>
+    <div class="absolute left-0 right-0 h-2 top-0 bg-gradient-to-t from-transparent to-background-0/50 z-10"></div>
     <AttributesSection {sheet} />
-    <div class="absolute left-0 right-0 h-2 -bottom-0 bg-gradient-to-b from-transparent to-dark-green-0/20 z-10"></div>
+    <div class="absolute left-0 right-0 h-2 -bottom-0 bg-gradient-to-b from-transparent to-background-0/50 z-10"></div>
   </div>
 
-  <div class="w-full relative pt-2 mb-2 px-5 bg-dark-green-0/20">
+  <div class="w-full relative pt-2 pb-2 mb-2 px-5 bg-background-0/50">
     <AbilitiesSection {sheet} />
-    <div class="absolute left-0 right-0 h-2 -bottom-2 bg-gradient-to-t from-transparent to-dark-green-0/20 z-10"></div>
+    <div class="absolute left-0 right-0 h-2 -bottom-2 bg-gradient-to-t from-transparent to-background-0/50 z-10"></div>
   </div>
 </div>
