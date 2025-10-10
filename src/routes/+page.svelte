@@ -1,48 +1,17 @@
 <script lang="ts">
   // import background from '$lib/assets/forest_bg.png';
-  import winterBackground from '$lib/assets/Winter.png';
-  import dwLogo from '$lib/assets/dw_logo.png';
-  import { onMount } from 'svelte';
+  // import winterBackground from '$lib/assets/Winter.png';
+  // import dwLogo from '$lib/assets/dw_logo.png';
+  // import { onMount } from 'svelte';
   // import creamFilagree from '$lib/assets/cream_filagree.png';
   import darkFilagree from '$lib/assets/dark_filagree.png';
-  import blackInkBackground from '$lib/assets/black_ink_background.png';
-  import pageTornEdgeBlack from '$lib/assets/page_torn_edge_black.png';
+  // import blackInkBackground from '$lib/assets/black_ink_background.png';
+  // import pageTornEdgeBlack from '$lib/assets/page_torn_edge_black.png';
   import BlinkingEye from '@/components/BlinkingEye.svelte';
-
-  let entered = false;
-
-  function enterSite() {
-    entered = true;
-    setTimeout(() => {
-      document.documentElement.classList.remove('no-scroll');
-    }, 1000);
-  }
-
-  onMount(() => {
-    document.documentElement.classList.add('no-scroll');
-  });
 </script>
 
-<!-- Overlay -->
-<div
-  class="fixed inset-0 z-50 flex flex-col items-center justify-center transition-opacity duration-1000
-    {entered ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'}"
-  aria-hidden={!entered}
-  style="background-image: url({blackInkBackground}); background-size: cover; background-position: center;"
->
-  <div class="absolute inset-0 backdrop-blur-[2px]"></div>
-  <img src={dwLogo} alt="DarkWest Logo" class="w-3/4 h-auto mb-4 logo-drop-shadow" />
-
-  <button
-    class="z-10 mt-10 text-4xl !text-black button-drop-shadow button-hover-drop-shadow font-semibold font-rampart-spurs-stamp !border-none !bg-transparent tracking-widest"
-    on:click={enterSite}
-  >
-    ENTER
-  </button>
-</div>
-
 <!-- Main Content -->
-<div class="flex flex-col w-full h-full transition-opacity duration-500 z-50 {entered ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}">
+<div class="flex flex-col w-full h-full transition-opacity duration-500">
   <div class="h-full flex flex-col relative grow items-center justify-center">
     <div class="relative w-full grow">
       {#each Array(8) as _, i (i)}
@@ -70,10 +39,27 @@
       <img src={darkFilagree} alt="Cream Filagree" class="w-22 h-auto filagree-drop-shadow" />
     </div>
 
-    <!-- <div class="flex flex-col gap-2 items-center justify-center h-full z-1">
-      <div>Contact</div>
-      <div class="text-xs">social logos</div>
-    </div> -->
+    <div class="flex flex-col gap-2 items-center justify-end h-full z-1">
+      <!-- <div>Contact</div> -->
+      <div class="flex items-center gap-4">
+        <a href="https://twitter.com/worldofdarkwest" target="_blank" rel="noopener noreferrer" class="hover:!text-tprimary-0 transition-colors duration-150">
+          <i class="mdi mdi-twitter text-2xl" aria-hidden="true"></i>
+          <span class="sr-only">Twitter</span>
+        </a>
+        <a href="https://www.instagram.com/worldofdarkwest" target="_blank" rel="noopener noreferrer" class="hover:!text-tprimary-0 transition-colors duration-150">
+          <i class="mdi mdi-instagram text-2xl" aria-hidden="true"></i>
+          <span class="sr-only">Instagram</span>
+        </a>
+        <a href="https://discord.gg/mQ4KXpJH83" target="_blank" rel="noopener noreferrer" class="hover:!text-tprimary-0 transition-colors duration-150">
+          <i class="fa-brands fa-discord text-2xl" aria-hidden="true"></i>
+          <span class="sr-only">Discord</span>
+        </a>
+        <a href="https://ko-fi.com/worldofdarkwest" target="_blank" rel="noopener noreferrer" class="hover:!text-tprimary-0 transition-colors duration-150">
+          <i class="mdi mdi-coffee text-2xl" aria-hidden="true"></i>
+          <span class="sr-only">Ko-fi</span>
+        </a>
+      </div>
+    </div>
 
     <div class="z-1">
       <img src={darkFilagree} alt="Cream Filagree" class="w-22 h-auto -scale-x-100 filagree-drop-shadow" />
@@ -82,19 +68,6 @@
 </div>
 
 <style>
-  .logo-drop-shadow {
-    filter: drop-shadow(0 0px 11px var(--color-tprimary-0)) drop-shadow(0 0px 11px var(--color-tprimary-0));
-  }
-
-  .button-drop-shadow {
-    filter: drop-shadow(0 0px 11px var(--color-tprimary-0)) drop-shadow(0 0px 11px var(--color-tprimary-0)) drop-shadow(0 0px 11px var(--color-tprimary-0));
-    transition: filter 0.3s ease;
-  }
-
-  .button-hover-drop-shadow:hover {
-    filter: drop-shadow(0 0px 11px var(--color-tprimary-0)) drop-shadow(0 0px 11px var(--color-tprimary-0)) drop-shadow(0 0px 15px var(--color-tprimary-0));
-  }
-
   .filagree-drop-shadow {
     filter: drop-shadow(0 0px 3px var(--color-tprimary-0));
   }

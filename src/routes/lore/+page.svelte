@@ -15,7 +15,7 @@
 
 <div class="flex w-full h-full">
   <!-- Sidebar -->
-  <nav class="sticky top-0 h-full w-36 min-w-28 bg-gradient-to-bl bg-background-0/80 flex flex-col items-start px-4 py-4 gap-3 z-10">
+  <nav class="sticky top-0 h-full min-w-56 bg-gradient-to-bl bg-background-0/80 flex flex-col items-start px-4 py-4 gap-3 z-10">
     <div class="text-2xl font-rampart-spurs-stamp tracking-widest h-6 text-tprimary">Lore</div>
     <div class="w-full px-2">
       <Separator white />

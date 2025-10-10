@@ -12,9 +12,28 @@
   import dwLogoSimple from '$lib/assets/dw_logo_simple.png';
   import winterBackground from '$lib/assets/Winter.png';
   import blackInkBackground from '$lib/assets/black_ink_background.png';
+  import { page } from '$app/stores';
+  import dwLogo from '$lib/assets/dw_logo.png';
 
   let loggedIn = false;
   let isAdmin = false;
+
+  // Overlay logic
+  let entered = false;
+  $: isRoot = $page.url.pathname === '/';
+
+  function enterSite() {
+    entered = true;
+    setTimeout(() => {
+      document.documentElement.classList.remove('no-scroll');
+    }, 1000);
+  }
+
+  onMount(() => {
+    if (isRoot) {
+      document.documentElement.classList.add('no-scroll');
+    }
+  });
 
   // Check for JWT in localStorage and fetch character info
   async function fetchUserInfo() {
@@ -73,19 +92,37 @@
 <div class="flex flex-col w-full h-full relative">
   <img src={blackInkBackground} alt="Black Ink Background" class="pointer-events-none fixed top-0 left-0 w-full h-full object-cover -z-10" />
 
+  {#if isRoot}
+    <!-- Overlay -->
+    <div
+      class="fixed inset-0 z-50 flex flex-col items-center justify-center transition-opacity duration-1000
+        {entered ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'}"
+      aria-hidden={entered}
+      style="background-image: url({blackInkBackground}); background-size: cover; background-position: center;"
+    >
+      <img src={dwLogo} alt="DarkWest Logo" class="w-3/4 h-auto mb-4 logo-drop-shadow" />
+
+      <button
+        class="z-10 mt-10 text-4xl !text-black button-drop-shadow button-hover-drop-shadow font-semibold font-rampart-spurs-stamp !border-none !bg-transparent tracking-widest"
+        on:click={enterSite}
+      >
+        ENTER
+      </button>
+    </div>
+  {/if}
+
   <div class="flex flex-col items-center relative w-full font-rampart-spurs z-10 border-b-0 border-black">
-    <!-- <div class="absolute inset-0 backdrop-blur-[2px] bg-black/60"></div> -->
     <div class="grid grid-cols-3 items-center w-full gap-3 z-10">
       <div class="flex items-center justify-end gap-4">
         <!-- <img src={logo} alt="Logo" class="h-18 w-auto cursor-pointer" on:click={() => goto(resolve('/'))} /> -->
 
-        <button class="w-fit text-xl px-3 button-hover-drop-shadow" on:click={() => (window.location.href = '/rules')}> Rules </button>
-        <button class="w-fit text-xl px-3 button-hover-drop-shadow" on:click={() => (window.location.href = '/lore')}> Lore </button>
+        <button class="w-fit text-xl px-3 button-hover-drop-shadow" on:click={() => goto(resolve('/rules'))}> Rules </button>
+        <button class="w-fit text-xl px-3 button-hover-drop-shadow" on:click={() => goto(resolve('/lore'))}> Lore </button>
       </div>
 
       <div class="flex items-center justify-center z-10">
         <button type="button" class="flex items-center w-fit !bg-transparent !border-none" on:click={() => goto(resolve('/'))}>
-          <img src={dwLogoSimple} alt="DarkWest Logo" class="w-84 h-auto logo-drop-shadow button-hover-drop-shadow pt-3 pb-2" />
+          <img src={dwLogoSimple} alt="DarkWest Logo" class="w-84 h-auto nav-logo-drop-shadow button-hover-drop-shadow pt-3 pb-2" />
         </button>
       </div>
 
@@ -96,18 +133,10 @@
         {:else if !loggedIn}
           <button class="w-fit px-3 py-1 button-hover-drop-shadow" on:click={loginWithDiscord}> Login </button>
         {:else}
-          <button class="w-fit text-xl px-3 py-1 button-hover-drop-shadow" on:click={() => (window.location.href = '/sheets')}> Sheets </button>
+          <button class="w-fit text-xl px-3 py-1 button-hover-drop-shadow" on:click={() => goto(resolve('/sheets'))}> Sheets </button>
         {/if}
       </div>
     </div>
-
-    <!-- <div class="h-6 w-full absolute left-0 right-0 -bottom-3 bg-gradient-to-b from-transparent via-background-0 to-transparent"></div> -->
-
-    <!-- <div class="flex items-center gap-4">
-      {#if isAdmin}
-        <button class="ml-auto w-fit text-xl px-3 rounded border-2 border-black" on:click={() => (window.location.href = '/admin')}> Admin </button>
-      {/if}
-    </div> -->
   </div>
 
   <div class="flex grow overflow-hidden">
@@ -116,9 +145,17 @@
 </div>
 
 <style>
-  .logo-drop-shadow {
-    transition: filter 0.3s ease;
+  .nav-logo-drop-shadow {
     filter: drop-shadow(0 0px 6px var(--color-tprimary-0)) drop-shadow(0 0px 6px var(--color-tprimary-0));
+  }
+
+  .logo-drop-shadow {
+    filter: drop-shadow(0 0px 11px var(--color-tprimary-0)) drop-shadow(0 0px 11px var(--color-tprimary-0));
+  }
+
+  .button-drop-shadow {
+    filter: drop-shadow(0 0px 11px var(--color-tprimary-0)) drop-shadow(0 0px 11px var(--color-tprimary-0));
+    transition: filter 0.3s ease;
   }
 
   .button-hover-drop-shadow {
@@ -126,6 +163,6 @@
   }
 
   .button-hover-drop-shadow:hover {
-    filter: drop-shadow(0 0px 11px var(--color-tsecondary-0)) drop-shadow(0 0px 11px var(--color-tsecondary-0));
+    filter: drop-shadow(0 0px 20px var(--color-tsecondary-0)) drop-shadow(0 0px 20px var(--color-tsecondary-0));
   }
 </style>
