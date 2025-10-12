@@ -9,6 +9,7 @@
   import { apiPatch, apiGet } from '$lib/api';
   import { goto } from '$app/navigation';
   import { resolve } from '$app/paths';
+  import { sheetStore } from '$lib/sheetStore';
 
   let sheetId = '';
   let sheet = null;
@@ -18,6 +19,7 @@
 
   async function handleSheetDataChanged() {
     if (!sheet || !sheet.data) return;
+    console.log('Sheet data changed:', sheet.data);
     isDirty = JSON.stringify(sheet.data) !== JSON.stringify(originalSheetData);
   }
 
@@ -75,6 +77,21 @@
   onDestroy(() => {
     eventBus.off(events.SHEET_DATA_CHANGED, handleSheetDataChanged);
   });
+  async function fetchWerewolfGifts() {
+    try {
+      const res = await apiGet('/api/character/werewolf-gifts');
+      const result = await res.json();
+      if (result.success) {
+        sheetStore.update((store) => ({ ...store, werewolfGifts: result.gifts }));
+      }
+    } catch (err) {
+      console.error('Failed to fetch werewolf gifts', err);
+    }
+  }
+
+  $: if (sheet && sheet.data && sheet.data.character_type === 'werewolf') {
+    fetchWerewolfGifts();
+  }
 </script>
 
 <div class="grid grid-cols-[auto_300px] w-full h-full border-t-2 border-black">

@@ -28,7 +28,6 @@ export async function apiGet(endpoint: string, options: RequestInit = {}) {
 
 export async function apiPost(endpoint: string, body: any, options: RequestInit = {}) {
   const url = `${import.meta.env.VITE_BACKEND_URL}${endpoint}`;
-  console.log('apiPost URL:', url);
   try {
     const response = await fetch(url, {
       ...options,
@@ -53,7 +52,6 @@ export async function apiPost(endpoint: string, body: any, options: RequestInit 
 
 export async function apiPatch(endpoint: string, body: any, options: RequestInit = {}) {
   const url = `${import.meta.env.VITE_BACKEND_URL}${endpoint}`;
-  console.log('apiPatch URL:', url);
   try {
     const response = await fetch(url, {
       ...options,
@@ -78,7 +76,6 @@ export async function apiPatch(endpoint: string, body: any, options: RequestInit
 
 export async function apiDelete(endpoint: string, options: RequestInit = {}) {
   const url = `${import.meta.env.VITE_BACKEND_URL}${endpoint}`;
-  console.log('apiDelete URL:', url);
   try {
     const response = await fetch(url, {
       ...options,

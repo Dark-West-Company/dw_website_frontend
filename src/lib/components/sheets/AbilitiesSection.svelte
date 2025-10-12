@@ -43,9 +43,9 @@
         <DotTextField label="Animal Ken" type={XP_TYPE_ABILITY} value="" level={sheet.skill_animal_ken ?? 0} {sheet} field="skill_animal_ken" />
       {/if}
       <DotTextField label="Crafts" type={XP_TYPE_ABILITY} value="" level={sheet.skill_crafts ?? 0} {sheet} field="skill_crafts" />
-      <DotTextField label="Drive" type={XP_TYPE_ABILITY} value="" level={sheet.skill_drive ?? 0} {sheet} field="skill_drive" />
+      <DotTextField label="Ride" type={XP_TYPE_ABILITY} value="" level={sheet.skill_drive ?? 0} {sheet} field="skill_drive" />
       <DotTextField label="Etiquette" type={XP_TYPE_ABILITY} value="" level={sheet.skill_etiquette ?? 0} {sheet} field="skill_etiquette" />
-      <DotTextField label="Firearms" type={XP_TYPE_ABILITY} value="" level={sheet.skill_firearms ?? 0} {sheet} field="skill_firearms" />
+      <DotTextField label="Ranged Weaponry" type={XP_TYPE_ABILITY} value="" level={sheet.skill_firearms ?? 0} {sheet} field="skill_firearms" />
       {#if subtype === 'human' || subtype === 'vampire' || subtype === 'werewolf'}
         <DotTextField label="Larceny" type={XP_TYPE_ABILITY} value="" level={sheet.skill_larceny ?? 0} {sheet} field="skill_larceny" />
       {/if}
@@ -69,7 +69,7 @@
     <div>
       <h3 class="text-lg mb-2 text-center font-rampart-spurs tracking-wider">Knowledges</h3>
       <DotTextField label="Academics" type={XP_TYPE_ABILITY} value="" level={sheet.knowledge_academics ?? 0} {sheet} field="knowledge_academics" />
-      <DotTextField label="Computer" type={XP_TYPE_ABILITY} value="" level={sheet.knowledge_computer ?? 0} {sheet} field="knowledge_computer" />
+      <DotTextField label="Culture" type={XP_TYPE_ABILITY} value="" level={sheet.knowledge_computer ?? 0} {sheet} field="knowledge_computer" />
       {#if subtype === 'mage'}
         <DotTextField label="Cosmology" type={XP_TYPE_ABILITY} value="" level={sheet.knowledge_cosmology ?? 0} {sheet} field="knowledge_cosmology" />
         <DotTextField label="Esoterica" type={XP_TYPE_ABILITY} value="" level={sheet.knowledge_esoterica ?? 0} {sheet} field="knowledge_esoterica" />

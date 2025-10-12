@@ -32,8 +32,8 @@ input {
 }
 
 .spurs-drop-shadow {
-    filter: drop-shadow(0 0px 6px var(--color-tprimary-0)) drop-shadow(0 0px 6px var(--color-tprimary-0));
-  }
+  filter: drop-shadow(0 0px 1px var(--color-tprimary-0)) drop-shadow(0 0px 2px var(--color-tprimary-0));
+}
 
 button:disabled {
   opacity: 0.5;

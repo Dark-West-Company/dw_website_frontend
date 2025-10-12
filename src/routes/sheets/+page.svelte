@@ -15,7 +15,6 @@
 
   onMount(() => {
     isAdmin = $userData.isAdmin ?? false;
-    console.log('isAdmin:', isAdmin);
   });
 
   async function createSheet(sheetType) {

@@ -15,12 +15,8 @@
       const res = await apiPost('/api/auth/discord/callback', { code });
       if (res.ok) {
         const data = await res.json();
-        console.log('Callback response data:', data);
         if (typeof window !== 'undefined') {
           localStorage.setItem('jwt', data.token);
-          console.log('JWT set in localStorage:', data.token);
-        } else {
-          console.log('localStorage not available (server-side)');
         }
       }
     } catch (e) {

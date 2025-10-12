@@ -1,6 +1,6 @@
 <script>
   import DotDisplay from './DotDisplay.svelte';
-  // import DotTextField from './components/sheets/DotTextField.svelte';
+  import WerewolfGiftsSelect from './WerewolfGiftsSelect.svelte';
   import DropdownSelect from './DropdownSelect.svelte';
   import DynamicListSection from './DynamicListSection.svelte';
   import IntegerField from './IntegerField.svelte';
@@ -22,7 +22,7 @@
 <div class="flex flex-col items-center w-full">
   <div class="flex justify-center items-center w-full relative mb-1 gap-3">
     <img src={sunSpurLeftBlack} alt="Sun Spur Left" class="h-12 spurs-drop-shadow" />
-    <h2 class="text-2xl text-tprimary-0 font-rampart-spurs-stamp tracking-wider">Advantages</h2>
+    <h2 class="text-2xl text-tprimary font-rampart-spurs-stamp tracking-wider">Advantages</h2>
     <img src={sunSpurRightBlack} alt="Sun Spur Right" class="h-12 spurs-drop-shadow" />
   </div>
 
@@ -32,13 +32,13 @@
     </div>
 
     <div>
-      <!-- If gifts are implemented as DynamicListSection or DotTextField, use type={XP_TYPE_WEREWOLF_GIFT} -->
-      Gifts TODO
+      <!-- Werewolf Gifts Group 1 -->
+      <WerewolfGiftsSelect gifts={sheetData.gifts} sheet={sheetData} field="gifts" startingIndex={0} />
     </div>
 
     <div class="flex flex-col gap-2">
-      <!-- If gifts are implemented as DynamicListSection or DotTextField, use type={XP_TYPE_WEREWOLF_GIFT} -->
-      Gifts TODO
+      <!-- Werewolf Gifts Group 2 -->
+      <WerewolfGiftsSelect gifts={sheetData.gifts} sheet={sheetData} field="gifts" startingIndex={5} />
     </div>
   </div>
 
@@ -51,20 +51,32 @@
 
         <div class="flex flex-col items-center gap-2 mt-2">
           <div class="font-rampart-spurs tracking-wider">Glory</div>
-          <DotDisplay readonly={true} sheet={sheetData} field="glory_permanent" bind:value={sheetData.glory_permanent} />
-          <DotDisplay shape="box" sheet={sheetData} field="glory_current" bind:value={sheetData.glory_current} />
+          {#if sheetData.glory_permanent !== undefined}
+            <DotDisplay readonly={true} sheet={sheetData} field="glory_permanent" bind:value={sheetData.glory_permanent} />
+          {/if}
+          {#if sheetData.glory_current !== undefined}
+            <DotDisplay shape="box" sheet={sheetData} field="glory_current" bind:value={sheetData.glory_current} />
+          {/if}
         </div>
 
         <div class="flex flex-col items-center gap-2">
           <div class="font-rampart-spurs tracking-wider">Honor</div>
-          <DotDisplay readonly={true} sheet={sheetData} field="honor_permanent" bind:value={sheetData.honor_permanent} />
-          <DotDisplay shape="box" sheet={sheetData} field="honor_current" bind:value={sheetData.honor_current} />
+          {#if sheetData.honor_permanent !== undefined}
+            <DotDisplay readonly={true} sheet={sheetData} field="honor_permanent" bind:value={sheetData.honor_permanent} />
+          {/if}
+          {#if sheetData.honor_current !== undefined}
+            <DotDisplay shape="box" sheet={sheetData} field="honor_current" bind:value={sheetData.honor_current} />
+          {/if}
         </div>
 
         <div class="flex flex-col items-center gap-2">
           <div class="font-rampart-spurs tracking-wider">Wisdom</div>
-          <DotDisplay readonly={true} sheet={sheetData} field="wisdom_permanent" bind:value={sheetData.wisdom_permanent} />
-          <DotDisplay shape="box" sheet={sheetData} field="wisdom_current" bind:value={sheetData.wisdom_current} />
+          {#if sheetData.wisdom_permanent !== undefined}
+            <DotDisplay readonly={true} sheet={sheetData} field="wisdom_permanent" bind:value={sheetData.wisdom_permanent} />
+          {/if}
+          {#if sheetData.wisdom_current !== undefined}
+            <DotDisplay shape="box" sheet={sheetData} field="wisdom_current" bind:value={sheetData.wisdom_current} />
+          {/if}
         </div>
       </div>
 
@@ -82,8 +94,12 @@
           <div class="w-fit text-center bg-background-0 font-rampart-spurs tracking-wider rounded text-tprimary px-2">Rage</div>
         </div>
 
-        <DotDisplay readonly={true} type={XP_TYPE_WEREWOLF_RAGE} sheet={sheetData} field="rage_permanent" bind:value={sheetData.rage_permanent} />
-        <DotDisplay shape="box" type={XP_TYPE_WEREWOLF_RAGE} sheet={sheetData} field="rage_current" bind:value={sheetData.rage_current} />
+        {#if sheetData.rage_permanent !== undefined}
+          <DotDisplay readonly={true} type={XP_TYPE_WEREWOLF_RAGE} sheet={sheetData} field="rage_permanent" bind:value={sheetData.rage_permanent} />
+        {/if}
+        {#if sheetData.rage_current !== undefined}
+          <DotDisplay shape="box" type={XP_TYPE_WEREWOLF_RAGE} sheet={sheetData} field="rage_current" bind:value={sheetData.rage_current} />
+        {/if}
       </div>
 
       <div class="flex flex-col items-center gap-2 relative border rounded-xl border-black pb-3 pt-4 px-3">
@@ -91,8 +107,12 @@
           <div class="w-fit text-center bg-background-0 font-rampart-spurs tracking-wider rounded text-tprimary px-2">Gnosis</div>
         </div>
 
-        <DotDisplay readonly={true} type={XP_TYPE_WEREWOLF_GNOSIS} sheet={sheetData} field="gnosis_permanent" bind:value={sheetData.gnosis_permanent} />
-        <DotDisplay shape="box" type={XP_TYPE_WEREWOLF_GNOSIS} sheet={sheetData} field="gnosis_current" bind:value={sheetData.gnosis_current} />
+        {#if sheetData.gnosis_permanent !== undefined}
+          <DotDisplay readonly={true} type={XP_TYPE_WEREWOLF_GNOSIS} sheet={sheetData} field="gnosis_permanent" bind:value={sheetData.gnosis_permanent} />
+        {/if}
+        {#if sheetData.gnosis_current !== undefined}
+          <DotDisplay shape="box" type={XP_TYPE_WEREWOLF_GNOSIS} sheet={sheetData} field="gnosis_current" bind:value={sheetData.gnosis_current} />
+        {/if}
       </div>
 
       <div class="flex flex-col items-center gap-2 relative border rounded-xl border-black pb-3 pt-4 px-3">
@@ -100,8 +120,12 @@
           <div class="w-fit text-center bg-background-0 font-rampart-spurs tracking-wider rounded text-tprimary px-2">Willpower</div>
         </div>
 
-        <DotDisplay readonly={true} sheet={sheetData} field="willpower_permanent" bind:value={sheetData.willpower_permanent} />
-        <DotDisplay type={XP_TYPE_WILLPOWER} shape="box" sheet={sheetData} field="willpower_current" bind:value={sheetData.willpower_current} />
+        {#if sheetData.willpower_permanent !== undefined}
+          <DotDisplay readonly={true} sheet={sheetData} field="willpower_permanent" bind:value={sheetData.willpower_permanent} />
+        {/if}
+        {#if sheetData.willpower_current !== undefined}
+          <DotDisplay type={XP_TYPE_WILLPOWER} shape="box" sheet={sheetData} field="willpower_current" bind:value={sheetData.willpower_current} />
+        {/if}
       </div>
     </div>
 

@@ -55,11 +55,9 @@
         });
 
         loggedIn = !!token;
-        console.log('[DEBUG] userData updated:', data);
       } else if (res.status === 401) {
         loggedIn = false;
         userData.update((u) => ({ ...u, isLoading: false }));
-        console.log('[DEBUG] fetchUserInfo: Unauthorized');
       }
     } catch (e) {
       loggedIn = false;
