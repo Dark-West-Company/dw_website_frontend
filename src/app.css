@@ -27,7 +27,7 @@ button {
   outline: none;
 }
 
-input {
+input:not([type="checkbox"]) {
   @apply border-b border-info/50 px-1 text-sm w-full outline-none;
 }
 
