@@ -6,7 +6,7 @@
 
 html {
   overflow: hidden;
-  font-family: 'Rampart Sans', sans-serif;
+  font-family: 'Charter', sans-serif;
 }
 
 body {
@@ -125,4 +125,28 @@ button:disabled {
   src: url('/fonts/Speedwriter.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+}
+@font-face {
+  font-family: 'Charter';
+  src: url('/fonts/Charter Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Charter';
+  src: url('/fonts/Charter Bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Charter';
+  src: url('/fonts/Charter Italic.otf') format('opentype');
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Charter';
+  src: url('/fonts/Charter Bold Italic.otf') format('opentype');
+  font-weight: bold;
+  font-style: italic;
 }

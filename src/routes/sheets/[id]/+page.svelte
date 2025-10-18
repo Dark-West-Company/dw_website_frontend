@@ -5,12 +5,13 @@
   import VampireSection from '@/components/sheets/VampireSection.svelte';
   import WerewolfSection from '@/components/sheets/WerewolfSection.svelte';
   import MageSection from '@/components/sheets/MageSection.svelte';
+  import DiceRoller from '@/components/sheets/DiceRoller.svelte';
+
   import { eventBus, events } from '$lib/eventBus';
   import { apiPatch, apiGet } from '$lib/api';
   import { goto } from '$app/navigation';
   import { resolve } from '$app/paths';
   import { sheetStore } from '$lib/sheetStore';
-  import DiceRoller from '$lib/components/DiceRoller.svelte';
 
   let sheetId = '';
   let sheet = null;

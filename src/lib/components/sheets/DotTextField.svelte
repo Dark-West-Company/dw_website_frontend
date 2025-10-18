@@ -28,7 +28,7 @@
 
 <div class="flex flex-col gap-1 w-full">
   <div class="flex items-center justify-between">
-    <div class="text-sm font-rampart-regular text-tsecondary-50">{@html label}</div>
+    <div class="text-md text-tsecondary-50">{@html label}</div>
     <div class="flex flex-grow border-b mx-3 border-cream-0/10"></div>
     <div class="flex gap-1 mb-1">
       {#each dots as i (i)}

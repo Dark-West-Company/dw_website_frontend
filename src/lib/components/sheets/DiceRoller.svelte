@@ -1,6 +1,6 @@
 <script lang="ts">
   import { apiGet, apiPost } from '@/api';
-  import { HUMAN_ABILITIES, VAMPIRE_ABILITIES, WEREWOLF_ABILITIES, MAGE_ABILITIES } from '../../constants';
+  import { HUMAN_ABILITIES, VAMPIRE_ABILITIES, WEREWOLF_ABILITIES, MAGE_ABILITIES } from '../../../constants';
   import moment from 'moment';
 
   export let sheet;

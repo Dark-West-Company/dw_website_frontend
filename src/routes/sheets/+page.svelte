@@ -1,7 +1,7 @@
 <script>
   import { userData } from '$lib/userStore';
   import { eventBus, events } from '@/eventBus';
-  import { apiPost } from '$lib/api';
+  import { apiPost, apiPatch } from '$lib/api';
   import { goto } from '$app/navigation';
   import { resolve } from '$app/paths';
   import { onMount } from 'svelte';
@@ -35,6 +35,15 @@
   function isAssociated(sheet) {
     if (!sheet.character_id) return false;
     return characters.some((char) => char.id === sheet.character_id);
+  }
+
+  async function associatedSheet(character, sheetId) {
+    try {
+      const res = await apiPatch(`/api/character/sheet/${sheetId}/associate`, { characterId: character });
+      if (res.ok) eventBus.emit(events.RELOAD_USER_DATA);
+    } catch {
+      console.error('Error associating sheet to character');
+    }
   }
 </script>
 
@@ -113,16 +122,19 @@
       {:else}
         <div class="flex flex-wrap grow">
           {#each characters as char (char.id)}
-            <div class="flex items-center w-64 h-64 bg-background-700">
-              {JSON.stringify(char)}
-              <div class="flex flex-col">
-                <span class="font-rampart-spurs text-lg">{char.name}</span>
-                <span class="text-sm text-background-300 italic">{char.type} character</span>
-              </div>
+            <div class="flex flex-col justify-between items-center w-64 h-32 bg-secondary-700 rounded py-5">
+              <div class="font-rampart-spurs text-lg">{char.firstname} {char.lastname}</div>
+
               {#if sheets.find((s) => s.character_id === char.id)}
-                <span class="text-background-300">(Sheet linked)</span>
+                <span class="text-background-300">(Sheet linked TODO FLUSH THIS OUT)</span>
               {:else}
-                <span class="text-background-300">(No sheet)</span>
+                <div> No sheet linked. </div>
+                <select on:change={(e) => associatedSheet(char.id, e.target.value)}>
+                  <option value="" disabled selected>Select Sheet</option>
+                  {#each sheets.filter((s) => !s.character_id) as sheetOption (sheetOption.id)}
+                    <option value={sheetOption.id}>{sheetOption.name || `Unnamed ${sheetOption.character_type} Sheet`}</option>
+                  {/each}
+                </select>
               {/if}
             </div>
           {/each}
