@@ -8,6 +8,16 @@ export default [
   pluginPrettier,
   ...pluginSvelte.configs['flat/recommended'],
   {
+    files: ['**/*.svelte'],
+    languageOptions: {
+      parser: require.resolve('@typescript-eslint/parser'),
+      parserOptions: {
+        project: './tsconfig.json',
+        extraFileExtensions: ['.svelte'],
+      },
+    },
+  },
+  {
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'module',
