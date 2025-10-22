@@ -7,6 +7,7 @@
   import sunSpurRightBlack from '$lib/assets/sun_spur_right_black.png';
 
   import { XP_TYPE_MAGE_SPHERE, XP_TYPE_BACKGROUND, XP_TYPE_MAGE_ARETE, XP_TYPE_WILLPOWER } from '../../../constants';
+  import MageQuintessenceRing from './MageQuintessenceRing.svelte';
   export let sheetData;
 </script>
 
@@ -68,7 +69,9 @@
         <DotDisplay type={XP_TYPE_WILLPOWER} shape="box" sheet={sheetData} field="willpower_current" bind:value={sheetData.willpower_current} />
       </div>
 
-      <div> Quintessence TODO </div>
+      <div>
+        <MageQuintessenceRing sheet={sheetData} />
+      </div>
     </div>
 
     <div class="h-fit flex flex-col items-center gap-2 relative border rounded-xl border-black pb-3 pt-4 px-3">

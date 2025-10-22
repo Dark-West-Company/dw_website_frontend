@@ -31,6 +31,10 @@ input:not([type="checkbox"]) {
   @apply border-b border-info/50 px-1 text-sm w-full outline-none;
 }
 
+textarea {
+  @apply border-b border-info/50 px-1 text-sm w-full outline-none;
+}
+
 .spurs-drop-shadow {
   filter: drop-shadow(0 0px 1px var(--color-tprimary-0)) drop-shadow(0 0px 2px var(--color-tprimary-0));
 }
