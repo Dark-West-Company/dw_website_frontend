@@ -1,7 +1,7 @@
 <script>
   import { userData } from '$lib/userStore';
   import { eventBus, events } from '@/eventBus';
-  import { apiPost, apiPatch } from '$lib/api';
+  import { apiPost, apiPatch, apiDelete } from '$lib/api';
   import { goto } from '$app/navigation';
   import { resolve } from '$app/paths';
   import { onMount } from 'svelte';
@@ -43,6 +43,20 @@
       if (res.ok) eventBus.emit(events.RELOAD_USER_DATA);
     } catch {
       console.error('Error associating sheet to character');
+    }
+  }
+  async function deleteSheet(sheetId) {
+    if (confirm('Are you sure you want to delete this character sheet?')) {
+      try {
+        const res = await apiDelete(`/api/character/sheet/${sheetId}`);
+        if (res.ok) {
+          eventBus.emit(events.RELOAD_USER_DATA);
+        } else {
+          alert('Failed to delete sheet.');
+        }
+      } catch {
+        alert('Error deleting sheet.');
+      }
     }
   }
 </script>
@@ -90,6 +104,12 @@
             {/if}
 
             <button class="ml-2 px-1 py-1 hover:!text-info" on:click={() => viewSheet(sheet.id)}> View </button>
+            <button
+              class="ml-2 px-1 py-1 hover:!text-error"
+              on:click={() => deleteSheet(sheet.id)}
+            >
+              Delete
+            </button>
           </div>
         {/each}
       </div>
