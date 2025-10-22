@@ -13,10 +13,17 @@
 
   let dots = [1, 2, 3, 4, 5];
 
+  // Sync specialty from sheet when field or level changes
+  $: if (level >= 4 && sheet && field) {
+    specialty = sheet[field + '_specialty'] ?? '';
+  }
+
   function handleInput(e) {
     specialty = e.target.value ?? '';
-    // Optionally emit event if you want to handle text changes
-    // eventBus.emit(events.SHEET_DATA_CHANGED, sheet);
+    if (sheet && field) {
+      sheet[field + '_specialty'] = specialty;
+      eventBus.emit(events.SHEET_DATA_CHANGED, sheet);
+    }
   }
 
   function setLevel(l) {
