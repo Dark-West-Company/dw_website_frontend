@@ -79,6 +79,7 @@
   onDestroy(() => {
     eventBus.off(events.SHEET_DATA_CHANGED, handleSheetDataChanged);
   });
+
   async function fetchWerewolfGifts() {
     try {
       const res = await apiGet('/api/character/werewolf-gifts');
@@ -110,7 +111,10 @@
             <span>Back</span>
           </button>
 
-          <div class="text-2xl mt-4 mb-4 text-center font-rampart-spurs-stamp whitespace-nowrap tracking-wider text-tprimary">{sheet.data.character_type} Character Sheet</div>
+          <div class="flex flex-col items-center mt-4 mb-4">
+            <div class="text-2xl text-center font-rampart-spurs-stamp whitespace-nowrap tracking-wider text-tprimary">{sheet.data.character_type} Character Sheet</div>
+            <div class="text-center capitalize">{sheet.data.mode} Mode</div>
+          </div>
 
           <div class="flex gap-2 ml-auto">
             <button class="px-2 py-1 rounded !bg-success-0 hover:!bg-success-50" disabled={!isDirty} on:click={onSaveSheet}> Save </button>
@@ -118,23 +122,23 @@
           </div>
         </div>
 
-        <SharedSection sheet={sheet.data} />
+        <SharedSection sheet={sheet.data} mode={sheet.data.mode} />
         <!-- Other sections will be rendered here based on character type -->
         <div class="px-5 mt-2">
           {#if sheet.data.character_type === 'human'}
-            <HumanSection sheetData={sheet.data} />
+            <HumanSection sheetData={sheet.data} mode={sheet.data.mode} />
           {/if}
 
           {#if sheet.data.character_type === 'vampire'}
-            <VampireSection sheetData={sheet.data} />
+            <VampireSection sheetData={sheet.data} mode={sheet.data.mode} />
           {/if}
 
           {#if sheet.data.character_type === 'werewolf'}
-            <WerewolfSection sheetData={sheet.data} />
+            <WerewolfSection sheetData={sheet.data} mode={sheet.data.mode} />
           {/if}
 
           {#if sheet.data.character_type === 'mage'}
-            <MageSection sheetData={sheet.data} />
+            <MageSection sheetData={sheet.data} mode={sheet.data.mode} />
           {/if}
         </div>
       </div>
@@ -147,7 +151,7 @@
 
   <div class="bg-background-0/80 border-l-2 border-black p-4 overflow-hidden">
     {#if sheet && sheet.data}
-      <DiceRoller sheet={sheet.data} />
+      <DiceRoller sheet={sheet.data} mode={sheet.data.mode} />
     {/if}
   </div>
 </div>

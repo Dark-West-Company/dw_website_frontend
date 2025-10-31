@@ -17,6 +17,8 @@
   import dwLogo from '$lib/assets/dw_logo.png';
   import dwLogoWhite from '$lib/assets/dw_logo_white.png';
 
+  export const prerender = true;
+
   let loggedIn = false;
   // let isAdmin = false;
 

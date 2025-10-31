@@ -1,3 +1,7 @@
+export const CREATIVE_MODE = 'creative';
+export const ACTIVE_MODE = 'active';
+export const ADMIN_MODE = 'admin';
+
 // XP progression type constants
 export const XP_TYPE_ATTRIBUTE = 'attribute';
 export const XP_TYPE_ABILITY = 'ability';

@@ -11,11 +11,11 @@
   $: sheets = $userData.sheets ?? [];
   $: characters = $userData.characters ?? [];
 
-  let isAdmin = $userData.isAdmin ?? false;
+  let isAdmin = false;
 
-  onMount(() => {
+  $: {
     isAdmin = $userData.isAdmin ?? false;
-  });
+  }
 
   async function createSheet(sheetType) {
     try {
@@ -104,12 +104,7 @@
             {/if}
 
             <button class="ml-2 px-1 py-1 hover:!text-info" on:click={() => viewSheet(sheet.id)}> View </button>
-            <button
-              class="ml-2 px-1 py-1 hover:!text-error"
-              on:click={() => deleteSheet(sheet.id)}
-            >
-              Delete
-            </button>
+            <button class="ml-2 px-1 py-1 hover:!text-error" on:click={() => deleteSheet(sheet.id)}> Delete </button>
           </div>
         {/each}
       </div>

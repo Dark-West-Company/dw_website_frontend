@@ -19,9 +19,7 @@
 
   <div class="flex relative overflow-hidden">
     <!-- Sidebar -->
-    <nav
-      class="absolute h-full left-0 top-1/2 !rounded-tr-2xl -translate-y-1/2 w-56 bg-gradient-to-bl bg-background-0/80 flex flex-col items-start px-4 py-4 gap-3 z-20 rounded-lg shadow-lg"
-    >
+    <nav class="absolute h-full left-0 top-1/2 !rounded-tr-2xl -translate-y-1/2 w-56 bg-background-0/80 flex flex-col items-start px-4 py-4 gap-3 z-20 rounded-lg">
       <div class="text-2xl font-rampart-spurs-stamp tracking-widest h-6 text-tprimary">Lore</div>
       <div class="w-full px-2">
         <Separator />
