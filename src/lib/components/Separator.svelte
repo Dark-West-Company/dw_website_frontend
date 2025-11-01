@@ -1,9 +1,9 @@
 <script>
   export let white = false;
-  export let text = "";
+  export let text = '';
 </script>
 
-<div class="relative flex items-center w-full">
+<div class="relative flex items-center w-full {$$restProps.class}" style={$$restProps.style}>
   <div class="absolute -left-3 -top-1 w-3 h-3 {white ? 'bg-tsecondary' : 'bg-success'} rounded-full"></div>
   <div class="absolute -right-3 -top-1 w-3 h-3 {white ? 'bg-tsecondary' : 'bg-success'} rounded-full"></div>
   {#if text}

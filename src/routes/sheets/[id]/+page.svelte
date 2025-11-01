@@ -97,61 +97,85 @@
   }
 </script>
 
-<div class="grid grid-cols-[auto_300px] w-full h-full border-t-2 border-black">
-  {#if isLoading}
-    <div class="flex items-center justify-center w-full h-full">
-      <p>Loading character sheet...</p>
-    </div>
-  {:else if sheet}
-    <div class="flex flex-col w-full h-full overflow-y-auto pb-5 bg-primary-0/80">
-      <div class="max-w-[1300px] mx-auto w-full">
-        <div class="grid grid-cols-[1fr_auto_1fr] items-center w-full px-5">
-          <button class="flex items-center w-fit h-fit gap-1 !bg-transparent hover:!text-info" on:click={() => goto(resolve('/sheets'))}>
-            <i class="mdi mdi-arrow-left" aria-hidden="true"></i>
-            <span>Back</span>
-          </button>
+<div class="flex flex-col relative w-full h-full">
+  <div class="torn-edge-top"></div>
 
-          <div class="flex flex-col items-center mt-4 mb-4">
-            <div class="text-2xl text-center font-rampart-spurs-stamp whitespace-nowrap tracking-wider text-tprimary">{sheet.data.character_type} Character Sheet</div>
-            <div class="text-center capitalize">{sheet.data.mode} Mode</div>
+  <div class="grid grid-cols-[auto_300px] w-full grow overflow-hidden bg-primary">
+    {#if isLoading}
+      <div class="flex items-center justify-center w-full h-full">
+        <p>Loading character sheet...</p>
+      </div>
+    {:else if sheet}
+      <div class="flex flex-col w-full h-full overflow-y-auto pb-5 bg-primary">
+        <div class="max-w-[1300px] mx-auto w-full">
+          <div class="grid grid-cols-[1fr_auto_1fr] items-center w-full px-5">
+            <button class="flex items-center w-fit h-fit gap-1 !bg-transparent hover:!text-info" on:click={() => goto(resolve('/sheets'))}>
+              <i class="mdi mdi-arrow-left" aria-hidden="true"></i>
+              <span>Back</span>
+            </button>
+
+            <div class="flex flex-col items-center mt-4 mb-4">
+              <div class="text-3xl text-center font-rampart-spurs-stamp whitespace-nowrap tracking-wider text-tprimary">{sheet.data.character_type} Character Sheet</div>
+            </div>
+
+            <div class="flex items-center gap-2 ml-auto">
+              <div class="text-center capitalize">{sheet.data.mode} Mode</div>
+
+              <button class="px-2 py-1 rounded !bg-success-0 hover:!bg-success-50" disabled={!isDirty} on:click={onSaveSheet}> Save </button>
+              <button class="px-2 py-1 rounded !bg-red-900 hover:!bg-red-700" disabled={!isDirty} on:click={onDiscardChanges}> Discard </button>
+            </div>
           </div>
 
-          <div class="flex gap-2 ml-auto">
-            <button class="px-2 py-1 rounded !bg-success-0 hover:!bg-success-50" disabled={!isDirty} on:click={onSaveSheet}> Save </button>
-            <button class="px-2 py-1 rounded !bg-red-900 hover:!bg-red-700" disabled={!isDirty} on:click={onDiscardChanges}> Discard </button>
+          <SharedSection sheet={sheet.data} mode={sheet.data.mode} />
+          <!-- Other sections will be rendered here based on character type -->
+          <div class="mt-2">
+            {#if sheet.data.character_type === 'human'}
+              <HumanSection sheetData={sheet.data} mode={sheet.data.mode} />
+            {/if}
+
+            {#if sheet.data.character_type === 'vampire'}
+              <VampireSection sheetData={sheet.data} mode={sheet.data.mode} />
+            {/if}
+
+            {#if sheet.data.character_type === 'werewolf'}
+              <WerewolfSection sheetData={sheet.data} mode={sheet.data.mode} />
+            {/if}
+
+            {#if sheet.data.character_type === 'mage'}
+              <MageSection sheetData={sheet.data} mode={sheet.data.mode} />
+            {/if}
           </div>
-        </div>
-
-        <SharedSection sheet={sheet.data} mode={sheet.data.mode} />
-        <!-- Other sections will be rendered here based on character type -->
-        <div class="px-5 mt-2">
-          {#if sheet.data.character_type === 'human'}
-            <HumanSection sheetData={sheet.data} mode={sheet.data.mode} />
-          {/if}
-
-          {#if sheet.data.character_type === 'vampire'}
-            <VampireSection sheetData={sheet.data} mode={sheet.data.mode} />
-          {/if}
-
-          {#if sheet.data.character_type === 'werewolf'}
-            <WerewolfSection sheetData={sheet.data} mode={sheet.data.mode} />
-          {/if}
-
-          {#if sheet.data.character_type === 'mage'}
-            <MageSection sheetData={sheet.data} mode={sheet.data.mode} />
-          {/if}
         </div>
       </div>
-    </div>
-  {:else}
-    <div class="flex items-center justify-center w-full h-full">
-      <p>Character sheet not found.</p>
-    </div>
-  {/if}
-
-  <div class="bg-background-0/80 border-l-2 border-black p-4 overflow-hidden">
-    {#if sheet && sheet.data}
-      <DiceRoller sheet={sheet.data} mode={sheet.data.mode} />
+    {:else}
+      <div class="flex items-center justify-center w-full h-full">
+        <p>Character sheet not found.</p>
+      </div>
     {/if}
+
+    <div class="p-4 overflow-hidden bg-background-0 !rounded-tl-2xl">
+      {#if sheet && sheet.data}
+        <DiceRoller sheet={sheet.data} mode={sheet.data.mode} />
+      {/if}
+    </div>
   </div>
 </div>
+
+<style>
+  .torn-edge-top {
+    /* position: absolute;
+    top: -100px;
+    right: 0;
+    left: 0; */
+
+    height: 67px;
+    min-height: 67px;
+    background-image: url(/src/lib/assets/page_torn_edge_black.png);
+    background-repeat: repeat-x;
+    background-size: 2000px auto;
+    background-position: top center;
+
+    filter: invert(8%) sepia(6%) saturate(2495%) hue-rotate(349deg) brightness(92%) contrast(81%);
+    z-index: 10;
+  }
+</style>

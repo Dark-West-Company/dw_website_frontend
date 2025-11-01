@@ -51,7 +51,7 @@ button:disabled {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-background-800);
+  background: var(--color-primary-100);
   border-radius: 6px;
   border: none;
 }
@@ -61,7 +61,7 @@ button:disabled {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-background-900);
+  background: inherit;
 }
 
 .no-scroll {
@@ -69,7 +69,7 @@ button:disabled {
 }
 
 .paragraph-text {
-  @apply mt-4  font-sans text-lg;
+  @apply mt-4 font-sans text-lg text-justify;
 }
 
 .font-rampart-spurs {
@@ -87,6 +87,10 @@ button:disabled {
 .font-speedwriter {
   font-family: 'Speedwriter', cursive;
 }
+
+  .black-to-text-primary {
+    filter: invert(72%) sepia(22%) saturate(259%) hue-rotate(158deg) brightness(92%) contrast(99%);
+  }
 
 @font-face {
   font-family: 'Rampart Regular';

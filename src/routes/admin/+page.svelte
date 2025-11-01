@@ -39,8 +39,8 @@
     right: 0;
     left: 0; */
 
-    height: 100px;
-    min-height: 100px;
+    height: 67px;
+    min-height: 67px;
     background-image: url(/src/lib/assets/page_torn_edge_black.png);
     background-repeat: repeat-x;
     background-size: 2000px auto;

@@ -16,6 +16,8 @@
   import { page } from '$app/stores';
   import dwLogo from '$lib/assets/dw_logo.png';
   import dwLogoWhite from '$lib/assets/dw_logo_white.png';
+  import flourishLeft from '$lib/assets/flourish_left.png';
+  import flourishRight from '$lib/assets/flourish_right.png';
 
   export const prerender = true;
 
@@ -23,7 +25,7 @@
   // let isAdmin = false;
 
   // Overlay logic
-  let entered = false;
+  let entered = true;
   $: isRoot = $page.url.pathname === '/';
 
   function enterSite() {
@@ -122,8 +124,10 @@
       </div>
 
       <div class="flex items-center justify-center z-10">
-        <button type="button" class="flex items-center w-fit !bg-transparent !border-none" on:click={() => goto(resolve('/'))}>
-          <img src={dwLogoSimple} alt="DarkWest Logo" class="w-84 h-auto nav-logo-drop-shadow button-hover-drop-shadow pt-3 pb-2" />
+        <button type="button" class="flex items-center w-fit !bg-transparent !border-none nav-logo-drop-shadow button-hover-drop-shadow" on:click={() => goto(resolve('/'))}>
+          <img src={flourishLeft} alt="Flourish Left" class="h-8 w-auto mr-2" />
+          <img src={dwLogoSimple} alt="DarkWest Logo" class="w-56 h-auto pb-5 pt-4" />
+          <img src={flourishRight} alt="Flourish Right" class="h-8 w-auto ml-2" />
         </button>
       </div>
 
@@ -147,7 +151,7 @@
 
 <style>
   .nav-logo-drop-shadow {
-    filter: drop-shadow(0 0px 6px var(--color-tprimary-0)) drop-shadow(0 0px 6px var(--color-tprimary-0));
+    filter: drop-shadow(0 0px 3px var(--color-tprimary-0)) drop-shadow(0 0px 6px var(--color-tprimary-0));
   }
 
   .logo-drop-shadow {

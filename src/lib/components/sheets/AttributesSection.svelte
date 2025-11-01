@@ -1,17 +1,17 @@
 <script>
   import DotTextField from './DotTextField.svelte';
   import { XP_TYPE_ATTRIBUTE } from '../../../constants';
-  import sunSpurLeftBlack from '$lib/assets/sun_spur_left_black.png';
-  import sunSpurRightBlack from '$lib/assets/sun_spur_right_black.png';
+  import flowerDividerLeft from '$lib/assets/flower_divider_left.png';
+  import flowerDividerRight from '$lib/assets/flower_divider_right.png';
 
   export let sheet;
 </script>
 
 <div class="w-full">
   <div class="flex justify-center items-center w-full relative mb-4 gap-3">
-    <img src={sunSpurLeftBlack} alt="Sun Spur Left" class="h-12 spurs-drop-shadow" />
-    <h2 class="text-2xl text-tprimary-0 font-rampart-spurs-stamp tracking-wider">Attributes</h2>
-    <img src={sunSpurRightBlack} alt="Sun Spur Right" class="h-12 spurs-drop-shadow" />
+    <img src={flowerDividerLeft} alt="Flower Divider Left" class="h-6 black-to-text-primary" />
+    <h2 class="text-2xl text-tprimary-0 font-rampart-spurs-stamp tracking-wider mt-1">Attributes</h2>
+    <img src={flowerDividerRight} alt="Flower Divider Right" class="h-6 black-to-text-primary" />
   </div>
 
   <div class="grid grid-cols-3 gap-x-6 w-full">

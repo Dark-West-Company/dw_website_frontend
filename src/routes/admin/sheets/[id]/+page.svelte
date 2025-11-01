@@ -120,10 +120,11 @@
 
           <div class="flex flex-col items-center mt-4 mb-4">
             <div class="text-2xl text-center font-rampart-spurs-stamp whitespace-nowrap tracking-wider text-tprimary">{sheet.data.character_type} Character Sheet</div>
-            <div class="text-center capitalize">{sheet.data.mode} Mode</div>
           </div>
 
           <div class="flex gap-2 ml-auto">
+            <div class="text-center capitalize">{sheet.data.mode} Mode</div>
+
             <button class="px-2 py-1 rounded !bg-success-0 hover:!bg-success-50" disabled={!isDirty} on:click={onSaveSheet}> Save </button>
             <button class="px-2 py-1 rounded !bg-red-900 hover:!bg-red-700" disabled={!isDirty} on:click={onDiscardChanges}> Discard </button>
           </div>
