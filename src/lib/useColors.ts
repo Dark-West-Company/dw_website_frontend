@@ -1,5 +1,3 @@
-import { base } from '$service-worker';
-
 export const useColors = () => {
   const generateBackgroundColors = (baseColor) => {
     let baseRgb = hexToRgb(baseColor);
