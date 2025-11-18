@@ -48,9 +48,9 @@
             <button
               type="button"
               class="w-3 h-3 rounded-full flex items-center justify-center cursor-pointer hover:!bg-tprimary-0 {i <= entry.level ? '!bg-tprimary-0' : '!bg-background-500'}"
-              on:click={() => updateLevel(idx, i + 1)}
-              title={`Set level to ${i + 1}`}
-              aria-label={`Set level to ${i + 1}`}
+              on:click={() => updateLevel(idx, i)}
+              title={`Set level to ${i}`}
+              aria-label={`Set level to ${i}`}
             >
             </button>
           {/each}
