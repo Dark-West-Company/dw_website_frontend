@@ -86,10 +86,10 @@
   };
 
   const getRollHistory = async () => {
-    if (!sheet || !sheet.character_sheet_id) return;
+    if (!sheet || !sheet.id) return;
     try {
       // uses get "/sheet/:sheetId/roll-history",
-      const res = await apiGet(`/api/character/sheet/${sheet.character_sheet_id}/roll-history`);
+      const res = await apiGet(`/api/character/sheet/${sheet.id}/roll-history`);
       const data = await res.json();
       if (data.success) {
         rollHistory = data.history;
@@ -105,14 +105,14 @@
     result = null;
     try {
       const payload = {
-        selectedAttribute,
-        selectedAbility,
-        bonusDice: Number(bonusDice) || 0,
+        selected_attribute: selectedAttribute,
+        selected_ability: selectedAbility,
+        bonus_dice: Number(bonusDice) || 0,
         difficulty: Number(difficulty) || 6,
         specialty,
-        spendWillpower,
-        autoSuccesses: Number(autoSuccesses) || 0,
-        sheetId: sheet.character_sheet_id,
+        spend_willpower: spendWillpower,
+        auto_successes: Number(autoSuccesses) || 0,
+        sheetId: sheet.id,
         note: note.trim(),
       };
       const res = await apiPost('/api/character/roll', payload);
@@ -120,6 +120,7 @@
       if (!data.success) {
         error = 'Dice roll failed.';
       } else {
+        console.log(data.result);
         rollHistory = [data.result, ...rollHistory];
       }
     } catch {
