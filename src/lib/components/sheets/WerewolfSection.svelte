@@ -9,6 +9,7 @@
   import { XP_TYPE_BACKGROUND, XP_TYPE_WEREWOLF_RAGE, XP_TYPE_WEREWOLF_GNOSIS, XP_TYPE_WILLPOWER } from '../../../constants';
 
   export let sheetData;
+  export let mode = 'active';
 
   const rankOptions = [
     { label: '1 - Cliath', value: 1 },
@@ -134,7 +135,7 @@
         <div class="w-fit text-center bg-background-0 font-rampart-spurs tracking-wider rounded text-tprimary px-2">Experience</div>
       </div>
 
-      <IntegerField header="Experience" bind:value={sheetData.experience} disabled={sheetData.mode !== 'creative'} />
+      <IntegerField header="Experience" bind:value={sheetData.experience} disabled={mode === 'active'} />
     </div>
   </div>
 </div>

@@ -11,7 +11,7 @@
     error = '';
     const newMode = sheet.mode === 'active' ? 'creative' : 'active';
     try {
-      const res = await apiPatch(`/api/admin/sheets/${sheet.character_sheet_id}`, {
+      const res = await apiPatch(`/api/admin/sheets/${sheet.id}`, {
         ...sheet,
         mode: newMode,
       });

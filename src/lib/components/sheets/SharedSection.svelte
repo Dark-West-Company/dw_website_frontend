@@ -4,6 +4,7 @@
   import AttributesSection from './AttributesSection.svelte';
   import AbilitiesSection from './AbilitiesSection.svelte';
   export let sheet;
+  export let mode = 'active';
 </script>
 
 <div class="flex flex-col relative items-center w-full">

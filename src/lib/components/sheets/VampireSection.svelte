@@ -9,6 +9,7 @@
   import { XP_TYPE_VAMPIRE_DISCIPLINE, XP_TYPE_BACKGROUND, XP_TYPE_VAMPIRE_VIRTUE, XP_TYPE_VAMPIRE_PATH, XP_TYPE_WILLPOWER } from '../../../constants';
 
   export let sheetData;
+  export let mode = 'active';
 
   const pathOptions = [
     { label: 'Humanity', value: 'humanity' },
@@ -88,7 +89,7 @@
         <div class="w-fit text-center bg-background-0 font-rampart-spurs tracking-wider rounded text-tprimary px-2">Experience</div>
       </div>
 
-      <IntegerField header="Experience" bind:value={sheetData.experience} disabled={sheetData.mode !== 'creative'} />
+      <IntegerField header="Experience" bind:value={sheetData.experience} disabled={mode === 'active'} />
     </div>
   </div>
 </div>

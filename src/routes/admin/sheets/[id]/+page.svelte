@@ -68,7 +68,7 @@
     if (!sheet || !sheet.data) return;
     try {
       console.log('Updating sheet data on backend:', sheet);
-      const res = await apiPatch(`/api/admin/sheets/${sheetId}`, sheet.data);
+      const res = await apiPatch(`/api/admin/sheets/${sheet.data.id}`, sheet.data);
       const result = await res.json();
       originalSheetData = JSON.parse(JSON.stringify(sheet.data));
       isDirty = false;

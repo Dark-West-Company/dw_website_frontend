@@ -9,6 +9,7 @@
   import { XP_TYPE_MAGE_SPHERE, XP_TYPE_BACKGROUND, XP_TYPE_MAGE_ARETE, XP_TYPE_WILLPOWER } from '../../../constants';
   import MageQuintessenceRing from './MageQuintessenceRing.svelte';
   export let sheetData;
+  export let mode = 'active';
 </script>
 
 <div class="flex flex-col items-center w-full">
@@ -82,7 +83,7 @@
           <div class="w-fit text-center bg-background-0 font-rampart-spurs tracking-wider rounded text-tprimary px-2">Experience</div>
         </div>
 
-        <IntegerField header="Experience" bind:value={sheetData.experience} disabled={sheetData.mode !== 'creative'} />
+        <IntegerField header="Experience" bind:value={sheetData.experience} disabled={mode === 'active'} />
       </div>
     </div>
     <div class="absolute left-0 right-0 h-2 -bottom-2 bg-gradient-to-t from-transparent to-background-0/50 z-10"></div>
