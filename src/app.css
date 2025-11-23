@@ -88,9 +88,9 @@ button:disabled {
   font-family: 'Speedwriter', cursive;
 }
 
-  .black-to-text-primary {
-    filter: invert(72%) sepia(22%) saturate(259%) hue-rotate(158deg) brightness(92%) contrast(99%);
-  }
+.black-to-text-primary {
+  filter: invert(72%) sepia(22%) saturate(259%) hue-rotate(158deg) brightness(92%) contrast(99%);
+}
 
 @font-face {
   font-family: 'Rampart Regular';

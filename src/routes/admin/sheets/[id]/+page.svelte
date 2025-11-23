@@ -80,7 +80,6 @@
       saveLoading = true;
       const res = await apiPatch(`/api/admin/sheets/${sheet.data.character_sheet_id}`, sheet.data);
       const result = await res.json();
-      isDirty = false;
       if (!result.success) {
         console.error('Failed to update character sheet:', result.error);
         toast.error('Failed to save character sheet.', { icon: '❌' });
@@ -92,9 +91,11 @@
       } else {
         toast.success('Character sheet saved successfully.', { icon: '✅' });
         originalSheetData = JSON.parse(JSON.stringify(sheet.data));
+        isDirty = false;
       }
     } catch (err) {
       console.error('Error updating character sheet:', err);
+      toast.error('Error saving character sheet.', { icon: '❌' });
     } finally {
       saveLoading = false;
     }
