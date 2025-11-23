@@ -18,6 +18,8 @@
     specialty = sheet[field + '_specialty'] ?? '';
   }
 
+  $: level = sheet && field ? (sheet[field] ?? 0) : level;
+
   function handleInput(e) {
     specialty = e.target.value ?? '';
     if (sheet && field) {

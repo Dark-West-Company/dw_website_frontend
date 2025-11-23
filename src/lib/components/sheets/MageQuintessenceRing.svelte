@@ -137,7 +137,6 @@
     // Update sheet data
     sheet.quintessence = quintessence;
     sheet.paradox = paradox;
-    console.log({ quintessence, paradox });
 
     // Emit event just like TextField does
     eventBus.emit(events.SHEET_DATA_CHANGED, { quintessence, paradox });

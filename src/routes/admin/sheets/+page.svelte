@@ -4,17 +4,13 @@
   import { resolve } from '$app/paths';
   import { apiGet, apiDelete } from '$lib/api';
   import { userData } from '$lib/userStore';
+  import toast from 'svelte-french-toast';
+  import { requestConfirmation } from '$lib/confirmationDialogStore';
 
   let sheets = [];
   let isLoading = true;
-  let isAdmin = false;
 
   onMount(async () => {
-    isAdmin = $userData.isAdmin ?? false;
-    if (!isAdmin) {
-      goto(resolve('/'));
-      return;
-    }
     const res = await apiGet('/api/admin/sheets');
     if (res.ok) {
       let data = await res.json();
@@ -26,24 +22,37 @@
   function viewSheet(sheetId) {
     goto(resolve(`/admin/sheets/${sheetId}`));
   }
+
   async function deleteSheet(sheetId) {
-    if (confirm('Permanently delete this character sheet? This cannot be undone.')) {
-      try {
-        const res = await apiDelete(`/api/admin/sheets/${sheetId}`);
-        if (res.ok) {
-          sheets = sheets.filter((s) => s.id !== sheetId);
-        } else {
-          alert('Failed to delete sheet.');
+    requestConfirmation(
+      'Permanently delete this character sheet? This cannot be undone.',
+      async () => {
+        try {
+          const res = await apiDelete(`/api/admin/sheets/${sheetId}`);
+          if (res.ok) {
+            sheets = sheets.filter((s) => s.id !== sheetId);
+          } else {
+            alert('Failed to delete sheet.');
+          }
+        } catch {
+          alert('Error deleting sheet.');
         }
-      } catch {
-        alert('Error deleting sheet.');
+      },
+      () => {
+        /* Cancelled */
       }
-    }
+    );
   }
 </script>
 
 <div class="flex flex-col items-center w-full h-full bg-background-0/50 border-t-2 border-black">
-  <div class="text-2xl font-rampart-spurs text-center capitalize my-4">All Character Sheets (Admin)</div>
+  <div class="grid grid-cols-3 w-full items-center px-4 pt-4">
+    <button class="flex items-center w-fit h-fit gap-1 hover:!text-info" on:click={() => goto(resolve('/admin'))}>
+      <i class="mdi mdi-arrow-left" aria-hidden="true"></i>
+      <span>Back</span>
+    </button>
+    <div class="text-2xl font-rampart-spurs text-center capitalize my-4">All Character Sheets (Admin)</div>
+  </div>
   {#if isLoading}
     <div>Loading...</div>
   {:else}

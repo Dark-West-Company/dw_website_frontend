@@ -18,6 +18,11 @@
   import dwLogoWhite from '$lib/assets/dw_logo_white.png';
   import flourishLeft from '$lib/assets/flourish_left.png';
   import flourishRight from '$lib/assets/flourish_right.png';
+  import { Toaster } from 'svelte-french-toast';
+  import { confirmationDialogStore } from '$lib/confirmationDialogStore';
+  import ConfirmationModal from '$lib/components/ConfirmationModal.svelte';
+  let dialog;
+  $: dialog = $confirmationDialogStore;
 
   export const prerender = true;
 
@@ -146,7 +151,27 @@
 
   <div class="flex grow overflow-hidden">
     <slot />
+
+    {#if dialog && dialog.visible}
+      <ConfirmationModal
+        message={dialog.message}
+        confirmText={dialog.confirmText}
+        cancelText={dialog.cancelText}
+        onConfirm={dialog.onConfirm}
+        onCancel={dialog.onCancel}
+      />
+    {/if}
   </div>
+
+  <Toaster
+    position="bottom-center"
+    toastOptions={{
+      className: '!bg-primary-900 !text-tprimary !border !border-primary-50 rounded px-4 py-2',
+      style: {
+        fontFamily: 'Charter Regular, serif',
+      },
+    }}
+  />
 </div>
 
 <style>

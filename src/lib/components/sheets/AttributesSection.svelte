@@ -16,20 +16,20 @@
 
   <div class="grid grid-cols-3 gap-x-6 w-full">
     <div>
-      <DotTextField label="Strength" type={XP_TYPE_ATTRIBUTE} value="" level={sheet.strength ?? 0} {sheet} field="strength" />
-      <DotTextField label="Dexterity" type={XP_TYPE_ATTRIBUTE} value="" level={sheet.dexterity ?? 0} {sheet} field="dexterity" />
-      <DotTextField label="Stamina" type={XP_TYPE_ATTRIBUTE} value="" level={sheet.stamina ?? 0} {sheet} field="stamina" />
+      <DotTextField label="Strength" type={XP_TYPE_ATTRIBUTE} value="" {sheet} field="strength" />
+      <DotTextField label="Dexterity" type={XP_TYPE_ATTRIBUTE} value="" {sheet} field="dexterity" />
+      <DotTextField label="Stamina" type={XP_TYPE_ATTRIBUTE} value="" {sheet} field="stamina" />
     </div>
 
     <div>
-      <DotTextField label="Charisma" type={XP_TYPE_ATTRIBUTE} value="" level={sheet.charisma ?? 0} {sheet} field="charisma" />
-      <DotTextField label="Manipulation" type={XP_TYPE_ATTRIBUTE} value="" level={sheet.manipulation ?? 0} {sheet} field="manipulation" />
-      <DotTextField label="Appearance" type={XP_TYPE_ATTRIBUTE} value="" level={sheet.appearance ?? 0} {sheet} field="appearance" />
+      <DotTextField label="Charisma" type={XP_TYPE_ATTRIBUTE} value="" {sheet} field="charisma" />
+      <DotTextField label="Manipulation" type={XP_TYPE_ATTRIBUTE} value="" {sheet} field="manipulation" />
+      <DotTextField label="Appearance" type={XP_TYPE_ATTRIBUTE} value="" {sheet} field="appearance" />
     </div>
     <div>
-      <DotTextField label="Perception" type={XP_TYPE_ATTRIBUTE} value="" level={sheet.perception ?? 0} {sheet} field="perception" />
-      <DotTextField label="Intelligence" type={XP_TYPE_ATTRIBUTE} value="" level={sheet.intelligence ?? 0} {sheet} field="intelligence" />
-      <DotTextField label="Wits" type={XP_TYPE_ATTRIBUTE} value="" level={sheet.wits ?? 0} {sheet} field="wits" />
+      <DotTextField label="Perception" type={XP_TYPE_ATTRIBUTE} value="" {sheet} field="perception" />
+      <DotTextField label="Intelligence" type={XP_TYPE_ATTRIBUTE} value="" {sheet} field="intelligence" />
+      <DotTextField label="Wits" type={XP_TYPE_ATTRIBUTE} value="" {sheet} field="wits" />
     </div>
   </div>
 </div>

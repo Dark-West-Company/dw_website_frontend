@@ -50,7 +50,6 @@
   }
 
   const setupAbilityOptions = () => {
-    console.log('Setting up ability options for character type:', sheet);
     // we need to generate the options for attributes and abilities based on the character type
     switch (sheet.character_type) {
       case 'human':
@@ -120,7 +119,6 @@
       if (!data.success) {
         error = 'Dice roll failed.';
       } else {
-        console.log(data.result);
         rollHistory = [data.result, ...rollHistory];
       }
     } catch {

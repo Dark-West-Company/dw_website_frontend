@@ -7,6 +7,8 @@
   import { onMount } from 'svelte';
   import Separator from '@/components/Separator.svelte';
   import HoverPopup from '@/components/HoverPopup.svelte';
+  import toast from 'svelte-french-toast';
+  import { requestConfirmation } from '$lib/confirmationDialogStore';
 
   $: sheets = $userData.sheets ?? [];
   $: characters = $userData.characters ?? [];
@@ -22,8 +24,12 @@
       const res = await apiPost('/api/character/sheet', { sheetType });
       if (res.ok) {
         eventBus.emit(events.RELOAD_USER_DATA);
+        toast.success('Sheet created successfully.\nYou may need to refresh the page.', { duration: 5000 });
+      } else {
+        toast.error('Failed to create new sheet.');
       }
     } catch {
+      toast.error('Error creating new sheet.');
       console.error('Error creating new sheet');
     }
   }
@@ -45,19 +51,27 @@
       console.error('Error associating sheet to character');
     }
   }
+
   async function deleteSheet(sheetId) {
-    if (confirm('Are you sure you want to delete this character sheet?')) {
-      try {
-        const res = await apiDelete(`/api/character/sheet/${sheetId}`);
-        if (res.ok) {
-          eventBus.emit(events.RELOAD_USER_DATA);
-        } else {
-          alert('Failed to delete sheet.');
+    requestConfirmation(
+      'Are you sure you want to delete this character sheet?',
+      async () => {
+        try {
+          const res = await apiDelete(`/api/character/sheet/${sheetId}`);
+          if (res.ok) {
+            eventBus.emit(events.RELOAD_USER_DATA);
+            toast.success('Sheet deleted successfully.');
+          } else {
+            toast.error('Failed to delete sheet.');
+          }
+        } catch {
+          toast.error('Error deleting sheet.');
         }
-      } catch {
-        alert('Error deleting sheet.');
+      },
+      () => {
+        // Cancelled
       }
-    }
+    );
   }
 </script>
 

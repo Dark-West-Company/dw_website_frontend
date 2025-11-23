@@ -12,16 +12,18 @@
   import { goto } from '$app/navigation';
   import { resolve } from '$app/paths';
   import { sheetStore } from '$lib/sheetStore';
+  import toast from 'svelte-french-toast';
+  import { requestConfirmation } from '$lib/confirmationDialogStore';
 
   let sheetId = '';
   let sheet = null;
   let originalSheetData = null;
   let isLoading = true;
   let isDirty = false;
+  let saveLoading = false;
 
   async function handleSheetDataChanged() {
     if (!sheet || !sheet.data) return;
-    console.log('Sheet data changed:', sheet.data);
     isDirty = JSON.stringify(sheet.data) !== JSON.stringify(originalSheetData);
   }
 
@@ -37,7 +39,6 @@
         if (res.ok) {
           sheet = await res.json();
           originalSheetData = JSON.parse(JSON.stringify(sheet.data));
-          console.log('Loaded sheet:', sheet);
           isLoading = false;
           if (!sheet || sheet.error || sheet.success === false) {
             window.location.href = '/sheets';
@@ -54,26 +55,70 @@
   });
 
   const onSaveSheet = async () => {
+    requestConfirmation(
+      'Are you sure you want to save changes to this character sheet?',
+      async () => {
+        // confirmed
+        await saveSheetData();
+      },
+      () => {
+        // cancelled
+      }
+    );
+  };
+
+  const saveSheetData = async () => {
     if (!sheet || !sheet.data) return;
+
     try {
-      console.log('Updating sheet data on backend:', sheet);
+      saveLoading = true;
       const res = await apiPatch(`/api/character/sheet/${sheetId}`, sheet.data);
       const result = await res.json();
-      originalSheetData = JSON.parse(JSON.stringify(sheet.data));
-      isDirty = false;
       if (!result.success) {
         console.error('Failed to update character sheet:', result.error);
+        toast.error('Failed to save character sheet.', { icon: '❌' });
+        // TODO pop modal displaying why
+
+        // reset sheet data to original
+        if (originalSheetData) {
+          sheet.data = JSON.parse(JSON.stringify(originalSheetData));
+          isDirty = false;
+        }
+      } else {
+        toast.success('Character sheet saved!', { icon: '✅' });
+        originalSheetData = JSON.parse(JSON.stringify(sheet.data));
       }
+
+      isDirty = false;
     } catch (err) {
       console.error('Error updating character sheet:', err);
+      toast.error('Error saving character sheet.', { icon: '❌' });
+      // TODO pop modal displaying why
+
+      // reset sheet data to original
+      if (originalSheetData) {
+        sheet.data = JSON.parse(JSON.stringify(originalSheetData));
+        isDirty = false;
+      }
+    } finally {
+      saveLoading = false;
     }
   };
 
   const onDiscardChanges = () => {
-    if (originalSheetData) {
-      sheet.data = JSON.parse(JSON.stringify(originalSheetData));
-      isDirty = false;
-    }
+    requestConfirmation(
+      'Are you sure you want to discard all unsaved changes?',
+      () => {
+        // confirmed
+        if (originalSheetData) {
+          sheet.data = JSON.parse(JSON.stringify(originalSheetData));
+          isDirty = false;
+        }
+      },
+      () => {
+        // cancelled
+      }
+    );
   };
 
   onDestroy(() => {
@@ -121,8 +166,10 @@
             <div class="flex items-center gap-2 ml-auto">
               <div class="text-center capitalize">{sheet.data.mode} Mode</div>
 
-              <button class="px-2 py-1 rounded !bg-success-0 hover:!bg-success-50" disabled={!isDirty} on:click={onSaveSheet}> Save </button>
-              <button class="px-2 py-1 rounded !bg-red-900 hover:!bg-red-700" disabled={!isDirty} on:click={onDiscardChanges}> Discard </button>
+              <button class="px-2 py-1 rounded !bg-success-0 hover:!bg-success-50" disabled={!isDirty || saveLoading} on:click={onSaveSheet}>
+                {saveLoading ? 'Saving...' : 'Save'}
+              </button>
+              <button class="px-2 py-1 rounded !bg-red-900 hover:!bg-red-700" disabled={!isDirty || saveLoading} on:click={onDiscardChanges}> Discard </button>
             </div>
           </div>
 

@@ -5,6 +5,7 @@
   import WerewolfSection from '$lib/components/sheets/WerewolfSection.svelte';
   import MageSection from '$lib/components/sheets/MageSection.svelte';
   import Changelog from '$lib/components/sheets/Changelog.svelte';
+  import AdminSheetControls from '$lib/components/sheets/AdminSheetControls.svelte';
 
   import { eventBus, events } from '$lib/eventBus';
   import { onMount } from 'svelte';
@@ -12,14 +13,15 @@
   import { resolve } from '$app/paths';
   import { apiGet, apiPatch } from '$lib/api';
   import { userData } from '$lib/userStore';
-  import AdminSheetControls from '$lib/components/sheets/AdminSheetControls.svelte';
+  import toast from 'svelte-french-toast';
+  import { requestConfirmation } from '$lib/confirmationDialogStore';
 
   let sheetId = '';
   let sheet = null;
   let originalSheetData = null;
   let isLoading = true;
   let isDirty = false;
-  let isAdmin = false;
+  let saveLoading = false;
 
   // Tab state for sidebar
   let activeTab = 'admin';
@@ -31,60 +33,87 @@
 
   async function handleSheetDataChanged() {
     if (!sheet || !sheet.data) return;
-    console.log('Sheet data changed:', sheet.data);
     isDirty = JSON.stringify(sheet.data) !== JSON.stringify(originalSheetData);
   }
 
   onMount(async () => {
-    isAdmin = $userData.isAdmin ?? false;
-    if (!isAdmin) {
-      goto(resolve('/'));
-      return;
-    }
-
+    // Only load sheet data, admin guard handled by layout
     const pathParts = window.location.pathname.split('/');
     sheetId = pathParts[pathParts.length - 1];
-
     try {
       const res = await apiGet(`/api/admin/sheets/${sheetId}`);
       if (res.ok) {
         sheet = await res.json();
         originalSheetData = JSON.parse(JSON.stringify(sheet.data));
-        console.log('Loaded sheet:', sheet);
         isLoading = false;
         if (!sheet || sheet.error || sheet.success === false) {
           window.location.href = '/sheets';
         }
+      } else {
+        toast.error('Failed to load sheet.');
+        goto(resolve('/admin/sheets'));
       }
     } catch (err) {
       console.error('Failed to load sheet:', sheetId, err);
+      toast.error('Error loading sheet.');
       goto(resolve('/admin/sheets'));
     }
-
     eventBus.on(events.SHEET_DATA_CHANGED, handleSheetDataChanged);
   });
 
   const onSaveSheet = async () => {
+    requestConfirmation(
+      'Are you sure you want to save changes to this character sheet?',
+      async () => {
+        // confirmed
+        await saveSheetData();
+      },
+      () => {
+        // cancelled
+      }
+    );
+  };
+
+  const saveSheetData = async () => {
     if (!sheet || !sheet.data) return;
     try {
-      console.log('Updating sheet data on backend:', sheet);
-      const res = await apiPatch(`/api/admin/sheets/${sheet.data.id}`, sheet.data);
+      saveLoading = true;
+      const res = await apiPatch(`/api/admin/sheets/${sheet.data.character_sheet_id}`, sheet.data);
       const result = await res.json();
-      originalSheetData = JSON.parse(JSON.stringify(sheet.data));
       isDirty = false;
       if (!result.success) {
         console.error('Failed to update character sheet:', result.error);
+        toast.error('Failed to save character sheet.', { icon: '❌' });
+
+        if (originalSheetData) {
+          sheet.data = JSON.parse(JSON.stringify(originalSheetData));
+          isDirty = false;
+        }
+      } else {
+        toast.success('Character sheet saved successfully.', { icon: '✅' });
+        originalSheetData = JSON.parse(JSON.stringify(sheet.data));
       }
     } catch (err) {
       console.error('Error updating character sheet:', err);
+    } finally {
+      saveLoading = false;
     }
   };
 
   const onDiscardChanges = () => {
-    if (originalSheetData) {
-      sheet.data = JSON.parse(JSON.stringify(originalSheetData));
-      isDirty = false;
-    }
+    requestConfirmation(
+      'Are you sure you want to discard all unsaved changes?',
+      () => {
+        // confirmed
+        if (originalSheetData) {
+          sheet.data = JSON.parse(JSON.stringify(originalSheetData));
+          isDirty = false;
+        }
+      },
+      () => {
+        // cancelled
+      }
+    );
   };
 
   async function fetchWerewolfGifts() {
@@ -122,11 +151,13 @@
             <div class="text-2xl text-center font-rampart-spurs-stamp whitespace-nowrap tracking-wider text-tprimary">{sheet.data.character_type} Character Sheet</div>
           </div>
 
-          <div class="flex gap-2 ml-auto">
+          <div class="flex items-center gap-2 ml-auto">
             <div class="text-center capitalize">{sheet.data.mode} Mode</div>
 
-            <button class="px-2 py-1 rounded !bg-success-0 hover:!bg-success-50" disabled={!isDirty} on:click={onSaveSheet}> Save </button>
-            <button class="px-2 py-1 rounded !bg-red-900 hover:!bg-red-700" disabled={!isDirty} on:click={onDiscardChanges}> Discard </button>
+            <button class="px-2 py-1 rounded !bg-success-0 hover:!bg-success-50" disabled={!isDirty || saveLoading} on:click={onSaveSheet}>
+              {saveLoading ? 'Saving...' : 'Save'}
+            </button>
+            <button class="px-2 py-1 rounded !bg-red-900 hover:!bg-red-700" disabled={!isDirty || saveLoading} on:click={onDiscardChanges}> Discard </button>
           </div>
         </div>
 
