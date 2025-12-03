@@ -72,6 +72,18 @@ button:disabled {
   @apply mt-4 font-sans text-lg text-justify;
 }
 
+ul {
+  @apply list-disc list-inside space-y-1;
+}
+
+li {
+  @apply leading-relaxed font-sans text-lg py-1;
+}
+
+li::marker {
+  @apply text-tprimary-0;
+}
+
 .font-rampart-spurs {
   font-family: 'Rampart Spurs', sans-serif;
 }
