@@ -5,7 +5,6 @@
 
   // Placeholder sidebar links for rules
   const sidebarLinks = [
-    { id: 'world_of_darkwest', title: 'World of Darkwest' },
     { id: 'golden_rule', title: 'Golden Rule' },
     { id: 'general_rules', title: 'General Rules' },
     { id: 'rp_rules', title: 'RP Rules' },
@@ -36,13 +35,12 @@
     <!-- Main Content -->
     <main class="w-full h-full flex justify-center relative overflow-y-auto bg-primary">
       <div class="flex flex-col items-start font-rampart-sans w-3/5">
-        <section id="world_of_darkwest" class="w-full py-3">
+        <section id="golden_rule" class="w-full py-3">
           <div class="flex justify-center items-center w-full relative mb-1 gap-2">
             <img src={flowerDividerLeft} alt="Flower Divider Left" class="h-8 black-to-text-primary" />
-            <div class="flex items-center text-3xl font-rampart-spurs-stamp text-center text-tprimary-0 mt-1">World of Darkwest</div>
+            <div class="flex items-center text-3xl font-rampart-spurs-stamp text-center text-tprimary-0 mt-1">The Golden Rule</div>
             <img src={flowerDividerRight} alt="Flower Divider Right" class="h-8 black-to-text-primary" />
           </div>
-          <h2 class="text-2xl text-center mt-5 text-tprimary-0 font-rampart-spurs-stamp tracking-wider mb-2">The Golden Rule Of WOD</h2>
           <p class="paragraph-text mb-2">
             The Roleplay you get here is what you make of it and your character. Wish to enjoy the simple life and stay out of trouble? You are free to do so. Want a high paced and
             drama-filled life? You are also free to do so. The rules here are a guide to how the server works and what behavior is acceptable. Tell the story you want to tell. We
