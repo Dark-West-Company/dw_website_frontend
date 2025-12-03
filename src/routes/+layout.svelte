@@ -30,7 +30,7 @@
   // let isAdmin = false;
 
   // Overlay logic
-  let entered = true;
+  let entered = false;
   $: isRoot = $page.url.pathname === '/';
 
   function enterSite() {
@@ -153,13 +153,7 @@
     <slot />
 
     {#if dialog && dialog.visible}
-      <ConfirmationModal
-        message={dialog.message}
-        confirmText={dialog.confirmText}
-        cancelText={dialog.cancelText}
-        onConfirm={dialog.onConfirm}
-        onCancel={dialog.onCancel}
-      />
+      <ConfirmationModal message={dialog.message} confirmText={dialog.confirmText} cancelText={dialog.cancelText} onConfirm={dialog.onConfirm} onCancel={dialog.onCancel} />
     {/if}
   </div>
 
