@@ -45,7 +45,7 @@
 
   <div class="grid grid-cols-3 gap-4 w-full mt-8">
     <div class="flex flex-col items-center gap-6">
-      <div class="flex flex-col items-center relative gap-4 border rounded-xl border-black px-3 pb-3 pt-4">
+      <div class="flex flex-col items-center relative gap-5 border rounded-xl border-black px-3 pb-3 pt-5 w-full">
         <div class="absolute left-0 right-0 -top-3 flex justify-center">
           <div class="w-fit text-center bg-background-0 font-rampart-spurs tracking-wider text-xl rounded text-tprimary px-2">Renown</div>
         </div>
@@ -81,7 +81,7 @@
         </div>
       </div>
 
-      <div class="flex flex-col items-center gap-2 relative border rounded-xl border-black px-3 pb-3 pt-4">
+      <div class="flex flex-col items-center gap-2 relative border rounded-xl border-black px-3 pb-3 pt-6 w-full">
         <div class="absolute left-0 right-0 -top-3 flex justify-center">
           <div class="w-fit text-center bg-background-0 font-rampart-spurs tracking-wider rounded text-tprimary px-2">Rank</div>
         </div>
@@ -90,7 +90,7 @@
     </div>
 
     <div class="flex flex-col items-center gap-8">
-      <div class="flex flex-col items-center gap-2 relative border rounded-xl border-black pb-3 pt-4 px-3">
+      <div class="flex flex-col items-center gap-2 relative border rounded-xl border-black pb-3 pt-6 px-3 w-full">
         <div class="absolute left-0 right-0 -top-3 flex justify-center">
           <div class="w-fit text-center bg-background-0 font-rampart-spurs tracking-wider rounded text-tprimary px-2">Rage</div>
         </div>
@@ -103,7 +103,7 @@
         {/if}
       </div>
 
-      <div class="flex flex-col items-center gap-2 relative border rounded-xl border-black pb-3 pt-4 px-3">
+      <div class="flex flex-col items-center gap-2 relative border rounded-xl border-black pb-3 pt-6 px-3 w-full">
         <div class="absolute left-0 right-0 -top-3 flex justify-center">
           <div class="w-fit text-center bg-background-0 font-rampart-spurs tracking-wider rounded text-tprimary px-2">Gnosis</div>
         </div>
@@ -116,7 +116,7 @@
         {/if}
       </div>
 
-      <div class="flex flex-col items-center gap-2 relative border rounded-xl border-black pb-3 pt-4 px-3">
+      <div class="flex flex-col items-center gap-2 relative border rounded-xl border-black pb-3 pt-6 px-3 w-full">
         <div class="absolute left-0 right-0 -top-3 flex justify-center">
           <div class="w-fit text-center bg-background-0 font-rampart-spurs tracking-wider rounded text-tprimary px-2">Willpower</div>
         </div>
