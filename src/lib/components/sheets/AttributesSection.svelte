@@ -16,20 +16,20 @@
 
   <div class="grid grid-cols-3 gap-x-6 w-full">
     <div>
-      <DotTextField label="Strength" type={XP_TYPE_ATTRIBUTE} value="" {sheet} field="strength" />
-      <DotTextField label="Dexterity" type={XP_TYPE_ATTRIBUTE} value="" {sheet} field="dexterity" />
-      <DotTextField label="Stamina" type={XP_TYPE_ATTRIBUTE} value="" {sheet} field="stamina" />
+      <DotTextField label="Strength" type={XP_TYPE_ATTRIBUTE} value="" {sheet} field="strength" min="1" />
+      <DotTextField label="Dexterity" type={XP_TYPE_ATTRIBUTE} value="" {sheet} field="dexterity" min="1" />
+      <DotTextField label="Stamina" type={XP_TYPE_ATTRIBUTE} value="" {sheet} field="stamina" min="1" />
     </div>
 
     <div>
-      <DotTextField label="Charisma" type={XP_TYPE_ATTRIBUTE} value="" {sheet} field="charisma" />
-      <DotTextField label="Manipulation" type={XP_TYPE_ATTRIBUTE} value="" {sheet} field="manipulation" />
-      <DotTextField label="Appearance" type={XP_TYPE_ATTRIBUTE} value="" {sheet} field="appearance" />
+      <DotTextField label="Charisma" type={XP_TYPE_ATTRIBUTE} value="" {sheet} field="charisma" min="1" />
+      <DotTextField label="Manipulation" type={XP_TYPE_ATTRIBUTE} value="" {sheet} field="manipulation" min="1" />
+      <DotTextField label="Appearance" type={XP_TYPE_ATTRIBUTE} value="" {sheet} field="appearance" min="1" />
     </div>
     <div>
-      <DotTextField label="Perception" type={XP_TYPE_ATTRIBUTE} value="" {sheet} field="perception" />
-      <DotTextField label="Intelligence" type={XP_TYPE_ATTRIBUTE} value="" {sheet} field="intelligence" />
-      <DotTextField label="Wits" type={XP_TYPE_ATTRIBUTE} value="" {sheet} field="wits" />
+      <DotTextField label="Perception" type={XP_TYPE_ATTRIBUTE} value="" {sheet} field="perception" min="1" />
+      <DotTextField label="Intelligence" type={XP_TYPE_ATTRIBUTE} value="" {sheet} field="intelligence" min="1" />
+      <DotTextField label="Wits" type={XP_TYPE_ATTRIBUTE} value="" {sheet} field="wits" min="1" />
     </div>
   </div>
 </div>

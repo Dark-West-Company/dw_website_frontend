@@ -6,6 +6,7 @@
   export let label;
   export let specialty = '';
   export let level = 0;
+  export let min = 0; // Minimum value, always filled and cannot be unfilled
   export let sheet;
   export let field;
   export let disableSpecialty = false;
@@ -28,9 +29,20 @@
     }
   }
 
-  function setLevel(l) {
-    level = l;
-    sheet[field] = l;
+  // Handles dot click logic with min enforcement and removal behavior
+  function setLevel(i) {
+    if (i < min) {
+      // Dots below min cannot be unfilled
+      return;
+    }
+    if (i === level) {
+      // If clicking the last filled dot (no dots filled after), remove it but not below min
+      level = Math.max(min, i - 1);
+    } else {
+      // Fill up to clicked dot, but not below min
+      level = Math.max(min, i);
+    }
+    sheet[field] = level;
     eventBus.emit(events.SHEET_DATA_CHANGED, sheet);
   }
 </script>
@@ -41,7 +53,17 @@
     <div class="flex flex-grow border-b mx-3 border-cream-0/10"></div>
     <div class="flex gap-1 mb-1">
       {#each dots as i (i)}
-        {#if type === 'none' || i <= level}
+        {#if i <= min}
+          <HoverPopup text={`Minimum level is ${min}`}>
+            <button
+              type="button"
+              class="w-3 h-3 rounded-full flex items-center justify-center !bg-tprimary-0 cursor-pointer"
+              on:click={() => setLevel(i)}
+              aria-label={`Set level to ${i}`}
+            >
+            </button>
+          </HoverPopup>
+        {:else if type === 'none' || i <= level}
           <button
             type="button"
             class="w-3 h-3 rounded-full flex items-center justify-center cursor-pointer hover:!bg-tprimary-0 {i <= level ? '!bg-tprimary-0' : '!bg-background-500'}"
