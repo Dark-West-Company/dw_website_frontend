@@ -82,7 +82,7 @@
       <div class="flex flex-col items-center py-1 justify-center w-full relative">
         <div class="torn-edge-top"></div>
 
-        <div class="flex flex-col items-center text-center text-xl gap-4 bg-primary py-2 relative">
+        <div class="flex flex-col items-center text-center text-xl gap-4 bg-primary py-2 relative w-full">
           <div class="absolute h-full w-1/2">
             <img src={sunSpurRightBlack} alt="Sun Spur Right Black" class="absolute right-0 translate-x-full pl-6 top-0 h-full z-0 opacity-30" />
             <img src={sunSpurLeftBlack} alt="Sun Spur Left Black" class="absolute left-0 -translate-x-full pr-6 top-0 h-full z-0 opacity-30" />
@@ -114,7 +114,7 @@
       <div class="flex flex-col items-center py-1 justify-center w-full relative">
         <div class="torn-edge-top"></div>
 
-        <div class="flex flex-col items-center text-center text-xl gap-4 bg-primary py-2 relative">
+        <div class="flex flex-col items-center text-center text-xl gap-4 bg-primary py-2 relative w-full">
           <div class="absolute h-full w-1/2">
             <img src={sunSpurRightBlack} alt="Sun Spur Right Black" class="absolute right-0 translate-x-full pl-6 top-0 h-full z-0 opacity-30" />
             <img src={sunSpurLeftBlack} alt="Sun Spur Left Black" class="absolute left-0 -translate-x-full pr-6 top-0 h-full z-0 opacity-30" />
@@ -165,7 +165,7 @@
       <div class="flex flex-col items-center py-1 justify-center w-full relative">
         <div class="torn-edge-top"></div>
 
-        <div class="flex flex-col items-center text-center text-xl gap-4 bg-primary py-2 relative">
+        <div class="flex flex-col items-center text-center text-xl gap-4 bg-primary py-2 relative w-full">
           <div class="absolute h-full w-1/2">
             <img src={sunSpurRightBlack} alt="Sun Spur Right Black" class="absolute right-0 translate-x-full pl-6 top-0 h-full z-0 opacity-30" />
             <img src={sunSpurLeftBlack} alt="Sun Spur Left Black" class="absolute left-0 -translate-x-full pr-6 top-0 h-full z-0 opacity-30" />
@@ -187,7 +187,7 @@
       <div class="flex flex-col items-center py-1 justify-center w-full relative">
         <div class="torn-edge-top"></div>
 
-        <div class="flex flex-col items-center text-center text-xl gap-4 bg-primary py-2 relative">
+        <div class="flex flex-col items-center text-center text-xl gap-4 bg-primary py-2 relative w-full">
           <div class="absolute h-full w-1/2">
             <img src={darkPack} alt="Sun Spur Right Black" class="absolute right-0 translate-x-full pl-6 top-0 h-full z-0 opacity-90" />
             <img src={darkPack} alt="Sun Spur Left Black" class="absolute left-0 -translate-x-full pr-6 top-0 h-full z-0 opacity-90" />
