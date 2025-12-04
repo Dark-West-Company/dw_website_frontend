@@ -80,7 +80,8 @@
           {/each}
         </div>
         <button
-          class="flex align-center justify-center w-6 h-4 !bg-red-900 hover:!bg-red-700 rounded-full text-xs"
+          class="flex align-center justify-center w-6 h-4 !bg-red-900 hover:!bg-red-700 rounded-full font-bold text-[24px]"
+          style="line-height: 10px;"
           on:click={() => removeEntry(idx)}
           disabled={entries.length <= 1}
           title="Remove entry">-</button
