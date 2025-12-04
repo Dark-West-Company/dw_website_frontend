@@ -10,7 +10,7 @@
 <div class="flex flex-col relative items-center w-full">
   <div class="absolute left-0 right-0 h-2 -top-2 bg-gradient-to-b from-transparent to-background-0/50 z-10"></div>
 
-  <div class="grid grid-cols-3 gap-2 w-full bg-background-0/50 py-3 px-5">
+  <div class="grid grid-cols-3 gap-6 w-full bg-background-0/50 py-3 px-5">
     <div class="flex flex-col gap-2">
       <TextField id="name" label="Name" bind:value={sheet.name} />
       <TextField id="player" label="Player" bind:value={sheet.player} />
