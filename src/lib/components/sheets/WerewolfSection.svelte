@@ -53,7 +53,7 @@
         <div class="flex flex-col items-center gap-2 mt-2">
           <div class="font-rampart-spurs tracking-wider">Glory</div>
           {#if sheetData.glory_permanent !== undefined}
-            <DotDisplay readonly={true} sheet={sheetData} field="glory_permanent" bind:value={sheetData.glory_permanent} />
+            <DotDisplay readonly={mode === 'active'} sheet={sheetData} field="glory_permanent" bind:value={sheetData.glory_permanent} />
           {/if}
           {#if sheetData.glory_current !== undefined}
             <DotDisplay shape="box" sheet={sheetData} field="glory_current" bind:value={sheetData.glory_current} />
@@ -63,7 +63,7 @@
         <div class="flex flex-col items-center gap-2">
           <div class="font-rampart-spurs tracking-wider">Honor</div>
           {#if sheetData.honor_permanent !== undefined}
-            <DotDisplay readonly={true} sheet={sheetData} field="honor_permanent" bind:value={sheetData.honor_permanent} />
+            <DotDisplay readonly={mode === 'active'} sheet={sheetData} field="honor_permanent" bind:value={sheetData.honor_permanent} />
           {/if}
           {#if sheetData.honor_current !== undefined}
             <DotDisplay shape="box" sheet={sheetData} field="honor_current" bind:value={sheetData.honor_current} />
@@ -73,7 +73,7 @@
         <div class="flex flex-col items-center gap-2">
           <div class="font-rampart-spurs tracking-wider">Wisdom</div>
           {#if sheetData.wisdom_permanent !== undefined}
-            <DotDisplay readonly={true} sheet={sheetData} field="wisdom_permanent" bind:value={sheetData.wisdom_permanent} />
+            <DotDisplay readonly={mode === 'active'} sheet={sheetData} field="wisdom_permanent" bind:value={sheetData.wisdom_permanent} />
           {/if}
           {#if sheetData.wisdom_current !== undefined}
             <DotDisplay shape="box" sheet={sheetData} field="wisdom_current" bind:value={sheetData.wisdom_current} />
@@ -96,7 +96,7 @@
         </div>
 
         {#if sheetData.rage_permanent !== undefined}
-          <DotDisplay readonly={true} type={XP_TYPE_WEREWOLF_RAGE} sheet={sheetData} field="rage_permanent" bind:value={sheetData.rage_permanent} />
+          <DotDisplay readonly={mode === 'active'} type={XP_TYPE_WEREWOLF_RAGE} sheet={sheetData} field="rage_permanent" bind:value={sheetData.rage_permanent} />
         {/if}
         {#if sheetData.rage_current !== undefined}
           <DotDisplay shape="box" type={XP_TYPE_WEREWOLF_RAGE} sheet={sheetData} field="rage_current" bind:value={sheetData.rage_current} />
@@ -109,7 +109,7 @@
         </div>
 
         {#if sheetData.gnosis_permanent !== undefined}
-          <DotDisplay readonly={true} type={XP_TYPE_WEREWOLF_GNOSIS} sheet={sheetData} field="gnosis_permanent" bind:value={sheetData.gnosis_permanent} />
+          <DotDisplay readonly={mode === 'active'} type={XP_TYPE_WEREWOLF_GNOSIS} sheet={sheetData} field="gnosis_permanent" bind:value={sheetData.gnosis_permanent} />
         {/if}
         {#if sheetData.gnosis_current !== undefined}
           <DotDisplay shape="box" type={XP_TYPE_WEREWOLF_GNOSIS} sheet={sheetData} field="gnosis_current" bind:value={sheetData.gnosis_current} />
@@ -122,7 +122,7 @@
         </div>
 
         {#if sheetData.willpower_permanent !== undefined}
-          <DotDisplay readonly={true} sheet={sheetData} field="willpower_permanent" bind:value={sheetData.willpower_permanent} />
+          <DotDisplay readonly={mode === 'active'} sheet={sheetData} field="willpower_permanent" bind:value={sheetData.willpower_permanent} />
         {/if}
         {#if sheetData.willpower_current !== undefined}
           <DotDisplay type={XP_TYPE_WILLPOWER} shape="box" sheet={sheetData} field="willpower_current" bind:value={sheetData.willpower_current} />
