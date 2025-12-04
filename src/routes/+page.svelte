@@ -206,7 +206,7 @@
       </div>
     </div>
 
-    <div class="absolute flex items-center justify-center w-full pointer-events-none bottom-5 z-50 gap-3 {atBottom ? 'opacity-0' : 'opacity-100'} transition-opacity duration-200">
+    <div class="absolute flex items-center justify-center w-full pointer-events-none bottom-5 z-20 gap-3 {atBottom ? 'opacity-0' : 'opacity-100'} transition-opacity duration-200">
       <div class="w-2 h-2 bg-tsecondary-0 rounded-full animate-pulse"></div>
       <div class="w-2 h-2 bg-tsecondary-0 rounded-full animate-pulse"></div>
       <div class="w-2 h-2 bg-tsecondary-0 rounded-full animate-pulse"></div>
