@@ -81,7 +81,7 @@
         </div>
       </div>
 
-      <div class="flex flex-col items-center gap-2 relative border rounded-xl border-black px-3 pb-3 pt-2">
+      <div class="flex flex-col items-center gap-2 relative border rounded-xl border-black px-3 pb-3 pt-4">
         <div class="absolute left-0 right-0 -top-3 flex justify-center">
           <div class="w-fit text-center bg-background-0 font-rampart-spurs tracking-wider rounded text-tprimary px-2">Rank</div>
         </div>
