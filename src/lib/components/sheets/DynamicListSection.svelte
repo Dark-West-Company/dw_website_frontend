@@ -3,6 +3,7 @@
 
   export let header = 'Dynamic List';
   export let entries = [];
+  export let min = 0; // Minimum value for dots
   if (entries === null || entries === undefined || !Array.isArray(entries) || entries.length === 0) {
     entries = [
       { text: '', level: 0 },
@@ -28,8 +29,19 @@
     eventBus.emit(events.SHEET_DATA_CHANGED, entries);
   }
 
-  function updateLevel(idx, value) {
-    entries[idx].level = value;
+  // Handles dot click logic with min enforcement and removal behavior
+  function updateLevel(idx, i) {
+    if (i < min) {
+      // Dots below min cannot be unfilled or set
+      return;
+    }
+    if (i === entries[idx].level) {
+      // If clicking the last filled dot (no dots filled after), remove it but not below min
+      entries[idx].level = Math.max(min, i - 1);
+    } else {
+      // Fill up to clicked dot, but not below min
+      entries[idx].level = Math.max(min, i);
+    }
     eventBus.emit(events.SHEET_DATA_CHANGED, entries);
   }
 </script>
@@ -45,14 +57,26 @@
         <input type="text" bind:value={entry.text} on:input={(e) => updateText(idx, e.target.value)} placeholder="Entry text" />
         <div class="flex gap-1">
           {#each [1, 2, 3, 4, 5] as i (i)}
-            <button
-              type="button"
-              class="w-3 h-3 rounded-full flex items-center justify-center cursor-pointer hover:!bg-tprimary-0 {i <= entry.level ? '!bg-tprimary-0' : '!bg-background-500'}"
-              on:click={() => updateLevel(idx, i)}
-              title={`Set level to ${i}`}
-              aria-label={`Set level to ${i}`}
-            >
-            </button>
+            {#if i <= min}
+              <!-- Dots below min are always filled, same color as filled-in dots, and clickable to set to min -->
+              <button
+                type="button"
+                class="w-3 h-3 rounded-full flex items-center justify-center !bg-tprimary-0 cursor-pointer"
+                on:click={() => updateLevel(idx, i)}
+                title={`Set level to ${i}`}
+                aria-label={`Set level to ${i}`}
+              >
+              </button>
+            {:else}
+              <button
+                type="button"
+                class="w-3 h-3 rounded-full flex items-center justify-center cursor-pointer hover:!bg-tprimary-0 {i <= entry.level ? '!bg-tprimary-0' : '!bg-background-500'}"
+                on:click={() => updateLevel(idx, i)}
+                title={`Set level to ${i}`}
+                aria-label={`Set level to ${i}`}
+              >
+              </button>
+            {/if}
           {/each}
         </div>
         <button
