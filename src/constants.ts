@@ -182,24 +182,24 @@ export type Gift = {
 // Ability label arrays per subtype (for DiceRoller and other utilities)
 export const HUMAN_ABILITIES = {
   talents: ['alertness', 'athletics', 'awareness', 'brawl', 'empathy', 'expression', 'intimidation', 'leadership', 'streetwise', 'subterfuge'],
-  skills: ['animal_ken', 'crafts', 'drive', 'etiquette', 'firearms', 'larceny', 'melee', 'performance', 'stealth', 'survival'],
+  skills: ['animal_ken', 'crafts', 'ride', 'etiquette', 'ranged_weaponry', 'larceny', 'melee', 'performance', 'stealth', 'survival'],
   knowledges: ['academics', 'computer', 'finance', 'investigation', 'law', 'medicine', 'occult', 'politics', 'science', 'technology'],
 };
 
 export const VAMPIRE_ABILITIES = {
   talents: ['alertness', 'athletics', 'awareness', 'brawl', 'empathy', 'expression', 'intimidation', 'leadership', 'streetwise', 'subterfuge'],
-  skills: ['animal_ken', 'crafts', 'drive', 'etiquette', 'firearms', 'larceny', 'melee', 'performance', 'stealth', 'survival'],
+  skills: ['animal_ken', 'crafts', 'ride', 'etiquette', 'ranged_weaponry', 'larceny', 'melee', 'performance', 'stealth', 'survival'],
   knowledges: ['academics', 'computer', 'finance', 'investigation', 'law', 'medicine', 'occult', 'politics', 'science', 'technology'],
 };
 
 export const WEREWOLF_ABILITIES = {
   talents: ['alertness', 'athletics', 'brawl', 'empathy', 'expression', 'intimidation', 'leadership', 'primal_urge', 'streetwise', 'subterfuge'],
-  skills: ['animal_ken', 'crafts', 'drive', 'etiquette', 'firearms', 'larceny', 'melee', 'performance', 'stealth', 'survival'],
+  skills: ['animal_ken', 'crafts', 'ride', 'etiquette', 'ranged_weaponry', 'larceny', 'melee', 'performance', 'stealth', 'survival'],
   knowledges: ['academics', 'computer', 'enigmas', 'investigation', 'law', 'medicine', 'occult', 'rituals', 'science', 'technology'],
 };
 
 export const MAGE_ABILITIES = {
   talents: ['alertness', 'art', 'athletics', 'awareness', 'brawl', 'empathy', 'expression', 'intimidation', 'leadership', 'streetwise', 'subterfuge'],
-  skills: ['crafts', 'drive', 'etiquette', 'firearms', 'martial_arts', 'meditation', 'melee', 'research', 'stealth', 'survival', 'technology'],
+  skills: ['crafts', 'ride', 'etiquette', 'ranged_weaponry', 'martial_arts', 'meditation', 'melee', 'research', 'stealth', 'survival', 'technology'],
   knowledges: ['academics', 'computer', 'cosmology', 'esoterica', 'enigmas', 'investigation', 'law', 'medicine', 'occult', 'politics', 'science'],
 };

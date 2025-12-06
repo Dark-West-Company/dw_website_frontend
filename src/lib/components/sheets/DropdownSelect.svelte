@@ -24,4 +24,3 @@
     <option value={String(opt.value)} class="text-sm bg-background-900 text-tprimary-0">{opt.label}</option>
   {/each}
 </select>
-

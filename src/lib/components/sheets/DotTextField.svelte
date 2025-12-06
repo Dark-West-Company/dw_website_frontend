@@ -19,7 +19,10 @@
     specialty = sheet[field + '_specialty'] ?? '';
   }
 
-  $: level = sheet && field ? (sheet[field] ?? 0) : level;
+  // Only update level when sheet or field changes, not on every reactivity cycle
+  $: if (sheet && field && level !== (sheet[field] ?? 0)) {
+    level = sheet[field] ?? 0;
+  }
 
   function handleInput(e) {
     specialty = e.target.value ?? '';

@@ -43,9 +43,9 @@
         <DotTextField label="Animal Ken" type={XP_TYPE_ABILITY} value="" level={sheet.skill_animal_ken ?? 0} {sheet} field="skill_animal_ken" />
       {/if}
       <DotTextField label="Crafts" type={XP_TYPE_ABILITY} value="" level={sheet.skill_crafts ?? 0} {sheet} field="skill_crafts" />
-      <DotTextField label="Ride" type={XP_TYPE_ABILITY} value="" level={sheet.skill_drive ?? 0} {sheet} field="skill_drive" />
+      <DotTextField label="Ride" type={XP_TYPE_ABILITY} value="" level={sheet.skill_ride ?? 0} {sheet} field="skill_ride" />
       <DotTextField label="Etiquette" type={XP_TYPE_ABILITY} value="" level={sheet.skill_etiquette ?? 0} {sheet} field="skill_etiquette" />
-      <DotTextField label="Ranged Weaponry" type={XP_TYPE_ABILITY} value="" level={sheet.skill_firearms ?? 0} {sheet} field="skill_firearms" />
+      <DotTextField label="Ranged Weaponry" type={XP_TYPE_ABILITY} value="" level={sheet.skill_ranged_weaponry ?? 0} {sheet} field="skill_ranged_weaponry" />
       {#if subtype === 'human' || subtype === 'vampire' || subtype === 'werewolf'}
         <DotTextField label="Larceny" type={XP_TYPE_ABILITY} value="" level={sheet.skill_larceny ?? 0} {sheet} field="skill_larceny" />
       {/if}

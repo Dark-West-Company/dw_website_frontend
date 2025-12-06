@@ -72,9 +72,9 @@
     abilityOptions = [...abilityOptions, ...abilities.knowledges.map((a) => ({ label: a.replace('_', ' '), value: 'knowledge_' + a }))];
 
     abilityOptions.forEach((opt) => {
-      if (opt.value === 'skill_drive') {
+      if (opt.value === 'skill_ride') {
         opt.label = 'Ride';
-      } else if (opt.value === 'skill_firearms') {
+      } else if (opt.value === 'skill_ranged_weaponry') {
         opt.label = 'Ranged Weaponry';
       } else if (opt.value === 'knowledge_computer') {
         opt.label = 'Culture';

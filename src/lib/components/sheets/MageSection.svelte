@@ -50,7 +50,7 @@
 
     <div class="grid grid-cols-3 gap-4 w-full">
       <div class="flex flex-col items-center gap-10">
-        <DynamicListSection header="Backgrounds" bind:entries={sheetData.disciplines} type={XP_TYPE_BACKGROUND} />
+        <DynamicListSection header="Backgrounds" bind:entries={sheetData.backgrounds} type={XP_TYPE_BACKGROUND} />
 
         <DynamicListSection header="Other Traits" bind:entries={sheetData.other_traits} />
       </div>

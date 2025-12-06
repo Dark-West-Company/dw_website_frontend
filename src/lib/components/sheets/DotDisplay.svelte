@@ -45,7 +45,9 @@
       <!-- Dots below min are always filled, same color as filled-in dots, and clickable to set to min -->
       <button
         type="button"
-        class="w-4 h-4 border flex items-center justify-center transition {readonly ? 'cursor-default' : 'cursor-pointer'} {shape === 'circle' ? 'rounded-full' : 'rounded'} !bg-tprimary-0"
+        class="w-4 h-4 border flex items-center justify-center transition {readonly ? 'cursor-default' : 'cursor-pointer'} {shape === 'circle'
+          ? 'rounded-full'
+          : 'rounded'} !bg-tprimary-0"
         aria-label={`Set value to ${i}`}
         title={`Set value to ${i}`}
         on:click={() => setValue(i)}
@@ -57,7 +59,10 @@
       <HoverPopup text={`${getUpgradeXpCost(type, value, i)}xp to upgrade to level ${i}`}>
         <button
           type="button"
-          class="w-4 h-4 border flex items-center justify-center transition {readonly ? 'cursor-default' : 'cursor-pointer'} {shape === 'circle' ? 'rounded-full' : 'rounded'} {i <= value ? '!bg-tprimary-0' : '!bg-background-500'}"
+          class="w-4 h-4 border flex items-center justify-center transition {readonly ? 'cursor-default' : 'cursor-pointer'} {shape === 'circle' ? 'rounded-full' : 'rounded'} {i <=
+          value
+            ? '!bg-tprimary-0'
+            : '!bg-background-500'}"
           aria-label={`Set value to ${i}`}
           title={`Set value to ${i}`}
           on:click={() => setValue(i)}
@@ -69,7 +74,10 @@
     {:else}
       <button
         type="button"
-        class="w-4 h-4 border flex items-center justify-center transition {readonly ? 'cursor-default' : 'cursor-pointer'} {shape === 'circle' ? 'rounded-full' : 'rounded'} {i <= value ? '!bg-tprimary-0' : '!bg-background-500'}"
+        class="w-4 h-4 border flex items-center justify-center transition {readonly ? 'cursor-default' : 'cursor-pointer'} {shape === 'circle' ? 'rounded-full' : 'rounded'} {i <=
+        value
+          ? '!bg-tprimary-0'
+          : '!bg-background-500'}"
         aria-label={`Set value to ${i}`}
         title={`Set value to ${i}`}
         on:click={() => setValue(i)}
